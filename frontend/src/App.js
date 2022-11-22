@@ -1,6 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
-import MainPage from './main/main_page';
+import MainPage from './components/UserCenter/main_page';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from "react-router-dom"; 
 
 function App() {
   return (
