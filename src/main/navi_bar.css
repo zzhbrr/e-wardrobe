@@ -1,0 +1,26 @@
+.navi_bar {
+    min-width: fit-content;
+    max-width: 260px;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgb(223, 223, 223);
+    float: left;
+}
+.navi_content {
+    font-size: 20px;
+    line-height: 50px;
+    padding-left: 60px;
+    padding-right: 60px;
+}
+.navi_content:hover {
+    background-color: rgba(0,0,0,0.15);
+    color:black;
+    transition-duration: 0.2s;
+}
+.selected {
+    background-color: black;
+    color: white;
+    transition-duration: 0.2s;
+}

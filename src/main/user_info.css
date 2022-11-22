@@ -1,0 +1,33 @@
+.user_info {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 60px;
+}
+.uid {
+    margin-bottom: 15px;
+    color: gray;
+    font-size: medium;
+}
+.left {
+    text-align: left;
+}
+.content {
+    line-height: 40px;
+    font-size: large;
+}
+.change_btn {
+    max-width: 200px;
+    margin-top: 10px;
+    padding: 10px;
+    font-size: medium;
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+    border-radius: 0;
+}
+.change_btn:hover {
+    color: white;
+    background-color: black;
+    transition-duration: 0.2s;
+}
