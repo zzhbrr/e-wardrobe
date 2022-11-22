@@ -11,11 +11,11 @@ export default function UserInfo(props){
     });
     return(
         <div className="user_info">
-            <h1 className="left">{userInfo.name}</h1>
+            <h1 className=" user left">{userInfo.name}</h1>
             <div className="uid left">uid：{userInfo.uid}</div>
-            <div className="content left">性别：{userInfo.gender}</div>
-            <div className="content left">年龄：{userInfo.age}</div>
-            <div className="content left">职业：{userInfo.profession}</div>
+            <div className="user_content left">性别：{userInfo.gender}</div>
+            <div className="user_content left">年龄：{userInfo.age}</div>
+            <div className="user_content left">职业：{userInfo.profession}</div>
             <button className="change_btn">修改信息</button>
         </div>
     )

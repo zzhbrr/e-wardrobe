@@ -1,5 +1,5 @@
 import './App.css';
-import MainPage from './components/UserCenter/main_page';
+import MainPage from './components/UserCenter';
 import {
   BrowserRouter as Router,
   Switch,
