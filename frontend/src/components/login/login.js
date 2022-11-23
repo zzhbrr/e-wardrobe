@@ -6,13 +6,22 @@ import './login.css'
 import Container from '@mui/material/Container';
 import Alert from '@mui/material/Alert';
 import {
-  useHistory
+    useNavigate
 } from "react-router-dom";
 
-export default function Login({socket, handleLogin}) {
+// const useStyles = makeStyles((theme) => ({
+//     submit: {
+//       margin: theme.spacing(3, 0, 2),
+//       palette: {}
+//     },
+// }));
+
+export default function Login({socket}) {
+    // const classes = useStyles();
     const [username, handleUsernameChange] = React.useState('')
     const [info, setInfo] = React.useState("")
     const [password, setPassword] = React.useState("")
+    const navigate = useNavigate()
 
     function handleLoginClick(){
         console.log("login clicked");
@@ -24,28 +33,47 @@ export default function Login({socket, handleLogin}) {
         }
     }
 
+    function handleRegisterLink() {
+        console.log("register clicked");
+        navigate("/register");
+    }
+
     return (
-        <div className="card">
+        <div>
             <Container component="main" maxWidth="xs" className="loginCard">
-                <div>
-                    <p>Login</p>
+                <div className='card-header'>
+                    <p className="title">Login</p>
+                    {info==="" ? "" : 
+                        <Alert severity="error" 
+                            sx={{
+                                'text-align': 'center',
+                            }}>{info}</Alert>
+                    }
                 </div>
-                <div>
-                    {info==="" ? "" : <Alert severity="error" className="margin_top">{info}</Alert>}
-                    <TextField margin="normal" required fullwidth 
-                        id = "Username"
-                        label = "Username"
-                        autoFocus
-                        onChange = {e => handleUsernameChange(e.target.value)}/>
-                    <TextField margin="normal" required fullwidth 
-                        id = "Password"
-                        label = "Password"
-                        onChange = {e => setPassword(e.target.value)}/>
+                <div className='card-body'>
+                    <div>
+                        <label>USERNAME</label> <br></br>
+                        <TextField margin="normal" required fullwidth 
+                            id = "Username"
+                            label = ""
+                            autoFocus
+                            onChange = {e => handleUsernameChange(e.target.value)}/>
+                    </div>
+                    <br></br>
+                    <div>
+                        <label>PASSWORD</label> <br></br>
+                        <TextField margin="normal" required fullwidth 
+                            id = "Password"
+                            label = ""
+                            type={"password"}
+                            onChange = {e => setPassword(e.target.value)}/>
+                    </div>
                 </div>
-                <Button type="submit" variant="contained" margin="normal"
+                <button type="submit" variant="contained" margin="normal" className='btn_sign-up'
                     onClick={() => handleLoginClick()}> 
                     LOGIN 
-                </Button>
+                </button>
+                <p className="register_link"><a onClick={handleRegisterLink}>Register</a></p>
             </Container>
         </div>
     )
