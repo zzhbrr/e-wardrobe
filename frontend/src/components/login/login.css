@@ -1,0 +1,21 @@
+.loginCard {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  color: rgb(20, 116, 129);
+  box-sizing: content-box;
+  margin: 0 auto 0 auto;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 1rem 1.5rem 2rem 1.5rem;
+  -webkit-backdrop-filter: blur(50px);
+  backdrop-filter: blur(50px);
+  box-shadow: inset 
+    0 -0.1em 0.1em rgba(255, 255, 255, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.1), 
+    0.3em 0.2em 1em rgba(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
+}
+
+.margin_top {
+  margin-top: 20px;
+}
