@@ -38,6 +38,14 @@ export default function Login({socket}) {
         navigate("/register");
     }
 
+    React.useEffect(() => {
+        socket.on('loginSuccess', (data) => {
+            console.log("login success");
+            navigate("/usercenter");
+        })
+    }, []);
+
+
     return (
         <div>
             <Container component="main" maxWidth="xs" className="loginCard">

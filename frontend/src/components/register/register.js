@@ -67,7 +67,6 @@ export default function Register({socket}) {
                         <TextField margin="normal" required fullwidth 
                             id = "EMAIL"
                             label = ""
-                            autoFocus
                             onChange = {e => setEmail(e.target.value)}/>
                     </div>
                     <br></br>
@@ -85,7 +84,6 @@ export default function Register({socket}) {
                         <TextField margin="normal" required fullwidth 
                             id = "CONFIRM"
                             label = ""
-                            autoFocus
                             onChange = {e => setCPassowrd(e.target.value)}/>
                     </div>
                 </div>
