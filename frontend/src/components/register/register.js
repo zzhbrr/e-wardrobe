@@ -8,6 +8,7 @@ import Alert from '@mui/material/Alert';
 import {
     useNavigate
 } from "react-router-dom";
+const md5 = require('md5');
 
 export default function Register({socket}) {
     const [userName, setUsername] = React.useState("");
@@ -15,10 +16,10 @@ export default function Register({socket}) {
     const [c_password, setCPassowrd] = React.useState("");
     const [email, setEmail] = React.useState("");
     const [info, setInfo] = React.useState("");
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     function handleRegClick(e) {
-        const data = { userName: userName, password: password, email: email };
+        const data = { username: userName, password: password, email: email };
         if (userName === "" || password === "" || email === "") {
             setInfo("Please Fill All the Field!");
           }
@@ -31,10 +32,20 @@ export default function Register({socket}) {
       
           if ((userName !== "") & (password !== "") & (email !== "") & (/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(email))) {
             if (password === c_password) {
-            //   socket.emit("register", data);
+                data.password = md5(data.password);
+                socket.emit("register", data);
             }
           }
     }
+
+    React.useEffect(() => {
+        socket.on("registerSuccess", (data) => {
+            navigate("/login");
+        });
+        socket.on("registerFailed", (data) => {
+            setInfo(data.message);
+        });
+    }, []);
 
     function handleLoginLink(e) {
         navigate("/login");
@@ -84,6 +95,7 @@ export default function Register({socket}) {
                         <TextField margin="normal" required fullwidth 
                             id = "CONFIRM"
                             label = ""
+                            type={"password"}
                             onChange = {e => setCPassowrd(e.target.value)}/>
                     </div>
                 </div>

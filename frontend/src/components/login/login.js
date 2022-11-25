@@ -8,6 +8,7 @@ import Alert from '@mui/material/Alert';
 import {
     useNavigate
 } from "react-router-dom";
+const md5 = require('md5');
 
 // const useStyles = makeStyles((theme) => ({
 //     submit: {
@@ -18,9 +19,10 @@ import {
 
 export default function Login({socket}) {
     // const classes = useStyles();
-    const [username, handleUsernameChange] = React.useState('')
+    const [username, setUsername] = React.useState('')
     const [info, setInfo] = React.useState("")
     const [password, setPassword] = React.useState("")
+    const [allreadyLogin, setAllreadyLogin] = React.useState(false)
     const navigate = useNavigate()
 
     function handleLoginClick(){
@@ -29,7 +31,15 @@ export default function Login({socket}) {
             setInfo("Please Enter All Your Login Information!");
             return ;
         } else {
-            // socket.emit('login', {username: username, password: password})
+            socket.on('loginSuccess', (data) => {
+                console.log("login success");
+                navigate("/usercenter");
+            });
+            socket.on('loginFailed', (data) => {
+                setInfo(data.message);
+            });
+            console.log('handling login button');
+            socket.emit('login', {username: username, password: md5(password)})
         }
     }
 
@@ -38,12 +48,21 @@ export default function Login({socket}) {
         navigate("/register");
     }
 
+    // React.useEffect(() => {
+    //     socket.on('loginSuccess', (data) => {
+    //         console.log("login success");
+    //         navigate("/usercenter");
+    //     });
+    //     socket.on('loginFailed', (data) => {
+    //         setInfo(data.message);
+    //     });
+    // }, []);
+
     React.useEffect(() => {
-        socket.on('loginSuccess', (data) => {
-            console.log("login success");
+        if (allreadyLogin) {
             navigate("/usercenter");
-        })
-    }, []);
+        }
+    });
 
 
     return (
@@ -65,7 +84,7 @@ export default function Login({socket}) {
                             id = "Username"
                             label = ""
                             autoFocus
-                            onChange = {e => handleUsernameChange(e.target.value)}/>
+                            onChange = {e => setUsername(e.target.value)}/>
                     </div>
                     <br></br>
                     <div>

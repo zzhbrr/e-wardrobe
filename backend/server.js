@@ -11,7 +11,6 @@ const io = require('socket.io')(server, {
     methods: ["GET", "POST"]
   }
 })
-// const io = require('socket.io')(server);
 app.use(cors())
 const port = 8000;
 
@@ -19,19 +18,18 @@ server.listen(port, () => {
     console.log(`Server running on port ${port}`);
     }
 );
+
+var onlineUsers = [];
 pg_pool.connect(function(err, client, done) { 
-    if(err) {
-    return console.error('数据库连接出错', err);
-    }
-    // 简单输出个 Hello World
-    client.query("SELECT distinct(tablename) FROM pg_tables WHERE SCHEMANAME = 'admin'", function(err, result) {
-        done();// 释放连接（将其返回给连接池）
-    if(err) {
-        return console.error('查询出错', err);
-    }
-    console.log(result.rows);
+    if(err) return console.error('数据库连接出错', err);
+    io.on('connection', (socket) => {
+        setTimeout(() => {
+            socket.emit('back_connect', 'connect');
+        }, 10000000);
+        console.log('a user connected');
+        require('./routes')(socket, io, client, onlineUsers);
     });
-   });
+});
    
 // pg_client.query("SELECT distinct(tablename) FROM pg_tables WHERE SCHEMANAME = 'admin'", (err, res) => {
 //     console.log(err, res.rows)
