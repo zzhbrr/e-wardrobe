@@ -49,6 +49,10 @@ export default function UserInfo({socket, userName}){
         socket.emit('userInfoChange', data);
     }
 
+    React.useEffect(()=>{
+        askInfo();
+    },[]);
+
     return(
         <div className="user_info">
             <h1 className=" user left">{userInfo.username}</h1>

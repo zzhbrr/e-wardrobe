@@ -1,9 +1,9 @@
-sql = require('./sql_userLogin');
+sql = require('./sql_userService');
 UID = 0;
 module.exports = {
     userLogin: function(socket, pg_client, onlineUsers) {
         function checkIfUserIsLoggedIn(username) {
-            return false;
+            // return false;
             if (onlineUsers.indexOf(username) === -1) {
                 return false;
             } else {
