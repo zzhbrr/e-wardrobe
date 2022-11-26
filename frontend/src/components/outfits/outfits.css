@@ -1,0 +1,81 @@
+.header {
+    text-align: center;
+    padding: 10px 0px 0px 10px;
+}
+.product_card {
+    height: 230px;
+    width: 350px;
+    border: 1px solid black;
+    text-align: center;
+    border-radius: 15px;  /* 圆角 */
+}
+.outfit_content {
+    line-height: 30px;
+    padding: 100;
+    margin: 0;
+    font-size: large;
+}
+.outfit_img {
+    height: 150px;
+    width: 100px;
+    /* border: 1px solid black; */
+}
+
+.list {
+    height: 65vh;
+    padding-right: 50px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+
+.upwear_pos{
+    position: absolute;
+    left: 540px;
+    top: 100px;
+    text-align: center;
+    height: 230px;
+    width: 350px;
+    border: 1px solid black;
+    border-radius: 15px;  /* 圆角 */
+}
+.coat_pos{
+    position: absolute;  /* 绝对位置 */
+    left: 140px;
+    top: 350px;
+    text-align: center;
+    height: 230px;
+    width: 350px;
+    border: 1px solid black;
+    border-radius: 15px;  /* 圆角 */
+}
+.downwear_pos{
+    position: absolute;
+    left: 540px;
+    top: 350px;
+    text-align: center;
+    height: 230px;
+    width: 350px;
+    border: 1px solid black;
+    border-radius: 15px;  /* 圆角 */
+}
+.shoe_pos{
+    position: absolute;
+    left: 540px;
+    top: 600px;
+    text-align: center;
+    height: 230px;
+    width: 350px;
+    border: 1px solid black;
+    border-radius: 15px;  /* 圆角 */
+}
+.decoration_pos{
+    position: absolute;
+    left: 940px;
+    top: 350px;
+    text-align: center;
+    height: 230px;
+    width: 350px;
+    border: 1px solid black;
+    border-radius: 15px;  /* 圆角 */
+}
