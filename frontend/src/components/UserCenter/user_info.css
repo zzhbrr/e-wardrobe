@@ -4,17 +4,20 @@
     flex-direction: column;
     padding: 60px;
 }
+.user {
+    margin-bottom: 0;
+}
 .uid {
     margin-bottom: 15px;
     color: gray;
     font-size: medium;
 }
-.left {
-    text-align: left;
-}
-.content {
+.user_content {
     line-height: 40px;
     font-size: large;
+}
+.left {
+    text-align: left;
 }
 .change_btn {
     max-width: 200px;
