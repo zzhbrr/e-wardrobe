@@ -4,7 +4,7 @@ import ChangeInfo from "../ChangeInfo"
 
 export default function UserInfo({socket, userName}){
     const [userInfo,set_userInfo]=React.useState({
-        uid:        0,
+        uid:        -1,
         username:       userName,
         gender:     "Unknown",
         age:        0,
@@ -14,7 +14,7 @@ export default function UserInfo({socket, userName}){
         if (data.gender === 0) data.gender = "男";
         else if (data.gender === 1) data.gender = "女";
         const tmp = {
-            uid:        userInfo.uid,
+            uid:        data.UID,
             username:       userInfo.username,
             gender:     data.gender, 
             age:        data.age,

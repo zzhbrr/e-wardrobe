@@ -22,7 +22,7 @@ module.exports = {
                             socket.emit('loginFailed', {message: '用户已登录'});
                         } else {
                             onlineUsers.push(data.username);
-                            socket.emit('loginSuccess', {message: '登录成功', username: data.username});
+                            socket.emit('loginSuccess', {message: '登录成功', username: data.username, uid: res.rows[0].uid});
                             console.log(`log: ${data.username} 成功登录`);
                         }
                     } else {

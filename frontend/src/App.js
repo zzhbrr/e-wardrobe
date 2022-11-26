@@ -20,14 +20,16 @@ function App() {
   localStorage.clear();
   const [isLogin, setIsLogIn] = React.useState(false);
   const [userName, setUserName] = React.useState(localStorage.getItem('userName'));
+  const [UserID, setUserID] = React.useState(localStorage.getItem('UserID'));
 
-  function handleLogin(username) {
+  function handleLogin(username, uid) {
     setUserName(username);
     // console.log('userName set to ', username);
     // alert('userName set to ', username);
     setIsLogIn(true);
     // userName = username;
     // isLogin = true;
+    setUserID(uid);
   }
 
   // React.useEffect(()=>{
