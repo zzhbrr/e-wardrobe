@@ -9,10 +9,10 @@ export default function ClothBar(props){
         <div className="clothbar">
             {items.map((item)=>{
                 return(
-                    <div className={item_selected==item?"clothbar_item cloth_item_selected":"clothbar_item"}
-                    onClick={()=>selectItem(item)}
-                    key={item} >{item}</div>
-            )})}
+                    <div className={item_selected==item ? "clothbar_item cloth_item_selected" : "clothbar_item"}
+                    onClick={()=>selectItem(item)} key={item}>
+                    {item}</div>)
+            })}
         </div>
     )
 }

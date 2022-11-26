@@ -2,7 +2,7 @@
     text-align: center;
     padding: 10px 0px 0px 10px;
 }
-.product_card {
+.special_product_card {
     height: 230px;
     width: 350px;
     border: 1px solid black;
@@ -15,7 +15,7 @@
     margin: 0;
     font-size: large;
 }
-.outfit_img {
+.outfits_img {
     height: 150px;
     width: 100px;
     /* border: 1px solid black; */
