@@ -38,7 +38,7 @@ export default function UserCenter({socket, isLogin, userName}){
             <h1 className="underline">个人中心</h1>
             <div className="flex-row">
                 <NaviBar selected_content={selected_content} set_selected_content={set_selected_content} />
-                {selected_content==SELECT_USERINFO?<UserInfo />:
+                {selected_content==SELECT_USERINFO?<UserInfo socket={socket} userName={userName}/>:
                     selected_content==SELECT_OUTFITS?<Outfits />:
                         selected_content==SELECT_ARTICLES?<Articles />:
                             <div className="user_info">error</div>}
