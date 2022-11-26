@@ -1,6 +1,6 @@
 import React from "react"
 import "./user_info.css"
-import ChangeInfo from "./change_info"
+import ChangeInfo from "../ChangeInfo"
 
 export default function UserInfo(props){
     const [userInfo,set_userInfo]=React.useState({

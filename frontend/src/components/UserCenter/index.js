@@ -4,7 +4,6 @@ import UserInfo from "./components/UserInfo"
 import Articles from "./components/Articles"
 import Outfits from "./components/Outfits"
 import "./index.css"
-import "./user_info.css"
 import {
     useNavigate
 } from "react-router-dom";

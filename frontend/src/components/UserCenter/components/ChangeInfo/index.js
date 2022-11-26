@@ -6,7 +6,7 @@ import {
     FormControl, InputLabel, DialogActions, 
     FormLabel, Radio, Button, Select, MenuItem
 } from '@mui/material';
-import "./user_info.css"
+import "../UserInfo/user_info.css";
 
 export default function ChangeInfo({handleChangeInfo}) {
     const [open, setOpen] = React.useState(false);

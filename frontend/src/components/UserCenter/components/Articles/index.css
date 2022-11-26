@@ -1,0 +1,23 @@
+.articles {
+    text-align: left;
+    padding: 50px 0px 0px 50px;
+}
+.article_block {
+    height: 80px;
+    width: 350px;
+    padding: 10px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid black;
+    margin: 0px 0px 0px 0px;
+}
+.author {
+    font: small;
+    color: grey;
+}
+
+.list {
+    height: 65vh;
+    padding-right: 50px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
