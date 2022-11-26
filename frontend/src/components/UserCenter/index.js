@@ -1,9 +1,10 @@
 import React from "react"
-import NaviBar from "./navi_bar"
-import UserInfo from "./user_info"
+import NaviBar from "./components/NaviBar"
+import UserInfo from "./components/UserInfo"
+import Articles from "./components/Articles"
+import Outfits from "./components/Outfits"
 import "./index.css"
 import "./user_info.css"
-import Outfits from "./all_outfits"
 import {
     useNavigate
 } from "react-router-dom";
@@ -40,7 +41,7 @@ export default function UserCenter({socket, isLogin, userName}){
                 <NaviBar selected_content={selected_content} set_selected_content={set_selected_content} />
                 {selected_content==SELECT_USERINFO?<UserInfo />:
                     selected_content==SELECT_OUTFITS?<Outfits />:
-                        selected_content==SELECT_ARTICLES?<div className="user_info">articles</div>:
+                        selected_content==SELECT_ARTICLES?<Articles />:
                             <div className="user_info">error</div>}
             </div>
         </div>
