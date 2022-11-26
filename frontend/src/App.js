@@ -14,23 +14,36 @@ import React from 'react';
 
 const socket = io('ws://localhost:8000')
 
+// var userName = "", isLogin = false;
+
 function App() {
-  React.useEffect(() => {
-    socket.emit('user_test', 'test', () => {
-      console.log('emit test event');
-    });
-    socket.on('back_connect', ()=>{
-        console.log('back_connect');
-    })
-  });
+  // localStorage.clear();
+  const [isLogin, setIsLogIn] = React.useState(false);
+  const [userName, setUserName] = React.useState(localStorage.getItem('userName'));
+
+  function handleLogin(username) {
+    setUserName(username);
+    // console.log('userName set to ', username);
+    // alert('userName set to ', username);
+    setIsLogIn(true);
+    // userName = username;
+    // isLogin = true;
+  }
+
+  // React.useEffect(()=>{
+  //   console.log('!!userName: ', userName)
+  //   console.log('!!isLogin: ', isLogin);
+  // }, )
+
       
   return (
     <Routes>
       <Route exact path="/login" element={
+        userName === null ? 
         <div className="App">
-          <Login socket={socket}/>
-        </div>
-        } />
+          <Login socket={socket} handleLogin={handleLogin}/>
+        </div> : <Navigate to="/usercenter" />
+        } /> 
       <Route exact path="/register" element={
         <div className="App">
           <Register socket={socket}/>
@@ -38,7 +51,7 @@ function App() {
         } />
       <Route exact path="/usercenter" element={
         <div className="App">
-          <UserCenter socket={socket}/>
+          <UserCenter socket={socket} isLogin={isLogin} userName={userName}/>
         </div>
       }/>
       <Route exact path="/" element={<Navigate to="/usercenter"></Navigate>} />

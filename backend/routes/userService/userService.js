@@ -16,12 +16,12 @@ module.exports = {
                     socket.emit('loginFailed', {message: '用户不存在'});
                 } else {
                     // console.log(res)
-                    if(res.rows[0].password.replace(/\s+/g, "") == data.password) { // 在数据库中存储的密码会用尾空格
+                    if(res.rows[0].password.replace(/\s+/g, "") == data.password) { // 在数据库中存储的密码会有尾空格
                         if (checkIfUserIsLoggedIn(data.username)) {
                             socket.emit('loginFailed', {message: '用户已登录'});
                         } else {
                             onlineUsers.push(data.username);
-                            socket.emit('loginSuccess', {message: '登录成功'});
+                            socket.emit('loginSuccess', {message: '登录成功', username: data.username});
                             console.log(`log: ${data.username} 成功登录`);
                         }
                     } else {
@@ -32,12 +32,15 @@ module.exports = {
             })
         });
 
-        socket.on('autoLogin', (username) => {
-            if (checkIfUserIsLoggedIn(username)) {
+        socket.on('autoLogin', (data) => {
+            // console.log('in autoLogin');
+            // console.log(username);
+            if (checkIfUserIsLoggedIn(data.username)) {
                 socket.emit('autoLoginSuccess');
-                onlineUsers.push(username);
+                onlineUsers.push(data.username);
             } else {
-                socket.emit('loginFailed', {message: '用户未登录'});
+                // console.log('autologin failed')
+                socket.emit('autoLoginFailed', {message: '用户未登录'});
             }
         })
     }, 

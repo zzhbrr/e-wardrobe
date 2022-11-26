@@ -17,7 +17,7 @@ const md5 = require('md5');
 //     },
 // }));
 
-export default function Login({socket}) {
+export default function Login({socket, handleLogin}) {
     // const classes = useStyles();
     const [username, setUsername] = React.useState('')
     const [info, setInfo] = React.useState("")
@@ -33,7 +33,9 @@ export default function Login({socket}) {
         } else {
             socket.on('loginSuccess', (data) => {
                 console.log("login success");
-                navigate("/usercenter");
+                localStorage.setItem("userName",data.username);
+                handleLogin(data.username);
+                navigate("/");
             });
             socket.on('loginFailed', (data) => {
                 setInfo(data.message);
