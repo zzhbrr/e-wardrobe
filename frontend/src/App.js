@@ -17,7 +17,7 @@ const socket = io('ws://localhost:8000')
 // var userName = "", isLogin = false;
 
 function App() {
-  // localStorage.clear();
+  localStorage.clear();
   const [isLogin, setIsLogIn] = React.useState(false);
   const [userName, setUserName] = React.useState(localStorage.getItem('userName'));
 
