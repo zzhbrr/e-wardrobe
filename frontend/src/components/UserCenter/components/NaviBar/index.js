@@ -1,6 +1,6 @@
 import "./navi_bar.css"
 import React from "react";
-const SELECT_USERINFO=0,SELECT_OUTFITS=1,SELECT_ARTICLES=2;
+const SELECT_USERINFO=0,SELECT_OUTFITS=1,SELECT_ARTICLES=2,SELECT_CLOTHES=3;
 
 export default function NaviBar(props){
     console.log(props)
@@ -18,6 +18,10 @@ export default function NaviBar(props){
             <div className={selected_content==SELECT_ARTICLES?"navi_content selected":"navi_content"} 
             onClick={()=>set_selected_content(SELECT_ARTICLES)}>
                 我的文章
+            </div>
+            <div className={selected_content==SELECT_CLOTHES?"navi_content selected":"navi_content"} 
+            onClick={()=>set_selected_content(SELECT_CLOTHES)}>
+                我的衣服
             </div>
         </div>
     )
