@@ -10,6 +10,10 @@
     border-bottom: 2px solid black;
     margin: 0px 0px 0px 0px;
 }
+.outfit_card:hover {
+    background-color: rgba(0,0,0,0.1);
+    transition-duration: 0.2s;
+}
 .product_card {
     width: 60px;
     height: 80px;
@@ -18,10 +22,6 @@
     margin: 5px;
     float: left;
     text-align: center;
-}
-.product_card:hover {
-    background-color: rgba(0,0,0,0.1);
-    transition-duration: 0.2s;
 }
 .outfit_content {
     line-height: 30px;

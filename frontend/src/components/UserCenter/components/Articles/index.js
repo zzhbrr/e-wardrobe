@@ -16,7 +16,7 @@ export default function Articles(props){
             <div className="list">
                 {article_list.map((article)=>{
                     return (<div className="article_block">
-                        <h3>{article.title}</h3>
+                        <h3 className="title">{article.title}</h3>
                         <div className="author">{article.author}</div>
                     </div>)
                 })}
