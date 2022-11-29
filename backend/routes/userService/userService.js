@@ -1,4 +1,4 @@
-sql = require('./sql_userLogin');
+sql = require('./sql_userService');
 UID = 0;
 module.exports = {
     userLogin: function(socket, pg_client, onlineUsers) {
@@ -22,7 +22,7 @@ module.exports = {
                             socket.emit('loginFailed', {message: '用户已登录'});
                         } else {
                             onlineUsers.push(data.username);
-                            socket.emit('loginSuccess', {message: '登录成功', username: data.username});
+                            socket.emit('loginSuccess', {message: '登录成功', username: data.username, uid: res.rows[0].uid});
                             console.log(`log: ${data.username} 成功登录`);
                         }
                     } else {
@@ -45,6 +45,7 @@ module.exports = {
             }
         })
     }, 
+
     userRegister: function(socket, pg_client) {
         socket.on('register', (data) => {
             pg_client.query(sql.checkoutUsername(data.username), (err, res) => {
@@ -61,5 +62,30 @@ module.exports = {
                 }
             })
         })
+    }, 
+
+    userInfo: function(socket, pg_client) {
+        socket.on('userInfoAsk', (data) => {
+            pg_client.query(sql.checkoutUsername(data.userName), (err, res) => {
+                if (err) throw err;
+                if (res.rows.length === 0) {
+                    socket.emit('userInfoAskFailed', {message: '用户不存在'});
+                } else {
+                    res.rows[0].userName = data.userName;
+                    socket.emit('userInfoAskSuccess', {message: '查询成功', userInfo: res.rows[0]});
+                }
+            })
+        });
+        socket.on('userInfoChange', (data) => {
+            // console.log('in userInfoChange');
+            // console.log(data);
+            if (data.gender === '男') data.gender = 0;
+            else if (data.gender === '女') data.gender = 1;
+            pg_client.query(sql.alterChangeUserInfo(data.uid, data.username, data.gender, data.age, data.profession), (err, res) => {
+                if (err) throw err;
+                console.log(`User ${data.username} changed info`);
+                socket.emit('userInfoChangeSuccess', {message: '修改成功'});
+            })
+        });
     }
 }
