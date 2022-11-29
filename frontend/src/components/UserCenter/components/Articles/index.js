@@ -1,15 +1,18 @@
 import React from "react";
 import "./index.css"
 
-export default function Articles(props){
-    const default_article={
-        title:  "Default Title",
-        author: " Default User",
-        src:    "../materials/defalut_article.html"
-    }
-    const defalut_article_list=[default_article,default_article,default_article,default_article];
+export default function Articles(props){    
+    const article_list=props.article_list;
+    console.log(article_list)
+    const reqArticles=props.reqArticles;
 
-    const [article_list,setArticles]=React.useState(defalut_article_list);
+    React.useEffect(()=>{
+        if(article_list==false){
+            reqArticles();
+        }
+    });
+    
+    // const [article_list,setArticles]=React.useState(defalut_article_list);
     return(
         <div className="articles">
             <h1>我发布的文章</h1>
