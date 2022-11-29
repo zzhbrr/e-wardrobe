@@ -102,7 +102,9 @@ export default function Login({socket, handleLogin}) {
                     onClick={() => handleLoginClick()}> 
                     LOGIN 
                 </button>
-                <p className="register_link"><a onClick={handleRegisterLink}>Register</a></p>
+                <p className="register_link">
+                    <a onClick={handleRegisterLink}>Register</a>
+                </p>
             </Container>
         </div>
     )

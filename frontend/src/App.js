@@ -3,6 +3,7 @@ import UserCenter from './components/UserCenter/index';
 import Login from './components/login/login';
 import Register from './components/register/register';
 import Outfits from './components/outfits/outfits';
+import Article from './components/article/article';
 import io from 'socket.io-client'
 import {
     BrowserRouter as Router,
@@ -57,6 +58,11 @@ function App() {
         <Route exact path="/outfits" element={
             <div className="App">
                 <Outfits socket={socket} userName={userName}/>
+            </div>
+        }/>
+        <Route exact path="/article" element={
+            <div className="App">
+                <Article socket={socket} userName={userName}/>
             </div>
         }/>
         <Route exact path="/" element={<Navigate to="/usercenter"></Navigate>} />
