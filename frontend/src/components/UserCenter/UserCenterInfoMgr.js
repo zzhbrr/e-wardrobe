@@ -65,13 +65,14 @@ export default class UserCenterInfoMgr{
         this.socket.emit('userInfoChange',tmp)
     }
     reqOutfitList=()=>{
-        // this.socket.emit('getOutfits',{
-        //     askType:'all',
-        //     uid:this.states.user_info.UID,
-        //     oid:-1
-        // })
-        console.log("outfits req")
-        this.handleOutfits({outfits:default_outfits})
+        this.socket.emit('getOutfits',{
+            askType:'all',
+            uid:this.states.user_info.UID,
+            oid:-1
+        })
+        //test code
+        // console.log("outfits req")
+        // this.handleOutfits({outfits:default_outfits})
     }
     reqOutfitImg=()=>{
         // this.socket.emit('PID2url',{
