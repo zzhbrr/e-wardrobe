@@ -70,7 +70,7 @@ module.exports = {
                 } else {
                     socket.emit('getClothesDetailSuccess', {img_src: res.rows[0].img_src, 
                         season: res.rows[0].season, climate: res.rows[0].climate, 
-                        situation: res.rows[0].situation, band: res.rows[0].band, texture: res.rows[0].texture});
+                        situation: res.rows[0].situation, band: res.rows[0].band, texture: res.rows[0].texture, band: res.rows[0].band_name});
                 }
             })
         });
