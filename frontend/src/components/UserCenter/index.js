@@ -1,5 +1,5 @@
 import React from "react"
-import NaviBar from "./components/NaviBar"
+import NaviBar from "../NaviBar"
 import UserInfo from "./components/UserInfo"
 import Articles from "./components/Articles"
 import Outfits from "./components/Outfits"

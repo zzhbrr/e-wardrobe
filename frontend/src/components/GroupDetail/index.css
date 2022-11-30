@@ -1,0 +1,16 @@
+.group {
+    min-height: 100vh;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+.flex-row {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+}
+.underline {
+    border-bottom: 1px solid grey;
+    padding-bottom: 10px;
+    margin-bottom: 0;
+}
