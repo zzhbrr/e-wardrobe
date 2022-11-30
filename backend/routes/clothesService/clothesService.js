@@ -33,12 +33,11 @@ module.exports = {
             } else {
                 pg_client.query(sql_clothes.getOutfitsByOID(data.oid), (err, res) => {
                     if (err) throw err;
-                    // res.rows[0].img_src = PID2url(res.rows[0].pid, pg_client);
-                    // PID2url(res.rows[0], 'coat_src', res.rows[0].coat_id, pg_client);
-                    // PID2url(res.rows[0], 'bottom_src', res.rows[0].bottom_id, pg_client);
-                    // PID2url(res.rows[0], 'ornament_src', res.rows[0].ornament_id, pg_client);
-                    // PID2url(res.rows[0], 'shoe_src', res.rows[0].shoe_id, pg_client);
-                    // PID2url(res.rows[0], 'top_src', res.rows[0].top_id, pg_client);
+                    PID2url(socket, pg_client, res.rows[0].coat_id, 0, 'coat');
+                    PID2url(socket, pg_client, res.rows[0].bottom_id, 0, 'bottom');
+                    PID2url(socket, pg_client, res.rows[0].ornament_id, 0, 'ornament');
+                    PID2url(socket, pg_client, res.rows[0].shoe_id, 0, 'shoe');
+                    PID2url(socket, pg_client, res.rows[0].top_id, 0, 'top');
                     socket.emit('getOutfitsSuccess', {message: '获取成功', outfits: res.rows[0]});
                 })
             }
@@ -63,13 +62,12 @@ module.exports = {
 
         socket.on('getClothesDetail', (data) => {
             sql_getClothesDetail = `SELECT * FROM admin.product WHERE pid = ${data.pid};`;
-            pg_client.query(sql1, (err, res) => {
+            pg_client.query(sql_getClothesDetail, (err, res) => {
                 if (err) throw err;
                 if (res.rows.length === 0) {
                     console.log('no product with pid: ' + data.pid);
                     socket.emit('getClothesDetailFailed', {message: '未找到该衣物'});
                 } else {
-                    console.log('get ' + data.type + ' detail');
                     socket.emit('getClothesDetailSuccess', {img_src: res.rows[0].img_src, 
                         season: res.rows[0].season, climate: res.rows[0].climate, 
                         situation: res.rows[0].situation, band: res.rows[0].band, texture: res.rows[0].texture});
@@ -78,14 +76,14 @@ module.exports = {
         });
 
         socket.on('getClothesComments', (data) => {
-            sql_getClothesComments = `SELECT time, content_src, username, uid
-                                        FROM admin.essay, admin.prod_essay, admin.user
-                                        WHERE admin.essay.eid = admin.prod_essay.eid AND admin.essay.uid = admin.user.uid
+            sql_getClothesComments = `SELECT time, content_src, username, admin.users_tmp.uid
+                                        FROM admin.essay, admin.prod_essay, admin.users_tmp
+                                        WHERE admin.essay.eid = admin.prod_essay.eid AND admin.essay.uid = admin.users_tmp.uid
                                             AND pid = ${data.pid};`;
             pg_client.query(sql_getClothesComments, (err, res) => {
                 if (err) throw err;
                 console.log('get ' + res.rows.length + ' comments');
-                socket.emit('getClothesCommentsSuccess', {message: '获取成功', comments: res.rows});
+                socket.emit('getClothesCommentsSuccess', {comments: res.rows});
             })
 
         })
