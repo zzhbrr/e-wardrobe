@@ -84,7 +84,9 @@ module.exports = {
             pg_client.query(sql.alterChangeUserInfo(data.uid, data.username, data.gender, data.age, data.profession), (err, res) => {
                 if (err) throw err;
                 console.log(`User ${data.username} changed info`);
-                socket.emit('userInfoChangeSuccess', {message: '修改成功'});
+                if (data.gender === 0) data.gender = "男";
+                else if (data.gender === 1) data.gender = "女";
+                socket.emit('userInfoChangeSuccess', {message: '修改成功', uid:data.uid, username:data.username, gender:data.gender, age:data.age, profession:data.profession});
             })
         });
     }

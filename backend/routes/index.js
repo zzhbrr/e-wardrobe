@@ -8,5 +8,5 @@ module.exports = function(socket, io, pg_client, onlineUsers) {
     userService.userInfo(socket, pg_client);
 
     clothesService.getOutfits(socket, pg_client);
-    clothesService.PID2url(socket, pg_client);
+    clothesService.getClothes(socket, pg_client);
 }
