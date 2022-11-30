@@ -11,13 +11,13 @@ const socket = require('socket.io-client').io('ws://localhost:8000');
 // });
 // socket.emit('getClothesDetail', {pid:12});
 //--------------------------------------------------------------------------------------------------------------------------------------------------------
-// socket.on('getOutfitsSuccess', (data) => {
-//    console.log(data);
-// });
-// socket.emit('getOutfits', {askType:'all', uid: 0});
-// socket.on('getAllClothesRetURLSuccess', (data) => {
-//    console.log(data);
-// });
+socket.on('getOutfitsSuccess', (data) => {
+   console.log(data);
+});
+socket.emit('getOutfits', {askType:'all', uid: 0});
+socket.on('getOutfitsRetURLSuccess', (data) => {
+   console.log(data);
+});
 //--------------------------------------------------------------------------------------------------------------------------------------------------------
 // socket.on('getClothesCommentsSuccess', (data) => {
 //    console.log(data);

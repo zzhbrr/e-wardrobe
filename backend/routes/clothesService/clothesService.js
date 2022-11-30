@@ -9,7 +9,7 @@ function PID2url(socket, pg_client, pid, index, type) {
         if (res.rows.length === 0) {
             console.log('no product with pid: ' + data.pid);
         } else {
-            socket.emit('getAllClothesRetURLSuccess', {img_src: res.rows[0].img_src, type: type, index: index});
+            socket.emit('getOutfitsRetURLSuccess', {img_src: res.rows[0].img_src, type: type, index: index});
         }
     })
 }
