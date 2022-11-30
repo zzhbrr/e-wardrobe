@@ -6,10 +6,10 @@ const socket = require('socket.io-client').io('ws://localhost:8000');
 // });
 // socket.emit('getAllClothes', {uid:0, username:'zz', type:'shoe'});
 //--------------------------------------------------------------------------------------------------------------------------------------------------------
-// socket.on('getClothesDetailSuccess', (data) => {
-//    console.log(data); 
-// });
-// socket.emit('getClothesDetail', {pid:12});
+socket.on('getClothesDetailSuccess', (data) => {
+   console.log(data); 
+});
+socket.emit('getClothesDetail', {pid:12});
 //--------------------------------------------------------------------------------------------------------------------------------------------------------
 // socket.on('getOutfitsSuccess', (data) => {
 //    console.log(data);
@@ -54,10 +54,10 @@ const socket = require('socket.io-client').io('ws://localhost:8000');
 // });
 // socket.emit('getGroupEssay', {gid: 0});
 //--------------------------------------------------------------------------------------------------------------------------------------------------------
-socket.on('getAllHistorySuccess', (data) => {
-   console.log(data);
-});
-socket.on('getAllHistoryRetURLSuccess', (data) => {
-   console.log(data);
-});
-socket.emit('getAllHistory', {uid: 0});
+// socket.on('getAllHistorySuccess', (data) => {
+//    console.log(data);
+// });
+// socket.on('getAllHistoryRetURLSuccess', (data) => {
+//    console.log(data);
+// });
+// socket.emit('getAllHistory', {uid: 0});
