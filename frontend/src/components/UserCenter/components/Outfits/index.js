@@ -28,25 +28,30 @@ export default function Outfits(props){
             <div className="list">
                 {outfit_list.map((outfit)=>
                     <div className="outfit_card" key={outfit.oid}>
-                        <div className="product_card" onClick={view_product(outfit.upwear.pid)}>
+                        <div className="product_card" onClick={view_product(outfit.top_pid)}>
                             <div className="outfit_content">上衣</div>
-                            <img src={outfit.upwear.src} className="outfit_img"/>
+                            {/* <img src={outfit.upwear.src} className="outfit_img"/> */}
+                            <img src={outfit.top_src} className="outfit_img"/>
                         </div>
-                        <div className="product_card" onClick={view_product(outfit.downwear.pid)}>
+                        <div className="product_card" onClick={view_product(outfit.bottom_id)}>
                             <div className="outfit_content">下装</div>
-                            <img src={outfit.downwear.src} className="outfit_img"/>
+                            {/* <img src={outfit.downwear.src} className="outfit_img"/> */}
+                            <img src={outfit.bottom_src} className="outfit_img"/>
                         </div>
-                        <div className="product_card" onClick={view_product(outfit.coat.pid)}>
+                        <div className="product_card" onClick={view_product(outfit.coatid)}>
                             <div className="outfit_content">外套</div>
-                            <img src={outfit.coat.src} className="outfit_img"/>
+                            {/* <img src={outfit.coat.src} className="outfit_img"/> */}
+                            <img src={outfit.coat_src} className="outfit_img"/>
                         </div>
-                        <div className="product_card" onClick={view_product(outfit.shoe.pid)}>
+                        <div className="product_card" onClick={view_product(outfit.shoe_id)}>
                             <div className="outfit_content">鞋子</div>
-                            <img src={outfit.shoe.src} className="outfit_img"/>
+                            {/* <img src={outfit.shoe.src} className="outfit_img"/> */}
+                            <img src={outfit.shoe_src} className="outfit_img"/>
                         </div>
-                        <div className="product_card" onClick={view_product(outfit.decoration.pid)}>
+                        <div className="product_card" onClick={view_product(outfit.ornament_id)}>
                             <div className="outfit_content">饰品</div>
-                            <img src={outfit.decoration.src} className="outfit_img"/>
+                            {/* <img src={outfit.decoration.src} className="outfit_img"/> */}
+                            <img src={outfit.ornament_src} className="outfit_img"/>
                         </div>
                     </div>
                 )}
