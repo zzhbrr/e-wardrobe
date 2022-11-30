@@ -3,7 +3,7 @@ import "./index.css"
 
 export default function Articles(props){    
     const article_list=props.article_list;
-    console.log(article_list)
+    // console.log(article_list)
     const reqArticles=props.reqArticles;
 
     React.useEffect(()=>{

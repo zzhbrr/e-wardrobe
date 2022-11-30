@@ -52,6 +52,7 @@ module.exports = {
                 if (res.rows.length === 0) {
                     console.log('no product with pid: ' + data.pid);
                 } else {
+                    console.log("PID2url success")
                     socket.emit('PID2urlSuccess', {message: '获取成功', img_src: res.rows[0].img_src, type_src: data.type_src, index: data.index});
                 }
             })

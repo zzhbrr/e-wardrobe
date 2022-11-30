@@ -11,6 +11,16 @@ import {useNavigate} from "react-router-dom";
 
 const navibar_items=['个人信息','我的穿搭','我的文章','我的衣服'];
 
+const default_outfit={
+    oid:    0,
+    '上衣': {pid: 1, img_src: ''},
+    '下装': {pid: 2, img_src: ''},
+    '外套': {pid: 3, img_src: ''},
+    '鞋子': {pid: 4, img_src: ''},
+    '饰品': {pid: 5, img_src: ''}
+}
+const default_outfits=[default_outfit,default_outfit]
+
 const default_article={
     title:  "Default Title",
     eid:    0
@@ -46,8 +56,8 @@ export default function UserCenter(props){
 
     const [item_selected, selectItem]=React.useState(navibar_items[0]);
 
-    const [user_info,setUserInfo]=React.useState({UID:-1});
-    const [outfit_list,setOutfits]=React.useState([]);
+    const [user_info,setUserInfo]=React.useState({username:userName, UID:-1});
+    // const [outfit_list,setOutfits]=React.useState([]);
     const [article_list,setArticles]=React.useState([]);
 
     const [upwear_list,setUpwears]=React.useState([]);
@@ -55,6 +65,12 @@ export default function UserCenter(props){
     const [coat_list,setCoats]=React.useState([]);
     const [shoe_list,setShoes]=React.useState([]);
     const [decoration_list,setDecorations]=React.useState([]);
+
+    const [on_change,setOnChange]=React.useState(false);
+    function onchange(){
+        setOnChange(!on_change)
+    }
+    // const [cur_img,setCurImg]=React.useState(0)
     const clothes_lists={
         '上衣': upwear_list,
         '下装': downwaer_list,
@@ -71,20 +87,25 @@ export default function UserCenter(props){
     }
     const states={
         user_info:user_info,
-        outfit_list:outfit_list,
+        // outfit_list:outfit_list,
         article_list:article_list,
-        clothes_lists:clothes_lists
+        clothes_lists:clothes_lists,
+        // cur_img:cur_img
     }
     const sets={
         setArticles:setArticles,
-        setOutfits:setOutfits,
+        // setOutfits:setOutfits,
         setUserInfo:setUserInfo,
-        clothes_sets:clothes_sets
+        clothes_sets:clothes_sets,
+        // setCurImg:setCurImg
+        onchange:onchange
     }
+
+    const outfits_ref=React.useRef([])
 
     const navigate = useNavigate()
 
-    const info_mgr=new UserCenterInfoMgr({socket:socket,states:states,sets:sets})
+    const info_mgr=new UserCenterInfoMgr({socket:socket,states:states,sets:sets,outfits_ref:outfits_ref})
 
     React.useEffect(()=>{
         socket.on("autoLoginFailed", ()=>{
@@ -111,7 +132,7 @@ export default function UserCenter(props){
             <div className="flex-row">
                 <NaviBar item_selected={item_selected} selectItem={selectItem} items={navibar_items} />
                 {item_selected==='个人信息'?<UserInfo user_info={user_info} reqUserInfo={info_mgr.reqUserInfo} handleChangeInfo={info_mgr.reqUserInfoChange} />:
-                    item_selected==='我的穿搭'?<Outfits outfit_list={outfit_list} reqOutfitList={info_mgr.reqOutfitList} reqOutfitImg={info_mgr.reqOutfitImg} />:
+                    item_selected==='我的穿搭'?<Outfits outfit_list={outfits_ref.current} reqOutfitList={info_mgr.reqOutfitList} reqOutfitImg={info_mgr.reqOutfitImg} />:
                         item_selected==='我的文章'?<Articles article_list={article_list} reqArticles={info_mgr.reqArticles} />:
                             item_selected==='我的衣服'?<Clothes clothes_lists={clothes_lists} reqClothes={info_mgr.reqClothes} />:
                                 <div className="user_info">error</div>}

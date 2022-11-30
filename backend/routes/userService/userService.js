@@ -3,7 +3,7 @@ UID = 0;
 module.exports = {
     userLogin: function(socket, pg_client, onlineUsers) {
         function checkIfUserIsLoggedIn(username) {
-            // return false;
+            return false;
             if (onlineUsers.indexOf(username) === -1) {
                 return false;
             } else {
@@ -66,12 +66,16 @@ module.exports = {
 
     userInfo: function(socket, pg_client) {
         socket.on('userInfoAsk', (data) => {
+            console.log("in userinfoAsk")
+            console.log(data)
             pg_client.query(sql.checkoutUsername(data.userName), (err, res) => {
                 if (err) throw err;
                 if (res.rows.length === 0) {
+                    console.log("userinAsk failed")
                     socket.emit('userInfoAskFailed', {message: '用户不存在'});
                 } else {
                     res.rows[0].userName = data.userName;
+                    console.log("userinAsk success")
                     socket.emit('userInfoAskSuccess', {message: '查询成功', userInfo: res.rows[0]});
                 }
             })
