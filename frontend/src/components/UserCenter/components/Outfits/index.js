@@ -19,22 +19,22 @@ export default function Outfits(props){
     }
 
     React.useEffect(()=>{
-        if(outfit_list==false){
+        if(outfit_list==false&&!props.init_state){
             console.log("req outfit list");
             reqOutfits()
         }
-        else{
-            let sign=false;
-            for(let i in outfit_list){
-                for(let j in items){
-                    sign=true;
-                    reqOutfitImg(i,items[j],outfit_list[i][items[j]].pid);
-                    console.log("outfits: req img");
-                    break;
-                }
-                if(sign) break;
-            }
-        }
+        // else{
+        //     let sign=false;
+        //     for(let i in outfit_list){
+        //         for(let j in items){
+        //             sign=true;
+        //             reqOutfitImg(i,items[j],outfit_list[i][items[j]].pid);
+        //             console.log("outfits: req img");
+        //             break;
+        //         }
+        //         if(sign) break;
+        //     }
+        // }
     })
 
     return(

@@ -15,7 +15,7 @@ export default function Clothes(props){
     //     reqClothes(item_selected);
     // }
     React.useEffect(()=>{
-        if(clothes_lists[item_selected]==false){
+        if(clothes_lists[item_selected]==false&&!props.init_state[item_selected]){
             reqClothes(item_selected);
         }
     })

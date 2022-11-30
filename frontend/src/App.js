@@ -53,7 +53,7 @@ function App() {
         } />
       <Route exact path="/usercenter" element={
         <div className="App">
-          <UserCenter socket={socket} isLogin={isLogin} userName={userName}/>
+          <UserCenter socket={socket} isLogin={isLogin} userName={userName} />
         </div>
       }/>
       <Route exact path="/" element={<Navigate to="/usercenter"></Navigate>} />
