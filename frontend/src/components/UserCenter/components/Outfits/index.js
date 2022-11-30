@@ -2,20 +2,11 @@ import React from "react";
 import "./all_outfits.css"
 
 export default function Outfits(props){
-    const default_product={
-        pid:    0,
-        src:    "https://www.runoob.com/images/pulpit.jpg"
-    }
-    const default_outfit={
-        oid:        0,
-        name:       "default",
-        upwear:     default_product,
-        downwear:   default_product,
-        coat:       default_product,
-        shoe:       default_product,
-        decoration: default_product
-    }
-    var outfit_list=[default_outfit,default_outfit,default_outfit,default_outfit,default_outfit,default_outfit,default_outfit];
+
+    const outfit_list=props.outfit_list;
+    const reqOutfits=props.reqOutfitList;
+    const reqOutfitImg=props.reqOutfitImg;
+
     const [on_change,set_onchange]=React.useState(false);
     function change(){
         set_onchange(!on_change);
@@ -24,6 +15,12 @@ export default function Outfits(props){
     {
         
     }
+
+    React.useEffect(()=>{
+        if(outfit_list==false){
+            reqOutfits()
+        }
+    })
 
     return(
         <div className="outfits">
