@@ -3,15 +3,15 @@ import NaviBar from "./components/NaviBar"
 import UserInfo from "./components/UserInfo"
 import Articles from "./components/Articles"
 import Outfits from "./components/Outfits"
+import Clothes from "./components/Clothes"
 import "./index.css"
-import "./user_info.css"
 import {
     useNavigate
 } from "react-router-dom";
 
-const SELECT_USERINFO = 0, SELECT_OUTFITS = 1, SELECT_ARTICLES = 2;
+const SELECT_USERINFO = 0, SELECT_OUTFITS = 1, SELECT_ARTICLES = 2,SELECT_CLOHES=3;
 
-export default function UserCenter({socket, isLogin, userName}){
+export default function UserCenter({socket, isLogin, userName, UID}){
     const [selected_content, set_selected_content]=React.useState(SELECT_USERINFO);
     const navigate = useNavigate()
 
@@ -39,10 +39,11 @@ export default function UserCenter({socket, isLogin, userName}){
             <h1 className="underline">个人中心</h1>
             <div className="flex-row">
                 <NaviBar selected_content={selected_content} set_selected_content={set_selected_content} />
-                {selected_content==SELECT_USERINFO?<UserInfo />:
-                    selected_content==SELECT_OUTFITS?<Outfits />:
-                        selected_content==SELECT_ARTICLES?<Articles />:
-                            <div className="user_info">error</div>}
+                {selected_content===SELECT_USERINFO?<UserInfo socket={socket} userName={userName}/>:
+                    selected_content===SELECT_OUTFITS?<Outfits socket={socket} userName={userName}/>:
+                        selected_content===SELECT_ARTICLES?<Articles />:
+                        selected_content===SELECT_CLOHES?<Clothes />:
+                                <div className="user_info">error</div>}
             </div>
         </div>
     )

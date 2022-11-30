@@ -34,7 +34,8 @@ export default function Login({socket, handleLogin}) {
             socket.on('loginSuccess', (data) => {
                 console.log("login success");
                 localStorage.setItem("userName",data.username);
-                handleLogin(data.username);
+                localStorage.setItem("userID",data.uid);
+                handleLogin(data.username, data.uid);
                 navigate("/");
             });
             socket.on('loginFailed', (data) => {

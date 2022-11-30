@@ -14,3 +14,18 @@
     padding-bottom: 10px;
     margin-bottom: 0;
 }
+button {
+    max-width: 200px;
+    margin-top: 10px;
+    padding: 10px;
+    font-size: medium;
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+    border-radius: 0;
+}
+button:hover {
+    color: white;
+    background-color: black;
+    transition-duration: 0.2s;
+}

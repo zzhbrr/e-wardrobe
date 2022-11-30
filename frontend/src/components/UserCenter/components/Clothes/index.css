@@ -1,0 +1,37 @@
+.clothes {
+    text-align: left;
+    margin: 50px 0 0 50px;
+}
+.img {
+    height: 80px;
+    width: 80px;
+}
+.cloth {
+    margin: 15px;
+    float: left;
+    border: 2px solid grey;
+    padding: 10px;
+}
+.cloth:hover {
+    background-color: rgba(0,0,0,0.1);
+    border: 2px solid black;
+}
+.button {
+    max-width: 200px;
+    margin-top: 10px;
+    padding: 10px;
+    font-size: medium;
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+    border-radius: 0;
+}
+.button:hover {
+    color: white;
+    background-color: black;
+    transition-duration: 0.2s;
+}
+.list {
+    overflow-y: auto;
+    height: 55vh;
+}
