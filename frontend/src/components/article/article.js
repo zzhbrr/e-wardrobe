@@ -1,23 +1,47 @@
+// article
 import React from "react";
 import "./article.css"
 
-export default function Article(props){
-    const default_article={
-        eid:    0,
-        title:  "Title",
-        author: "Tom",
-        url:    "https://www.baidu.com/"
+export default function ArticleDetail(props){
+    const article_detail={
+        eid:      0,
+        title:    "Title",
+        uid:      0,
+        username: "Tom",
+        content_src:    "https://www.baidu.com/"
     }
+
+    // [article_detail, set_article_detail] = React.useState({
+    //     eid: -1, 
+    //     title: "T",
+    //     uid:      0,
+    //     username: "Tom",
+    //     content_src:    "https://www.baidu.com/", 
+    //     time: "2022-12-01"
+    // })
+
+    React.useEffect(() => {
+        props.socket.on('getArticleDetailSuccess', (res) => {
+
+        })
+        props.socket.emit('getArticleDetail', {eid: props.eid});
+    }, [])
 
     return(
         <div>
             <div className="title">
-                <h1>{default_article.title}</h1>
-                <h2>{default_article.author}</h2>
+                <h1>{article_detail.title}</h1>
+                <h2>{article_detail.author}</h2>
             </div>
             <div>
-                <iframe src={default_article.url} width="800" height="400" name="content"></iframe>
-                <p><a href={default_article.url} target="content">{default_article.url}</a></p>
+                {/* key={article.eid}
+                {article.title}
+                {article.content_src}
+                {article.uid}
+                {article.username}
+                {article.time} */}
+                {/* <iframe src={article_detail.content_src} width="800" height="400" name="content"></iframe> */}
+                <p><a href={article_detail.content_src} target="content">{article_detail.content_src}</a></p>
             </div>
         </div>
     )
