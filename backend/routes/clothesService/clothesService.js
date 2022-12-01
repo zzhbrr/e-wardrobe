@@ -90,5 +90,22 @@ module.exports = {
             })
 
         })
+    }, 
+    addOutfits: function addOutfits(socket, pg_client) {
+        socket.on('addOutfits', (data) => {
+            pg_client.query('SELECT COUNT(oid) FROM admin.outfit', function(err, res) {
+                OID_count = res.rows[0].count;
+                console.log('OID_count is ' + OID_count + " now");
+                sql_addOutfits = `INSERT INTO admin.outfit (oid, top_id, bottom_id, coat_id, shoe_id, ornament_id, uid, username) 
+                                    VALUES (${OID_count}, ${data.top_id}, ${data.bottom_id}, ${data.coat_id}, ${data.shoe_id}, ${data.ornament_id}, ${data.uid}, '${data.username}');`;
+                pg_client.query(sql_addOutfits, (err, res) => {
+                    if (err) throw err;
+                    console.log('add outfit success');
+                    socket.emit('addOutfitsSuccess', {oid: OID_count, top_id: data.top_id, bottom_id: data.bottom_id, coat_id: data.coat_id, shoe_id: data.shoe_id, ornament_id: data.ornament_id, uid: data.uid, username: data.username});
+                })
+            });
+        })
+        
+        
     }
 }

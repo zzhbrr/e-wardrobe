@@ -55,5 +55,22 @@ module.exports = {
 
         // });
 
+    }, 
+    addArticle: function addArticle(socket, pg_client) {
+        socket.on('addArticle', (data) => {
+            console.log('add article: ' + data.title);
+            pg_client.query('SELECT COUNT(eid) FROM admin.essay', function(err, res) {
+                EID_count = res.rows[0].count;
+                sql_addArticle = `INSERT INTO admin.essay (eid, title, content_src, uid, time) 
+                                    VALUES (${EID_count}, '${data.title}', '${data.content_src}', '${data.uid}', current_timestamp(0));`;
+                pg_client.query(sql_addArticle, (err, res) => {
+                    if (err) throw err;
+                    pg_client.query(`SELECT to_char(time, 'YYYY/MM/DD HH24:MI:SS') AS time FROM admin.essay WHERE eid=${EID_count}`, (err, res3) => {
+                        if (err) throw err;
+                        socket.emit('addArticleSuccess', {eid:EID_count, title: data.title, content_src: data.content_src, uid: data.uid, time: res3.time});
+                    })
+                });
+            });
+        });
     }
 }

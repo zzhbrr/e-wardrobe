@@ -26,5 +26,19 @@ module.exports = {
                 socket.emit('getAllHistorySuccess', {history: res.rows});
             })
         });
+    }, 
+    addHistory: function addHistory(socket, pg_client) {
+        socket.on('addHistory', (data) => {
+            pg_client.query(`SELECT COUNT(hid) FROM admin.history WHERE admin.history.uid=${data.uid}`, function(err, res) {
+                if (err) throw err;
+                hid_count = Number(res.rows[0].count);
+                sql_addHistory = `INSERT INTO admin.history (uid, hid, h_year, h_month, h_day, climate, situation, up_wear_id, down_wear_id, coat_id, shoe_id, decration_id) 
+                                    VALUES (${data.uid}, ${hid_count}, ${data.year}, ${data.month}, ${data.day}, '${data.climate}', '${data.situation}', ${data.top_id}, ${data.bottom_id}, ${data.coat_id}, ${data.shoe_id}, ${data.ornament_id})`;
+                pg_client.query(sql_addHistory, (err, res) => {
+                    if (err) throw err;
+                    socket.emit('addHistorySuccess', {uid:data.uid, hid:hid_count, year:data.year, month:data.month, day:data.day, climate:data.climate, situation:data.situation, top_id:data.top_id, bottom_id:data.bottom_id, coat_id:data.coat_id, shoe_id:data.shoe_id, ornament_id:data.ornament_id});
+                })
+            })
+        });
     }
 }
