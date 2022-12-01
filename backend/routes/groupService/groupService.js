@@ -36,7 +36,7 @@ module.exports = {
                                     FROM admin.essay, admin.users_tmp, admin.essay_group 
                                     WHERE admin.essay.eid = admin.essay_group.eid AND admin.essay.uid = admin.users_tmp.uid
                                         AND admin.essay_group.gid = ${data.gid};`;
-            sql_getGroupEssayByReplyTime = `SElECT left_table.left_eid AS eid, left_table.left_title AS title, left_table.left_time AS time, left_table.left_uid AS uid, left_table.left_username AS username, right_table.right_recent_reply AS recently_reply_time
+            sql_getGroupEssayByReplyTime = `SElECT left_table.left_eid AS eid, left_table.left_title AS title, to_char(left_table.left_time, 'YYYY/MM/DD HH24:MI:SS') AS time, left_table.left_uid AS uid, left_table.left_username AS username, to_char(right_table.right_recent_reply, 'YYYY/MM/DD HH24:MI:SS') AS recently_reply_time 
                                             FROM (SELECT admin.essay.eid AS left_eid, title AS left_title, time AS left_time, admin.essay.uid AS left_uid, username AS left_username
                                                     FROM admin.essay, admin.users_tmp, admin.essay_group
                                                     WHERE admin.essay.eid = admin.essay_group.eid AND admin.essay.uid = admin.users_tmp.uid AND admin.essay_group.gid = ${data.gid}) AS left_table
@@ -55,7 +55,7 @@ module.exports = {
         });
 
         socket.on('getWorldEssay', (data) => {
-            sql_getWorldEssayByReplyTime = `SElECT left_table.left_eid AS eid, left_table.left_title AS title, left_table.left_time AS time, left_table.left_uid AS uid, left_table.left_username AS username, right_table.right_recent_reply AS recently_reply_time
+            sql_getWorldEssayByReplyTime = `SElECT left_table.left_eid AS eid, left_table.left_title AS title, to_char(left_table.left_time, 'YYYY/MM/DD HH24:MI:SS') AS time, left_table.left_uid AS uid, left_table.left_username AS username, to_char(right_table.right_recent_reply, 'YYYY/MM/DD HH24:MI:SS') AS recently_reply_time 
                                             FROM (SELECT admin.essay.eid AS left_eid, title AS left_title, time AS left_time, admin.essay.uid AS left_uid, username AS left_username
                                                     FROM admin.essay, admin.users_tmp, admin.essay_group
                                                     WHERE admin.essay.eid = admin.essay_group.eid AND admin.essay.uid = admin.users_tmp.uid) AS left_table

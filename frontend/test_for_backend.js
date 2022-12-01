@@ -54,10 +54,10 @@ const socket = require('socket.io-client').io('ws://localhost:8000');
 // });
 // socket.emit('getGroupEssay', {gid: 0});
 //--------------------------------------------------------------------------------------------------------------------------------------------------------
-// socket.on('getWorldEssaySuccess', (data) => {
-//    console.log(data);
-// });
-// socket.emit('getWorldEssay', {num:4});
+socket.on('getWorldEssaySuccess', (data) => {
+   console.log(data);
+});
+socket.emit('getWorldEssay', {num:4});
 //--------------------------------------------------------------------------------------------------------------------------------------------------------
 // socket.on('getAllHistorySuccess', (data) => {
 //    console.log(data);
@@ -90,9 +90,9 @@ const socket = require('socket.io-client').io('ws://localhost:8000');
 // });
 // socket.emit('getUserGroups', {uid: 1});
 //--------------------------------------------------------------------------------------------------------------------------------------------------------
-socket.on('getUserCreatGroupsSuccess', (data) => {
-      console.log(data);
-});
-socket.emit('getUserCreatGroups', {uid: 1});
+// socket.on('getUserCreatGroupsSuccess', (data) => {
+//       console.log(data);
+// });
+// socket.emit('getUserCreatGroups', {uid: 1});
 //--------------------------------------------------------------------------------------------------------------------------------------------------------
 // const qiniu = require('qiniu-js')
