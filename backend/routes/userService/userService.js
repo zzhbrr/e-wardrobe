@@ -1,5 +1,5 @@
 sql = require('./sql_userService');
-UID = 0;
+
 module.exports = {
     userLogin: function(socket, pg_client, onlineUsers) {
         function checkIfUserIsLoggedIn(username) {
@@ -46,16 +46,19 @@ module.exports = {
         })
     }, 
 
-    userRegister: function(socket, pg_client) {
+    userRegister: function(socket, pg_client, UID_count) {
         socket.on('register', (data) => {
+            // console.log('in register');
+            sql_register = `SELECT * FROM admin.users_tmp WHERE username='${data.username}'`;
             pg_client.query(sql.checkoutUsername(data.username), (err, res) => {
                 if (err) throw err;
+                // console.log('in register: UID_count: ' + UID_count);
                 if (res.rows.length === 0) {
                     // console.log(sql.alterAddUser(data.username, data.password, data.email))
-                    pg_client.query(sql.alterAddUser(UID, data.username, data.password, data.email), (err, res) => {
+                    pg_client.query(sql.alterAddUser(UID_count, data.username, data.password, data.email), (err, res) => {
                         if (err) throw err;
                         socket.emit('registerSuccess', {message: '注册成功'});
-                        UID = UID + 1;
+                        UID_count = UID_count + 1;
                     })
                 } else {
                     socket.emit('registerFailed', {message: '用户名已存在'});
@@ -93,5 +96,17 @@ module.exports = {
                 socket.emit('userInfoChangeSuccess', {message: '修改成功', uid:data.uid, username:data.username, gender:data.gender, age:data.age, profession:data.profession});
             })
         });
+    }, 
+    userLogout: function(socket, pg_client, onlineUsers) {
+        socket.on('logout', (data) => {
+            let index = onlineUsers.indexOf(data.username);
+            if (index === -1) {
+                socket.emit('logoutFailed', {message: '用户未登录'});
+            } else {
+                onlineUsers.splice(index, 1);
+                console.log(`log: ${data.username} 成功登出`);
+                socket.emit('logoutSuccess', {message: '登出成功', uid: data.uid, username: data.username});
+            }
+        })
     }
 }
