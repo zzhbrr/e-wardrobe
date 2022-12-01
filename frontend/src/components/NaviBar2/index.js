@@ -1,7 +1,7 @@
 import React from "react";
 import "./ClothBar.css"
 
-export default function ClothBar(props){
+export default function NaviBar2(props){
     const item_selected=props.item_selected;
     const selectItem=props.selectItem;
     const items=props.items;
