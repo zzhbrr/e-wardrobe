@@ -1,6 +1,7 @@
 module.exports = {
     getArticles: function getArticles(socket, pg_client) {
         socket.on('getAllArticles', (data) => {
+            console.log(`req article: ${data.uid}`)
             sql_getAllArticles = `  SELECT eid, title, time 
                                     FROM admin.essay 
                                     WHERE uid = ${data.uid};`;

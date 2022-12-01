@@ -3,11 +3,11 @@ import "./index.css"
 
 export default function Articles(props){    
     const article_list=props.article_list;
-    console.log(article_list)
+    // console.log(article_list)
     const reqArticles=props.reqArticles;
 
     React.useEffect(()=>{
-        if(article_list==false){
+        if(article_list==false&&!props.init_state){
             reqArticles();
         }
     });
@@ -17,12 +17,12 @@ export default function Articles(props){
         <div className="articles">
             <h1>我发布的文章</h1>
             <div className="list">
-                {article_list.map((article)=>{
-                    return (<div className="article_block">
+                {article_list.map((article)=>{return (
+                    <div className="article_block" key={article.eid}>
                         <h3 className="title">{article.title}</h3>
-                        <div className="author">{article.author}</div>
-                    </div>)
-                })}
+                        <div className="author">{article.time.substr(0,10)}</div>
+                    </div>
+                )})}
             </div>
         </div>
     )
