@@ -1,10 +1,12 @@
 module.exports = {
     getGroups: function getGroups(socket, pg_client) {
         socket.on('getGroupDetail', (data) => {
-            sql_getGroupDetail = `SELECT * FROM admin.interst_group WHERE gid = ${data.gid}`;
+            sql_getGroupDetail = `SELECT *
+                                    FROM admin.interst_group, admin.users_tmp
+                                    WHERE gid = ${data.gid} AND admin.interst_group.creator_uid = admin.users_tmp.uid;`;
             pg_client.query(sql_getGroupDetail, (err, res) => {
                 if (err) throw err;
-                socket.emit('getGroupDetailSuccess', {groupName: res.rows[0].group_name, intro: res.rows[0].intro});
+                socket.emit('getGroupDetailSuccess', {groupName: res.rows[0].group_name, intro: res.rows[0].intro, creatorname: res.rows[0].username, creatorid: res.rows[0].creator_uid});
             })
         });
 
@@ -69,7 +71,7 @@ module.exports = {
                 let num = Math.min(res.rows.length, data.num);
                 socket.emit('getWorldEssaySuccess', {essays: res.rows.slice(0, num), num: num});
             })
-    });
+        });
 
         socket.on('getUserGroups', (data) => {
             sql_getUserGroups = `SELECT admin.group_user.gid, group_name, intro
@@ -78,6 +80,16 @@ module.exports = {
             pg_client.query(sql_getUserGroups, (err, res) => {
                 if (err) throw err;
                 socket.emit('getUserGroupsSuccess', {groups: res.rows});
+            })
+        });
+
+        socket.on('getUserCreatGroups', (data) => {
+            sql_getUserCreatGroups = `SELECT gid, group_name, intro
+                                        FROM admin.interst_group 
+                                        WHERE admin.interst_group.creator_uid = ${data.uid}`;
+            pg_client.query(sql_getUserCreatGroups, (err, res) => {
+                if (err) throw err;
+                socket.emit('getUserCreatGroupsSuccess', {groups: res.rows});
             })
         });
     }
