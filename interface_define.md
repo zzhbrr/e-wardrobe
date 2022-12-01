@@ -87,3 +87,12 @@ getArticleDetail: content返回url.
 | ------------- | --------------------------- | ------------------------------------------------------------ |
 | getAllHistory | `{hid:int,username:string}` | `getAllHistorySuccess:{histories:[{date:string,climate:string,situation:string,top_id:int...}...]}` |
 
+
+
+
+
+logout
+
+`{uid:int, username:string}`
+
+`logoutSuccess:{message:string, uid:int, username:string}`
