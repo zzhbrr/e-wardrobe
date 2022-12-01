@@ -2,7 +2,7 @@
 import React from "react";
 import "./Article.css";
 import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';             // markdown 对表格/删除线/脚注等的支持
+// import remarkGfm from 'remark-gfm';             // markdown 对表格/删除线/脚注等的支持
 import gfm from 'remark-gfm';
 import MarkNav from 'markdown-navbar';          // markdown 目录
 
@@ -41,7 +41,7 @@ export default function ArticleDetail(props){
                 {/* <ReactMarkdown src={article_detail.content_src} escapeHtml={false} remarkPlugins={[remarkGfm]}>
                     {md}
                 </ReactMarkdown> */}
-                <ReactMarkdown remarkPlugins={[gfm]}># *React-Markdown* now supports ~strikethrough~. Thanks to gfm plugin.</ReactMarkdown>
+                <ReactMarkdown remarkPlugins={[remarkGfm]}># *React-Markdown* $now$ supports ~strikethrough~. Thanks to gfm plugin.</ReactMarkdown>
                 {/* <iframe src={article_detail.content_src} width="800" height="400" name="content"></iframe> */}
                 <p><a href={article_detail.content_src} target="content">{article_detail.content_src}</a></p>
             </div>
