@@ -53,6 +53,7 @@ module.exports = {
                         FROM admin.product NATURAL JOIN admin.user_product
                         ON admin.product.pid=admin.user_product.pid;`;
             // console.log('in getAllClothes');
+            console.log(data)
             pg_client.query(sql_getAllClothes, (err, res) => {
                 if (err) throw err;
                 console.log('get ' + res.rows.length + ' ' + data.type + 's');

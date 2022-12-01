@@ -1,17 +1,22 @@
 .articles {
+    width: 100%;
+    min-width: fit-content;
     text-align: left;
-    padding: 50px 0px 0px 50px;
+    padding: 30px 50px 0px 50px;
 }
 .article_block {
     height: auto;
-    width: 350px;
-    padding: 10px;
-    padding-bottom: 10px;
+    width: 90%;
+    min-width: fit-content;
+    padding: 10px 10px 0 10px;
     border-bottom: 2px solid black;
     margin: 0px 0px 0px 0px;
 }
+.article_block:hover {
+    background-color: rgba(0,0,0,0.1);
+}
 .title {
-    margin: 10px 0 0 0;
+    margin: 10px 0 3px 0;
 }
 .author {
     font: small;
