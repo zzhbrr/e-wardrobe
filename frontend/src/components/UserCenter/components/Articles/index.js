@@ -20,7 +20,7 @@ export default function Articles(props){
                 {article_list.map((article)=>{return (
                     <div className="article_block" key={article.eid}>
                         <h3 className="title">{article.title}</h3>
-                        <div className="author">{article.time.substr(0,10)}</div>
+                        <div className="author">{article.time}</div>
                     </div>
                 )})}
             </div>

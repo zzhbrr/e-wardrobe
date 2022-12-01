@@ -1,30 +1,23 @@
 // article
 import React from "react";
-import "./article.css"
+import "./Article.css";
 
 export default function ArticleDetail(props){
-    const article_detail={
-        eid:      0,
-        title:    "Title",
+    const [article_detail, set_article_detail] = React.useState({
+        eid: -1, 
+        title: "Title",
         uid:      0,
         username: "Tom",
-        content_src:    "https://www.baidu.com/"
-    }
-
-    // [article_detail, set_article_detail] = React.useState({
-    //     eid: -1, 
-    //     title: "T",
-    //     uid:      0,
-    //     username: "Tom",
-    //     content_src:    "https://www.baidu.com/", 
-    //     time: "2022-12-01"
-    // })
+        content_src:    "https://www.baidu.com/", 
+        time: "2022-12-01"
+    })
 
     React.useEffect(() => {
         props.socket.on('getArticleDetailSuccess', (res) => {
-
+            set_article_detail(res);
+            console.log(props);
         })
-        props.socket.emit('getArticleDetail', {eid: props.eid});
+        props.socket.emit('getArticleDetail', {eid: 0});
     }, [])
 
     return(
@@ -40,6 +33,8 @@ export default function ArticleDetail(props){
                 {article.uid}
                 {article.username}
                 {article.time} */}
+                <p>{article_detail.username}</p>
+                <p>{article_detail.time}</p>
                 {/* <iframe src={article_detail.content_src} width="800" height="400" name="content"></iframe> */}
                 <p><a href={article_detail.content_src} target="content">{article_detail.content_src}</a></p>
             </div>

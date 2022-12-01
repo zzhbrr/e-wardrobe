@@ -1,5 +1,5 @@
 import React from "react";
-import "./outfits.css"
+import "./Outfit.css"
 import cloth_pic from "./cloth.png"
 
 export default function Outfits(props){
