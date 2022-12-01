@@ -1,10 +1,10 @@
 const socket = require('socket.io-client').io('ws://localhost:8000');
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------
-socket.on('getAllClothesSuccess', (data) => {
-   console.log(data); 
-});
-socket.emit('getAllClothes', {uid:0, username:'zz', type:'shoe'});
+// socket.on('getAllClothesSuccess', (data) => {
+//    console.log(data); 
+// });
+// socket.emit('getAllClothes', {uid:0, username:'zz', type:'shoe'});
 //--------------------------------------------------------------------------------------------------------------------------------------------------------
 // socket.on('getClothesDetailSuccess', (data) => {
 //    console.log(data); 
@@ -54,6 +54,11 @@ socket.emit('getAllClothes', {uid:0, username:'zz', type:'shoe'});
 // });
 // socket.emit('getGroupEssay', {gid: 0});
 //--------------------------------------------------------------------------------------------------------------------------------------------------------
+socket.on('getWorldEssaySuccess', (data) => {
+   console.log(data);
+});
+socket.emit('getWorldEssay', {num:4});
+//--------------------------------------------------------------------------------------------------------------------------------------------------------
 // socket.on('getAllHistorySuccess', (data) => {
 //    console.log(data);
 // });
@@ -78,3 +83,9 @@ socket.emit('getAllClothes', {uid:0, username:'zz', type:'shoe'});
 //     console.log(data);
 // });
 // socket.emit('logout', {username: 'zz', uid: 0});
+//--------------------------------------------------------------------------------------------------------------------------------------------------------
+// // 测试 getUserGroups 接口
+// socket.on('getUserGroupsSuccess', (data) => {
+//       console.log(data);
+// });
+// socket.emit('getUserGroups', {uid: 1});
