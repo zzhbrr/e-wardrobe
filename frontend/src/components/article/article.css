@@ -1,66 +1,49 @@
-.header {
-    text-align: center;
-    padding: 10px 0px 0px 10px;
+.Article_head{
+    height: auto;
+    border-bottom: 2px solid black;
+    margin: 0px 0px 0px 0px;
 }
-.outfit_content {
-    line-height: 30px;
-    padding: 100;
-    margin: 0;
-    font-size: large;
+.Article_head:hover {
+    background-color: rgba(0,0,0,0.1);
 }
-.outfits_img {
-    height: 150px;
-    width: 100px;
-    /* border: 1px solid black; */
+.Article_title{
+    color: black;
+}
+.Article_username{
+    font: italic bold arial;
+    color: black;
+}
+.Article_time{
+    color: grey;
 }
 
-.upwear_pos{
-    position: absolute;
-    left: 540px;
-    top: 100px;
-    text-align: center;
-    height: 230px;
-    width: 350px;
-    border: 1px solid black;
-    border-radius: 15px;  /* 圆角 */
+.Article_body{
+    height: auto;
+    border-bottom: 2px solid black;
+    margin: 0px 0px 0px 0px;
 }
-.coat_pos{
-    position: absolute;  /* 绝对位置 */
-    left: 140px;
-    top: 350px;
-    text-align: center;
-    height: 230px;
-    width: 350px;
-    border: 1px solid black;
-    border-radius: 15px;  /* 圆角 */
+
+/* .Comment_like{
+    background-color:dodgerblue;
+    color:white;
+    width: 300px;
+    height: 47px;
+    border:0;
+    font-size: 20px;			
+    border-radius: 1px;
+    margin: 10px 10px 10px 10px;
+} */
+.Comment_username{
+    color: rgba(0,0,0,0.4);
 }
-.downwear_pos{
-    position: absolute;
-    left: 540px;
-    top: 350px;
-    text-align: center;
-    height: 230px;
-    width: 350px;
-    border: 1px solid black;
-    border-radius: 15px;  /* 圆角 */
+.Comment_like {
+    font-size: 50px;	
+    background-color: white; 
+    color: black; 
+    border: 3px solid #008CBA;
+    border-radius: 6px;
 }
-.shoe_pos{
-    position: absolute;
-    left: 540px;
-    top: 600px;
-    text-align: center;
-    height: 230px;
-    width: 350px;
-    border: 1px solid black;
-    border-radius: 15px;  /* 圆角 */
-}
-.decoration_pos{
-    position: absolute;
-    left: 940px;
-    top: 350px;
-    text-align: center;
-    height: 230px;
-    width: 350px;
-    border: 1px solid black;
-    border-radius: 15px;  /* 圆角 */
+.Comment_like:hover {
+    background-color: #008CBA;
+    color: white;
 }

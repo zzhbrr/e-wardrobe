@@ -2,8 +2,8 @@
 import React from "react";
 import "./Article.css";
 import ReactMarkdown from 'react-markdown';
-// import remarkGfm from 'remark-gfm';             // markdown 对表格/删除线/脚注等的支持
-import gfm from 'remark-gfm';
+import remarkGfm from 'remark-gfm';             // markdown 对表格/删除线/脚注等的支持
+import remarkMath from 'remark-math'
 import MarkNav from 'markdown-navbar';          // markdown 目录
 
 export default function ArticleDetail(props){
@@ -16,6 +16,12 @@ export default function ArticleDetail(props){
         time: "2022-12-01"
     })
     const [md, handleMD] = React.useState('loading... ...');
+    const [comment_list, set_comment_list] = React.useState([{
+        time: "2022-12-01",
+        content: "good good good.",
+        uid:      0,
+        username: "Tom",
+    }])
 
     React.useEffect(() => {
         props.socket.on('getArticleDetailSuccess', (res) => {
@@ -27,23 +33,42 @@ export default function ArticleDetail(props){
         })
         props.socket.emit('getArticleDetail', {eid: 1});
     }, [])
+    React.useEffect(() => {
+        props.socket.on('getArticleCommentsSuccess', (res) => {
+            set_comment_list(res.comments);
+            console.log(res);
+        })
+        props.socket.emit('getArticleComments', {eid: 0});
+    }, [])
 
+    
     return(
         <div>
-            <div className="title">
-                <h1>{article_detail.title}</h1>
-                <h2>{article_detail.author}</h2>
+            <div className="Article_head">
+                <h1 className="Article_title">{article_detail.title}</h1>
+                <h2 className="Article_username">{article_detail.username}</h2>
+                <p className="Article_time">编辑于&nbsp;&nbsp;{article_detail.time}</p>
             </div>
-            <div>
-                <p>{article_detail.username}</p>
-                <p>{article_detail.time}</p>
-                <MarkNav source={article_detail.content_src} ordered={true}/>
-                {/* <ReactMarkdown src={article_detail.content_src} escapeHtml={false} remarkPlugins={[remarkGfm]}>
+            <div className="Article_body">
+                {/* <MarkNav source={article_detail.content_src} ordered={true}/> */}
+                <ReactMarkdown escapeHtml={false} remarkPlugins={[remarkGfm]}>
                     {md}
-                </ReactMarkdown> */}
-                <ReactMarkdown remarkPlugins={[remarkGfm]}># *React-Markdown* $now$ supports ~strikethrough~. Thanks to gfm plugin.</ReactMarkdown>
+                </ReactMarkdown>
+                {/* <ReactMarkdown escapeHtml={false} remarkPlugins={[remarkGfm]}>{article_detail.content_src}</ReactMarkdown> */}
                 {/* <iframe src={article_detail.content_src} width="800" height="400" name="content"></iframe> */}
                 <p><a href={article_detail.content_src} target="content">{article_detail.content_src}</a></p>
+            </div>
+            <div>
+                <bottom className="Comment_like">
+                    赞同
+                </bottom>
+                <h2>相关评论</h2>
+                {comment_list.map((comment)=>{return (
+                    <div className="Comment_block" key={comment.eid}>
+                        <p className="Comment_username">{comment.username}&nbsp;编辑于&nbsp;{comment.time}</p>
+                        <div className="Comment_content">{comment.content}</div>
+                    </div>
+                )})}
             </div>
         </div>
     )

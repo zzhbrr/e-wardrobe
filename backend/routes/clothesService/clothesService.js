@@ -63,8 +63,9 @@ module.exports = {
 
         socket.on('getClothesDetail', (data) => {
             sql_getClothesDetail = `SELECT * 
-                                    FROM admin.product, admin.band
-                                    WHERE admin.product.pid = admin.band.pid AND admin.product.pid = ${data.pid};`;
+                                    FROM admin.product FULL JOIN admin.band
+                                    ON admin.product.pid = admin.band.pid
+                                    WHERE admin.product.pid = ${data.pid};`;
             pg_client.query(sql_getClothesDetail, (err, res) => {
                 if (err) throw err;
                 if (res.rows.length === 0) {

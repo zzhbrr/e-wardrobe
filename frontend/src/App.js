@@ -2,10 +2,10 @@ import './App.css';
 import UserCenter from './components/UserCenter/index';
 import Login from './components/login/login';
 import Register from './components/register/register';
-import Outfits from './components/Outfit/Outfit';
-import Article from './components/Article/Article';
+import OutfitDetail from './components/Outfit/Outfit';
+import ArticleDetail from './components/Article/Article';
 import History from './components/History/History';
-import Cloth from './components/Cloth/Cloth';
+import ClothDetail from './components/Cloth/Cloth';
 import io from 'socket.io-client'
 import {
     BrowserRouter as Router,
@@ -57,14 +57,14 @@ function App() {
                 <UserCenter socket={socket} isLogin={isLogin} userName={userName}/>
             </div>
         }/>
-        <Route exact path="/outfits" element={
+        <Route exact path="/outfit" element={
             <div className="App">
-                <Outfits socket={socket} userName={userName}/>
+                <OutfitDetail socket={socket} userName={userName}/>
             </div>
         }/>
         <Route exact path="/article" element={
             <div className="App">
-                <Article socket={socket} userName={userName}/>
+                <ArticleDetail socket={socket} userName={userName}/>
             </div>
         }/>
         <Route exact path="/history" element={
@@ -74,7 +74,7 @@ function App() {
         }/>
         <Route exact path="/cloth" element={
             <div className="App">
-                <Cloth socket={socket} userName={userName}/>
+                <ClothDetail socket={socket} userName={userName}/>
             </div>
         }/>
         <Route exact path="/" element={<Navigate to="/usercenter"></Navigate>} />

@@ -1,0 +1,51 @@
+.Cloth_head{
+    height: auto;
+    border-bottom: 2px solid black;
+    margin: 0px 0px 0px 0px;
+}
+.Cloth_season{
+    line-height: 70px;
+    font-size: 20px;	
+    background-color: white; 
+    color: black; 
+    border: 3px solid #008CBA;
+    border-radius: 6px;
+}
+.Cloth_climate{
+    line-height: 70px;
+    font-size: 20px;	
+    background-color: white; 
+    color: black; 
+    border: 3px solid green;
+    border-radius: 6px;
+}
+.Cloth_situation{
+    line-height: 70px;
+    font-size: 20px;	
+    background-color: white; 
+    color: black; 
+    border: 3px solid red;
+    border-radius: 6px;
+}
+.Cloth_band{
+    line-height: 70px;
+    font-size: 20px;	
+    background-color: white; 
+    color: black; 
+    border: 3px solid purple;
+    border-radius: 6px;
+}
+.Cloth_texture{
+    line-height: 70px;
+    font-size: 20px;	
+    background-color: white; 
+    color: black; 
+    border: 3px solid yellowgreen;
+    border-radius: 6px;
+}
+
+
+.cloth_img{
+    width:500px;
+    height:500px
+}
