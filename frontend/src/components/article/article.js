@@ -1,14 +1,17 @@
 // article
 import React from "react";
 import "./Article.css";
+import { useNavigate, useParams } from "react-router-dom";
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';             // markdown 对表格/删除线/脚注等的支持
 import remarkMath from 'remark-math'
 import MarkNav from 'markdown-navbar';          // markdown 目录
 
 export default function ArticleDetail(props){
+    const params=useParams();
+    const eid=params.eid;
     const [article_detail, set_article_detail] = React.useState({
-        eid: -1, 
+        eid: eid, 
         title: "Title",
         uid:      0,
         username: "Tom",
@@ -31,14 +34,14 @@ export default function ArticleDetail(props){
                 .then((resp) => resp.text())
                 .then((txt) => handleMD(txt));
         })
-        props.socket.emit('getArticleDetail', {eid: 1});
+        props.socket.emit('getArticleDetail', {eid: eid});
     }, [])
     React.useEffect(() => {
         props.socket.on('getArticleCommentsSuccess', (res) => {
             set_comment_list(res.comments);
             console.log(res);
         })
-        props.socket.emit('getArticleComments', {eid: 0});
+        props.socket.emit('getArticleComments', {eid: eid});
     }, [])
 
     
@@ -46,8 +49,7 @@ export default function ArticleDetail(props){
         <div>
             <div className="Article_head">
                 <h1 className="Article_title">{article_detail.title}</h1>
-                <h2 className="Article_username">{article_detail.username}</h2>
-                <p className="Article_time">编辑于&nbsp;&nbsp;{article_detail.time}</p>
+                <h4 className="Article_time">{article_detail.username}&nbsp;&nbsp;编辑于&nbsp;&nbsp;{article_detail.time}</h4>
             </div>
             <div className="Article_body">
                 {/* <MarkNav source={article_detail.content_src} ordered={true}/> */}
@@ -59,9 +61,6 @@ export default function ArticleDetail(props){
                 <p><a href={article_detail.content_src} target="content">{article_detail.content_src}</a></p>
             </div>
             <div>
-                <bottom className="Comment_like">
-                    赞同
-                </bottom>
                 <h2>相关评论</h2>
                 {comment_list.map((comment)=>{return (
                     <div className="Comment_block" key={comment.eid}>

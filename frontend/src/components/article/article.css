@@ -37,8 +37,8 @@
     color: rgba(0,0,0,0.4);
 }
 .Comment_like {
-    font-size: 50px;	
-    background-color: white; 
+    font-size: 20px;	
+    background-color: white;
     color: black; 
     border: 3px solid #008CBA;
     border-radius: 6px;

@@ -1,10 +1,13 @@
 // cloth
 import React from "react";
 import "./Cloth.css";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function ClothDetail(props){
+    const params=useParams();
+    const pid=params.pid;
     const [cloth_detail, set_cloth_detail] = React.useState({
-        img_src: "https://ts1.cn.mm.bing.net/th/id/R-C.64e3a39dabdc64ab5ca9f0f5535a597d?rik=Qo%2f0pUpy%2byIJmQ&riu=http%3a%2f%2fpic50.photophoto.cn%2f20190317%2f0017031054873654_b.jpg&ehk=mLll4UknAZT%2b1DEDWk%2bkzef5s7ybPhLpfx0dMjU8qls%3d&risl=&pid=ImgRaw&r=0",
+        img_src: "",
         season: "春",
         climate: "晴天",
         situation: "约会",
@@ -23,7 +26,7 @@ export default function ClothDetail(props){
             set_cloth_detail(res);
             console.log(res);
         })
-        props.socket.emit('getClothesDetail', {pid: 12});
+        props.socket.emit('getClothesDetail', {pid: pid});
     }, [])
     React.useEffect(() => {
         console.log("adfsfs");
@@ -31,7 +34,7 @@ export default function ClothDetail(props){
             set_comment_list(res.comments);
             console.log(res);
         })
-        props.socket.emit('getClothesComments', {pid: 0});
+        props.socket.emit('getClothesComments', {pid: pid});
     }, [])
 
 

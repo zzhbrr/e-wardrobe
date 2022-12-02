@@ -10,7 +10,7 @@
 }
 .outfits_img {
     height: 150px;
-    width: 100px;
+    width: 150px;
     /* border: 1px solid black; */
 }
 .outfit_head {
@@ -26,9 +26,9 @@
 .upwear_pos{
     position: absolute;
     left: 540px;
-    top: 100px;
+    top: 120px;
     text-align: center;
-    height: 230px;
+    height: 200px;
     width: 350px;
     border: 1px solid black;
     border-radius: 15px;  /* 圆角 */
@@ -38,7 +38,7 @@
     left: 140px;
     top: 350px;
     text-align: center;
-    height: 230px;
+    height: 200px;
     width: 350px;
     border: 1px solid black;
     border-radius: 15px;  /* 圆角 */
@@ -48,7 +48,7 @@
     left: 540px;
     top: 350px;
     text-align: center;
-    height: 230px;
+    height: 200px;
     width: 350px;
     border: 1px solid black;
     border-radius: 15px;  /* 圆角 */
@@ -56,9 +56,9 @@
 .shoe_pos{
     position: absolute;
     left: 540px;
-    top: 600px;
+    top: 580px;
     text-align: center;
-    height: 230px;
+    height: 200px;
     width: 350px;
     border: 1px solid black;
     border-radius: 15px;  /* 圆角 */
@@ -68,7 +68,7 @@
     left: 940px;
     top: 350px;
     text-align: center;
-    height: 230px;
+    height: 200px;
     width: 350px;
     border: 1px solid black;
     border-radius: 15px;  /* 圆角 */

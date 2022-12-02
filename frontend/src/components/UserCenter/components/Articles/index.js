@@ -20,7 +20,7 @@ export default function Articles(props){
             <h1>我发布的文章</h1>
             <div className="list">
                 {article_list.map((article)=>{return (
-                    <div className="article_block" key={article.eid} onClick={()=>navigate("/article")}> {/* "/article/"+eid */}
+                    <div className="article_block" key={article.eid} onClick={()=>navigate("/article/"+`${article.eid}`)}>
                         <h3 className="title">{article.title}</h3>
                         <div className="author">{article.time}</div>
                     </div>

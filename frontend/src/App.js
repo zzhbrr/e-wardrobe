@@ -66,24 +66,24 @@ function App() {
             <GroupDetail gid={0} socket={socket} isLogin={isLogin}/>
             </div>
         }/>
-        <Route exact path="/outfit" element={
+        <Route exact path="/outfit/:oid" element={
             <div className="App">
-                <OutfitDetail socket={socket} userName={userName}/>
+                <OutfitDetail oid={0} uid={0} userName={userName} socket={socket}/>
             </div>
         }/>
-        <Route exact path="/article" element={
+        <Route exact path="/article/:eid" element={
             <div className="App">
-                <ArticleDetail socket={socket} userName={userName}/>
+                <ArticleDetail eid={0} socket={socket} userName={userName}/>
             </div>
         }/>
-        <Route exact path="/history" element={
+        <Route exact path="/history/:uid" element={
             <div className="App">
-                <History socket={socket} userName={userName}/>
+                <History socket={socket} uid={0} userName={userName}/>
             </div>
         }/>
-        <Route exact path="/cloth" element={
+        <Route exact path="/cloth/:pid" element={
             <div className="App">
-                <ClothDetail socket={socket} userName={userName}/>
+                <ClothDetail pid={0} socket={socket} userName={userName}/>
             </div>
         }/>
         <Route exact path="/" element={<Navigate to="/usercenter"></Navigate>} />
