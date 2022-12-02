@@ -62,7 +62,7 @@ export default function ClothDetail(props){
                 {comment_list.map((comment)=>{return (
                     <div className="Comment_block" key={comment.pid}>
                         <p className="Comment_username">{comment.username}&nbsp;编辑于&nbsp;{comment.time}</p>
-                        <div className="Comment_content">{comment.content}</div>
+                        <div className="Comment_content">{comment.content_src}</div>
                     </div>
                 )})}
             </div>

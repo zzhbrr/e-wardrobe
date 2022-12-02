@@ -3,6 +3,7 @@ import React from "react";
 import "./History.css";
 
 export default function HistoryDetail(props){
+    const username = props.username;
     const [history_detail, set_history_detail] = React.useState({
         date: "2022-12-01",
         climate: "晴天",
@@ -21,12 +22,10 @@ export default function HistoryDetail(props){
     return(
         <div>
             <div className="History_head">
+                <h1>{"zz"}的历史记录</h1>
                 <div className="History_around">
-                    <bottom className="History_season">
-                        季节:&nbsp;{cloth_detail.season}
-                    </bottom>
                 </div>
-                <img src={cloth_detail.img_src} className="cloth_img"/>
+                <img src={history_detail.img_src} className="cloth_img"/>
             </div>
         </div>
     )
