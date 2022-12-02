@@ -40,6 +40,6 @@ pg_pool.connect(function(err, client, done) {
         console.log('GID_count: ' + GID_count);
         console.log('OID_count: ' + OID_count);
         console.log('PID_count: ' + PID_count);
-        require('./routes')(socket, client, onlineUsers, UID_count, EID_count, GID_count, OID_count, PID_count);
+        require('./routes')(socket, client, onlineUsers);
     });
 });

@@ -15,6 +15,8 @@ import {
     Navigate
 } from "react-router-dom";
 import React from 'react';
+import GroupDetail from './components/GroupDetail';
+import Group from './components/Group';
 
 const socket = io('ws://localhost:8000')
 
@@ -25,15 +27,15 @@ function App() {
     const [isLogin, setIsLogIn] = React.useState(false);
     const [userName, setUserName] = React.useState(localStorage.getItem('userName'));
 
-    function handleLogin(username) {
-        setUserName(username);
-        // console.log('userName set to ', username);
-        // alert('userName set to ', username);
-        setIsLogIn(true);
-        // userName = username;
-        // isLogin = true;
-    }
-
+  function handleLogin(username, uid) {
+    setUserName(username);
+    // console.log('userName set to ', username);
+    // alert('userName set to ', username);
+    setIsLogIn(true);
+    // userName = username;
+    // isLogin = true;
+    setUserID(uid);
+  }
   // React.useEffect(()=>{
   //   console.log('!!userName: ', userName)
   //   console.log('!!isLogin: ', isLogin);
@@ -44,17 +46,28 @@ function App() {
         <Route exact path="/login" element={
             userName === null ? 
             <div className="App">
-                <Login socket={socket} handleLogin={handleLogin}/>
+            <Login socket={socket} handleLogin={handleLogin}/>
             </div> : <Navigate to="/usercenter" />
-        }/> 
+            } /> 
         <Route exact path="/register" element={
             <div className="App">
-                <Register socket={socket}/>
+            <Register socket={socket}/>
             </div>
-        }/>
+            } />
         <Route exact path="/usercenter" element={
             <div className="App">
-                <UserCenter socket={socket} isLogin={isLogin} userName={userName}/>
+            <UserCenter socket={socket} isLogin={isLogin} userName={userName} />
+            </div>
+        }/>
+        <Route exact path='/group' element={
+            <div className='App'>
+                <Group uid={UserID} socket={socket} isLogin={isLogin}/>
+            </div>
+        }>
+        </Route>
+        <Route exact path="/group/:gid" element={
+            <div className="App">
+            <GroupDetail gid={0} socket={socket} isLogin={isLogin}/>
             </div>
         }/>
         <Route exact path="/outfit" element={

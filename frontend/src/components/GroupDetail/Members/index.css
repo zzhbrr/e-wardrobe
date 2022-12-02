@@ -4,25 +4,23 @@
     text-align: left;
     padding: 30px 50px 0px 50px;
 }
-.article_block {
+.member_block {
     height: auto;
-    width: 90%;
+    width: 20%;
+    text-align: center;
     min-width: fit-content;
-    padding: 10px 10px 0 10px;
-    border-bottom: 2px solid black;
-    margin: 0px 0px 0px 0px;
+    padding: 10px 15px 10px 15px;
+    border: 1px solid black;
+    margin: 10px;
+    float:left
 }
-.article_block:hover {
+.member_block:hover {
     background-color: rgba(0,0,0,0.1);
 }
-.title {
-    margin: 10px 0 3px 0;
+.member_name {
+    margin: 0;
+    line-height: 24px;
 }
-.author {
-    font: small;
-    color: grey;
-}
-
 .list {
     height: 65vh;
     padding-right: 50px;

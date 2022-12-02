@@ -46,24 +46,27 @@ module.exports = {
         })
     }, 
 
-    userRegister: function(socket, pg_client, UID_count) {
+    userRegister: function(socket, pg_client) {
         socket.on('register', (data) => {
             // console.log('in register');
-            sql_register = `SELECT * FROM admin.users_tmp WHERE username='${data.username}'`;
-            pg_client.query(sql.checkoutUsername(data.username), (err, res) => {
-                if (err) throw err;
-                // console.log('in register: UID_count: ' + UID_count);
-                if (res.rows.length === 0) {
-                    // console.log(sql.alterAddUser(data.username, data.password, data.email))
-                    pg_client.query(sql.alterAddUser(UID_count, data.username, data.password, data.email), (err, res) => {
-                        if (err) throw err;
-                        socket.emit('registerSuccess', {message: '注册成功'});
-                        UID_count = UID_count + 1;
-                    })
-                } else {
-                    socket.emit('registerFailed', {message: '用户名已存在'});
-                }
-            })
+            pg_client.query('SELECT COUNT(*) FROM admin.users_tmp', function(err, res) {
+                UID_count = res.rows[0].count;
+                sql_register = `SELECT * FROM admin.users_tmp WHERE username='${data.username}'`;
+                pg_client.query(sql.checkoutUsername(data.username), (err, res) => {
+                    if (err) throw err;
+                    // console.log('in register: UID_count: ' + UID_count);
+                    if (res.rows.length === 0) {
+                        // console.log(sql.alterAddUser(data.username, data.password, data.email))
+                        pg_client.query(sql.alterAddUser(UID_count, data.username, data.password, data.email), (err, res) => {
+                            if (err) throw err;
+                            socket.emit('registerSuccess', {message: '注册成功'});
+                            UID_count = UID_count + 1;
+                        })
+                    } else {
+                        socket.emit('registerFailed', {message: '用户名已存在'});
+                    }
+                })
+            });
         })
     }, 
 
