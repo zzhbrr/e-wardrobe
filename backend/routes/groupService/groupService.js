@@ -96,8 +96,8 @@ module.exports = {
 
     updateGroup: function updateGroup(socket, pg_client) {
         socket.on('createGroup', (data) => {
-            pg_client.query('SELECT COUNT(gid) FROM admin.interst_group', function(err, res) {
-                GID_count = res.rows[0].count;
+            pg_client.query('SELECT MAX(gid) AS max_gid FROM admin.interst_group', function(err, res) {
+                GID_count = res.rows[0].max_gid + 1;
                 sql_addGroup = `INSERT INTO admin.interst_group (gid, group_name, intro, creator_uid)
                                 VALUES (${GID_count}, '${data.group_name}', '${data.intro}', ${data.uid});`;
                 pg_client.query(sql_addGroup, (err, res) => {
@@ -114,6 +114,19 @@ module.exports = {
                 socket.emit('joinGroupSuccess', {gid: data.gid, uid: data.uid});
             })
         });
-
+        socket.on('deleteGroup', (data) => {
+            sql_deleteGroup = `DELETE FROM admin.interst_group
+                                WHERE gid = ${data.gid};`;
+            pg_client.query(`DELETE FROM admin.interst_group WHERE gid = ${data.gid};`, (err, res) => {
+                if (err) throw err;
+                pg_client.query(`DELETE FROM admin.essay_group WHERE gid = ${data.gid};`, (err, res) => {
+                    if (err) throw err;
+                    pg_client.query(`DELETE FROM admin.group_user WHERE gid = ${data.gid};`, (err, res) => {
+                        if (err) throw err;
+                        socket.emit('deleteGroupSuccess', {gid: data.gid});
+                    });
+                });
+            });
+        });
     },
 }

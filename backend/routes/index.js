@@ -14,6 +14,7 @@ module.exports = function(socket, pg_client, onlineUsers) {
     clothesService.getOutfits(socket, pg_client);
     clothesService.getClothes(socket, pg_client);
     clothesService.updateOutfits(socket, pg_client);
+    clothesService.updateClothes(socket, pg_client);
 
     articleService.getArticles(socket, pg_client);
     articleService.updateArticle(socket, pg_client);
