@@ -11,6 +11,8 @@ import {
   Navigate
 } from "react-router-dom";
 import React from 'react';
+import GroupDetail from './components/GroupDetail';
+import Group from './components/Group';
 
 const socket = io('ws://localhost:8000')
 
@@ -31,7 +33,7 @@ function App() {
     // isLogin = true;
     setUserID(uid);
   }
-
+  
   // React.useEffect(()=>{
   //   console.log('!!userName: ', userName)
   //   console.log('!!isLogin: ', isLogin);
@@ -53,7 +55,23 @@ function App() {
         } />
       <Route exact path="/usercenter" element={
         <div className="App">
-          <UserCenter socket={socket} isLogin={isLogin} userName={userName}/>
+          <UserCenter socket={socket} isLogin={isLogin} userName={userName} />
+        </div>
+      }/>
+      <Route exact path='/group' element={
+        <div className='App'>
+            <Group uid={UserID} socket={socket} isLogin={isLogin}/>
+        </div>
+      }>
+        {/* <Route path=':gid' exact element={
+            <div className="App">
+                <GroupDetail socket={socket} isLogin={isLogin}/>
+            </div>
+        }/> */}
+      </Route>
+      <Route exact path="/group/:gid" element={
+        <div className="App">
+          <GroupDetail gid={0} socket={socket} isLogin={isLogin}/>
         </div>
       }/>
       <Route exact path="/" element={<Navigate to="/usercenter"></Navigate>} />

@@ -1,6 +1,6 @@
 .navi_bar {
-    min-width: fit-content;
-    max-width: 240px;
+    min-width: 210px;
+    max-width: 210px;
     display: flex;
     flex: 1;
     flex-direction: column;

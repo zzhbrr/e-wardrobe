@@ -1,9 +1,11 @@
 module.exports = {
     getArticles: function getArticles(socket, pg_client) {
         socket.on('getAllArticles', (data) => {
-            sql_getAllArticles = `  SELECT eid, title, time 
+            console.log(`req article: ${data.uid}`)
+            sql_getAllArticles = `  SELECT eid, title, to_char(time, 'YYYY/MM/DD HH24:MI:SS') AS time 
                                     FROM admin.essay 
-                                    WHERE uid = ${data.uid};`;
+                                    WHERE uid = ${data.uid}
+                                    ORDER BY time DESC;`;
             pg_client.query(sql_getAllArticles, (err, res) => {
                 if (err) throw err;
                 socket.emit('getAllArticlesSuccess', {articles: res.rows});
@@ -11,7 +13,7 @@ module.exports = {
         });
         
         socket.on('getArticleDetail', (data) => {
-            sql_getArticleDetail = `SELECT * 
+            sql_getArticleDetail = `SELECT eid, title, content_src, to_char(time, 'YYYY/MM/DD HH24:MI:SS') AS time, admin.users_tmp.uid, username
                                     FROM admin.essay, admin.users_tmp
                                     WHERE admin.essay.uid = admin.users_tmp.uid AND eid = '${data.eid}';`;
             pg_client.query(sql_getArticleDetail, (err, res) => {
@@ -26,9 +28,10 @@ module.exports = {
         });
         
         socket.on('getArticleComments', (data) => {
-            sql_getArticleComments = `SELECT time, content, username, admin.users_tmp.uid 
+            sql_getArticleComments = `SELECT to_char(time, 'YYYY/MM/DD HH24:MI:SS') AS time, content, username, admin.users_tmp.uid 
                                       FROM admin.essaycomment, admin.users_tmp
-                                      WHERE admin.essaycomment.uid = admin.users_tmp.uid AND eid = '${data.eid}';`;
+                                      WHERE admin.essaycomment.uid = admin.users_tmp.uid AND eid = '${data.eid}'
+                                      ORDER BY time DESC;`;
             pg_client.query(sql_getArticleComments, (err, res) => {
                 if (err) throw err;
                 if (res.rows.length === 0) {

@@ -53,6 +53,7 @@ module.exports = {
                         FROM admin.product NATURAL JOIN admin.user_product
                         ON admin.product.pid=admin.user_product.pid;`;
             // console.log('in getAllClothes');
+            console.log(data)
             pg_client.query(sql_getAllClothes, (err, res) => {
                 if (err) throw err;
                 console.log('get ' + res.rows.length + ' ' + data.type + 's');
@@ -78,7 +79,7 @@ module.exports = {
         });
 
         socket.on('getClothesComments', (data) => {
-            sql_getClothesComments = `SELECT time, content_src, username, admin.users_tmp.uid
+            sql_getClothesComments = `SELECT to_char(time, 'YYYY/MM/DD HH24:MI:SS') AS time, content_src, username, admin.users_tmp.uid
                                         FROM admin.essay, admin.prod_essay, admin.users_tmp
                                         WHERE admin.essay.eid = admin.prod_essay.eid AND admin.essay.uid = admin.users_tmp.uid
                                             AND pid = ${data.pid};`;

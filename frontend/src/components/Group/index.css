@@ -1,10 +1,10 @@
-.main_page {
+.group_detail {
     min-height: 100vh;
     display: flex;
     flex: 1;
     flex-direction: column;
 }
-.flex-row {
+.group-row {
     display: flex;
     flex: 1;
     flex-direction: row;

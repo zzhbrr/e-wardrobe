@@ -6,6 +6,7 @@ import {
     FormControl, InputLabel, DialogActions, 
     FormLabel, Radio, Button, Select, MenuItem
 } from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
 import "../UserInfo/user_info.css";
 
 export default function ChangeInfo({handleChangeInfo}) {
@@ -33,7 +34,10 @@ export default function ChangeInfo({handleChangeInfo}) {
     return (
         <div>
             <div>
-                <button className='change_btn' onClick={handleClickChangeInfo}>修改信息</button>
+                <button className='change_btn' onClick={handleClickChangeInfo}>
+                    <EditIcon style={{float:"left",marginRight:"5px"}}/>
+                    修改信息
+                </button>
             </div>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>修改信息</DialogTitle>
@@ -46,7 +50,7 @@ export default function ChangeInfo({handleChangeInfo}) {
                     <FormControl fullWidth>
                         <InputLabel>年龄</InputLabel>
                         <Select value={age} onChange={(e) => setAge(e.target.value)}>
-                            {ages.map((age) => <MenuItem value={age}>{age}</MenuItem>)}
+                            {ages.map((age) => <MenuItem value={age} key={age}>{age}</MenuItem>)}
                         </Select>
                     </FormControl>
                     <TextField
