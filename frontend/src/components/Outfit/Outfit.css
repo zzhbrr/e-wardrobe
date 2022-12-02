@@ -13,6 +13,15 @@
     width: 100px;
     /* border: 1px solid black; */
 }
+.outfit_head {
+    margin-bottom: 0;
+}
+.oid {
+    margin-bottom: 15px;
+    color: gray;
+    font-size: medium;
+    border-bottom: 1px solid black;
+}
 
 .upwear_pos{
     position: absolute;
