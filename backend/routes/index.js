@@ -13,14 +13,14 @@ module.exports = function(socket, pg_client, onlineUsers) {
 
     clothesService.getOutfits(socket, pg_client);
     clothesService.getClothes(socket, pg_client);
-    clothesService.addOutfits(socket, pg_client);
+    clothesService.updateOutfits(socket, pg_client);
 
     articleService.getArticles(socket, pg_client);
-    articleService.addArticle(socket, pg_client);
+    articleService.updateArticle(socket, pg_client);
 
     groupService.getGroups(socket, pg_client);
-    groupService.addGroup(socket, pg_client);
+    groupService.updateGroup(socket, pg_client);
 
     historyService.getHistory(socket, pg_client);
-    historyService.addHistory(socket, pg_client);
+    historyService.updateHistory(socket, pg_client);
 }

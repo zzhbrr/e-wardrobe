@@ -19,10 +19,14 @@ const socket = require('socket.io-client').io('ws://localhost:8000');
 //    console.log(data);
 // });
 //--------------------------------------------------------------------------------------------------------------------------------------------------------
-// socket.on('getClothesCommentsSuccess', (data) => {
+// socket.on('getClothesEssaysSuccess', (data) => {
 //    console.log(data);
 // });
-// socket.emit('getClothesComments', {pid: 11});
+// socket.emit('getClothesEssays', {pid: 11});
+socket.emit('getClothesComments', {pid: 11});
+socket.on('getClothesCommentsSuccess', (data) => {
+    console.log(data);
+});
 //--------------------------------------------------------------------------------------------------------------------------------------------------------
 // socket.on('getAllArticlesSuccess', (data) => {
 //    console.log(data);

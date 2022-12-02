@@ -94,7 +94,7 @@ module.exports = {
         });
     }, 
 
-    addGroup: function addGroup(socket, pg_client) {
+    updateGroup: function updateGroup(socket, pg_client) {
         socket.on('createGroup', (data) => {
             pg_client.query('SELECT COUNT(gid) FROM admin.interst_group', function(err, res) {
                 GID_count = res.rows[0].count;

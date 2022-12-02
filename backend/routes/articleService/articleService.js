@@ -56,7 +56,7 @@ module.exports = {
         // });
 
     }, 
-    addArticle: function addArticle(socket, pg_client) {
+    updateArticle: function updateArticle(socket, pg_client) {
         socket.on('addArticle', (data) => {
             console.log('add article: ' + data.title);
             pg_client.query('SELECT COUNT(eid) FROM admin.essay', function(err, res) {

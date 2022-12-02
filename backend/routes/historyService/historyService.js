@@ -27,7 +27,7 @@ module.exports = {
             })
         });
     }, 
-    addHistory: function addHistory(socket, pg_client) {
+    updateHistory: function updateHistory(socket, pg_client) {
         socket.on('addHistory', (data) => {
             pg_client.query(`SELECT COUNT(hid) FROM admin.history WHERE admin.history.uid=${data.uid}`, function(err, res) {
                 if (err) throw err;

@@ -63,8 +63,9 @@ module.exports = {
 
         socket.on('getClothesDetail', (data) => {
             sql_getClothesDetail = `SELECT * 
-                                    FROM admin.product, admin.band
-                                    WHERE admin.product.pid = admin.band.pid AND admin.product.pid = ${data.pid};`;
+                                    FROM admin.product FULL JOIN admin.band
+                                    ON admin.product.pid = admin.band.pid 
+                                    WHERE admin.product.pid = ${data.pid};`;
             pg_client.query(sql_getClothesDetail, (err, res) => {
                 if (err) throw err;
                 if (res.rows.length === 0) {
@@ -78,20 +79,33 @@ module.exports = {
             })
         });
 
-        socket.on('getClothesComments', (data) => {
-            sql_getClothesComments = `SELECT to_char(time, 'YYYY/MM/DD HH24:MI:SS') AS time, content_src, username, admin.users_tmp.uid
+        socket.on('getClothesEssays', (data) => {
+            sql_getClothesEssays = `SELECT to_char(time, 'YYYY/MM/DD HH24:MI:SS') AS time, content_src, username, admin.users_tmp.uid
                                         FROM admin.essay, admin.prod_essay, admin.users_tmp
                                         WHERE admin.essay.eid = admin.prod_essay.eid AND admin.essay.uid = admin.users_tmp.uid
                                             AND pid = ${data.pid};`;
+            pg_client.query(sql_getClothesEssays, (err, res) => {
+                if (err) throw err;
+                console.log('get ' + res.rows.length + ' essays');
+                socket.emit('getClothesEssaysSuccess', {essays: res.rows});
+            })
+
+        });
+
+        socket.on('getClothesComments', (data) => {
+            sql_getClothesComments = `SELECT to_char(c_time, 'YYYY/MM/DD HH24:MI:SS') AS time, content, username, admin.users_tmp.uid
+                                        FROM admin.users_tmp, admin.p_comment
+                                        WHERE admin.p_comment.uid = admin.users_tmp.uid
+                                            AND pid = ${data.pid};`;
             pg_client.query(sql_getClothesComments, (err, res) => {
                 if (err) throw err;
-                console.log('get ' + res.rows.length + ' comments');
+                console.log('get ' + res.rows.length + ' essays');
                 socket.emit('getClothesCommentsSuccess', {comments: res.rows});
             })
 
-        })
+        });
     }, 
-    addOutfits: function addOutfits(socket, pg_client) {
+    updateOutfits: function updateOutfits(socket, pg_client) {
         socket.on('addOutfits', (data) => {
             pg_client.query('SELECT COUNT(oid) FROM admin.outfit', function(err, res) {
                 OID_count = res.rows[0].count;
