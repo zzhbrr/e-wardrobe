@@ -1,6 +1,10 @@
 .clothes {
     text-align: left;
     margin: 30px 50px 0 50px;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: left;
 }
 .img {
     height: 80px;
@@ -17,7 +21,7 @@
     border: 2px solid black;
 }
 .button {
-    max-width: 200px;
+    max-width: fit-content;
     margin-top: 10px;
     padding: 10px;
     font-size: medium;
@@ -35,5 +39,5 @@
     overflow-y: auto;
     overflow-x: hidden;
     padding-right: 20px;
-    height: 55vh;
+    /* height: 55vh; */
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import ClothBar from "./ClothBar";
+import ClothBar from "../../../NaviBar2";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import "./index.css"
 

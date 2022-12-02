@@ -1,0 +1,29 @@
+.members {
+    width: 100%;
+    min-width: fit-content;
+    text-align: left;
+    padding: 30px 50px 0px 50px;
+}
+.member_block {
+    height: auto;
+    width: 20%;
+    text-align: center;
+    min-width: fit-content;
+    padding: 10px 15px 10px 15px;
+    border: 1px solid black;
+    margin: 10px;
+    float:left
+}
+.member_block:hover {
+    background-color: rgba(0,0,0,0.1);
+}
+.member_name {
+    margin: 0;
+    line-height: 24px;
+}
+.list {
+    height: 65vh;
+    padding-right: 50px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}

@@ -1,0 +1,21 @@
+.globalbar {
+    display: flex;
+    justify-content: left;
+    width: 100%;
+}
+.globalbar_item {
+    background: white;
+    margin: 5px;
+    padding: 10px 10px 5px 10px;
+    font-size: large;
+    border-bottom: 3px solid transparent;
+    float: left;
+
+}
+.globalbar_item:hover {
+    /* border-bottom: 3px solid black; */
+    background-color: rgba(0,0,0,0.05);
+}
+.globalbar_item_selected {
+    border-bottom: 3px solid black;
+}
