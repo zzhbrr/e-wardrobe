@@ -149,7 +149,6 @@ module.exports = {
             pg_client.query('SELECT MAX(pid) AS max_pid FROM admin.product', function(err, res) {
                 PID_count = res.rows[0].max_pid + 1;
                 // console.log('PID_count is ' + PID_count + " now");
-                console.log(data.color === undefined);
                 sql_addClothes = `INSERT INTO admin.product (pid, img_src, p_type, color, season, climate, situation, texture)
                                     VALUES (${PID_count}, '${data.img_src}', '${data.type}', '${data.color === undefined ? '' : data.color}', 
                                     '${data.season === undefined ? '' : data.season}', '${data.climate === undefined ? '' : data.climate}', '${data.situation  === undefined ? '' : data.situation}', 
@@ -165,8 +164,6 @@ module.exports = {
                 })
             });
         });
-
-
         socket.on('deleteClothes', (data) => {
             pg_client.query(`DELETE FROM admin.product WHERE pid = ${data.pid};`, (err, res) => {
                 if (err) throw err;
@@ -189,5 +186,27 @@ module.exports = {
                 socket.emit('changeClothesInfoSuccess', {pid: data.pid, img_src: res.rows[0].img_src, season: res.rows[0].season, climate: res.rows[0].climate, situation: res.rows[0].situation, texture: res.rows[0].texture});
             })
         });
+        socket.on('addClothesComments', (data) => {
+            pg_client.query(`SELECT MAX(seq_id) AS max_seqid FROM admin.p_comment WHERE pid = ${data.pid}`, function(err, res) {
+                SeqID_count = res.rows[0].max_seqid + 1;
+                console.log('SeqID_count is ' + SeqID_count + " now");
+                sql_addClothesComments = `INSERT INTO admin.p_comment (pid, seq_id, uid, content, c_time) 
+                                            VALUES (${data.pid}, ${SeqID_count}, ${data.uid}, '${data.content}', current_timestamp(0))
+                                            RETURNING *;`;
+                pg_client.query(sql_addClothesComments, (err, res) => {
+                    if (err) throw err;
+                    console.log('add clothes comments success');
+                    socket.emit('addClothesCommentsSuccess', {pid: res.rows[0].pid, seqid: res.rows[0].seq_id, uid: res.rows[0].uid, content: res.rows[0].content, c_time: res.rows[0].c_time});
+                })
+            });
+        });
+        socket.on('deleteClothesComments', (data) => {
+            console.log('in deleteClothesComments');
+            pg_client.query(`DELETE FROM admin.p_comment WHERE pid = ${data.pid} AND seq_id = ${data.seqid};`, (err, res) => {
+                if (err) throw err;
+                socket.emit('deleteClothesCommentsSuccess', {message: '删除成功'});
+            });
+        });
+
     }
 }

@@ -115,5 +115,13 @@ module.exports = {
                 socket.emit('deleteArticleSuccess', {eid: data.eid});
             });
         });
+
+        socket.on('deleteArticleComment', (data) => {
+            console.log('delete comment: ' + data.ecid + ' from article: ' + data.eid); 
+            pg_client.query(`DELETE FROM admin.essaycomment WHERE ecid = ${data.ecid} AND eid = ${data.eid};`, (err, res) => {
+                if (err) throw err;
+                socket.emit('deleteArticleCommentSuccess', {eid:data.eid, ecid: data.ecid});
+            });
+        });
     }
 }

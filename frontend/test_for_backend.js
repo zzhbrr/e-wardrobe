@@ -57,6 +57,16 @@ const socket = require('socket.io-client').io('ws://localhost:8000');
 // });
 // socket.emit('getArticleComments', {eid: 0});
 //--------------------------------------------------------------------------------------------------------------------------------------------------------
+// socket.on('addClothesCommentsSuccess', (data) => {
+//     console.log(data);  
+// });
+// socket.emit('addClothesComments', {pid: 11, uid: 2, content: 'test'});
+//--------------------------------------------------------------------------------------------------------------------------------------------------------
+// socket.on('deleteClothesCommentsSuccess', (data) => {
+//     console.log(data);
+// });
+// socket.emit('deleteClothesComments', {pid:11, seqid:1});
+//--------------------------------------------------------------------------------------------------------------------------------------------------------
 // socket.on('getGroupDetailSuccess', (data) => {
 //    console.log(data);
 // });
@@ -137,7 +147,12 @@ const socket = require('socket.io-client').io('ws://localhost:8000');
 // socket.on('addCommentToArticleSuccess', (data) => {
 //         console.log(data);
 // });
-// socket.emit('addCommentToArticle', {uid: 2, eid: 3, content: 'test comment for test'});
+// socket.emit('addCommentToArticle', {uid: 2, eid: 2, content: 'test comment for test'});
+//--------------------------------------------------------------------------------------------------------------------------------------------------------
+// socket.on('deleteArticleCommentSuccess', (data) => {
+//     console.log(data);
+// });
+// socket.emit('deleteArticleComment', {eid: 2, ecid: 1});
 //--------------------------------------------------------------------------------------------------------------------------------------------------------
 // socket.on('deleteArticleSuccess', (data) => {
 //         console.log(data);
