@@ -174,7 +174,7 @@ const socket = require('socket.io-client').io('ws://localhost:8000');
 // socket.on('addHistorySuccess', (data) => {
 //       console.log(data);
 // });
-// socket.emit('addHistory', {uid:3, year:2022, month:12, day:1, climate:'阴', situation:'约会', top_id: 8, bottom_id: 9, shoe_id: 10, coat_id: 11, ornament_id: 12});
+// socket.emit('addHistory', {uid:0, year:2077, month:12, day:1, climate:'阴', situation:'约会', top_id: 12, bottom_id: 11, shoe_id: 9, coat_id: 11, ornament_id: 12});
 //--------------------------------------------------------------------------------------------------------------------------------------------------------
 // socket.emit('changeHistory', {change:{h_year:2019, climate:'\'大雨\''}, uid:3, hid: 1});
 // socket.on('changeHistorySuccess', (data) => {

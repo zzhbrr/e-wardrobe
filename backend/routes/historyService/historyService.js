@@ -2,7 +2,7 @@ function PID2url(socket, pg_client, pid, index, type) {
     pg_client.query(sql_clothes.getProductURLByPID(pid), (err, res) => {
         if (err) throw err;
         if (res.rows.length === 0) {
-            console.log('no product with pid: ' + data.pid);
+            console.log('no product with pid: ' + pid);
         } else {
             socket.emit('getAllHistoryRetURLSuccess', {img_src: res.rows[0].img_src, type: type, index: index});
         }
