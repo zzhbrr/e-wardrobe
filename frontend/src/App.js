@@ -2,13 +2,17 @@ import './App.css';
 import UserCenter from './components/UserCenter/index';
 import Login from './components/login/login';
 import Register from './components/register/register';
+import OutfitDetail from './components/Outfit/Outfit';
+import ArticleDetail from './components/Article/Article';
+import History from './components/History/History';
+import ClothDetail from './components/Cloth/Cloth';
 import io from 'socket.io-client'
 import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useNavigate,
-  Navigate
+    BrowserRouter as Router,
+    Routes,
+    Route,
+    useNavigate,
+    Navigate
 } from "react-router-dom";
 import React from 'react';
 import GroupDetail from './components/GroupDetail';
@@ -19,66 +23,74 @@ const socket = io('ws://localhost:8000')
 // var userName = "", isLogin = false;
 
 function App() {
-  localStorage.clear();
-  const [isLogin, setIsLogIn] = React.useState(false);
-  const [userName, setUserName] = React.useState(localStorage.getItem('userName'));
-  const [UserID, setUserID] = React.useState(localStorage.getItem('UserID'));
+    localStorage.clear();
+    const [isLogin, setIsLogIn] = React.useState(false);
+    const [userName, setUserName] = React.useState(localStorage.getItem('userName'));
+    const [UserID, setUserID] = React.useState(localStorage.getItem('UserID'));
 
-  function handleLogin(username, uid) {
-    setUserName(username);
-    // console.log('userName set to ', username);
-    // alert('userName set to ', username);
-    setIsLogIn(true);
-    // userName = username;
-    // isLogin = true;
-    setUserID(uid);
-  }
-  
-  // React.useEffect(()=>{
-  //   console.log('!!userName: ', userName)
-  //   console.log('!!isLogin: ', isLogin);
-  // }, )
-
-      
-  return (
-    <Routes>
-      <Route exact path="/login" element={
-        userName === null ? 
-        <div className="App">
-          <Login socket={socket} handleLogin={handleLogin}/>
-        </div> : <Navigate to="/usercenter" />
-        } /> 
-      <Route exact path="/register" element={
-        <div className="App">
-          <Register socket={socket}/>
-        </div>
-        } />
-      <Route exact path="/usercenter" element={
-        <div className="App">
-          <UserCenter socket={socket} isLogin={isLogin} userName={userName} />
-        </div>
-      }/>
-      <Route exact path='/group' element={
-        <div className='App'>
-            <Group uid={UserID} socket={socket} isLogin={isLogin}/>
-        </div>
-      }>
-        {/* <Route path=':gid' exact element={
+    function handleLogin(username, uid) {
+        setUserName(username);
+        // console.log('userName set to ', username);
+        // alert('userName set to ', username);
+        setIsLogIn(true);
+        // userName = username;
+        // isLogin = true;
+        setUserID(uid);
+    }
+    return (
+        <Routes>
+        <Route exact path="/login" element={
+            userName === null ? 
             <div className="App">
-                <GroupDetail socket={socket} isLogin={isLogin}/>
+            <Login socket={socket} handleLogin={handleLogin}/>
+            </div> : <Navigate to="/usercenter" />
+            } /> 
+        <Route exact path="/register" element={
+            <div className="App">
+            <Register socket={socket}/>
             </div>
-        }/> */}
-      </Route>
-      <Route exact path="/group/:gid" element={
-        <div className="App">
-          <GroupDetail gid={0} socket={socket} isLogin={isLogin}/>
-        </div>
-      }/>
-      <Route exact path="/" element={<Navigate to="/usercenter"></Navigate>} />
-      {/* <Router exact path="/wardorbe" element={}/> */}
-      {/* <Router exact path="/diary" element={}/> */}
-    </Routes>
-  );
+            } />
+        <Route exact path="/usercenter" element={
+            <div className="App">
+            <UserCenter socket={socket} isLogin={isLogin} userName={userName} />
+            </div>
+        }/>
+        <Route exact path='/group' element={
+            <div className='App'>
+                <Group uid={UserID} socket={socket} isLogin={isLogin}/>
+            </div>
+        }>
+        </Route>
+        <Route exact path="/group/:gid" element={
+            <div className="App">
+            <GroupDetail gid={0} socket={socket} isLogin={isLogin}/>
+            </div>
+        }/>
+        <Route exact path="/outfit/:oid" element={
+            <div className="App">
+                <OutfitDetail oid={0} uid={0} userName={userName} socket={socket}/>
+            </div>
+        }/>
+        <Route exact path="/article/:eid" element={
+            <div className="App">
+                <ArticleDetail eid={0} socket={socket} userName={userName}/>
+            </div>
+        }/>
+        <Route exact path="/history/:uid" element={
+            <div className="App">
+                <History socket={socket} uid={0} userName={userName}/>
+            </div>
+        }/>
+        <Route exact path="/cloth/:pid" element={
+            <div className="App">
+                <ClothDetail pid={0} socket={socket} userName={userName}/>
+            </div>
+        }/>
+        <Route exact path="/" element={<Navigate to="/usercenter"></Navigate>} />
+        {/* <Router exact path="/wardorbe" element={}/> */}
+        {/* <Router exact path="/diary" element={}/> */}
+        </Routes>
+    );
 }
 
 export default App;

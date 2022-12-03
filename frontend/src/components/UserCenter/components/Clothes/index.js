@@ -2,6 +2,7 @@ import React from "react";
 import ClothBar from "../../../NaviBar2";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import "./index.css"
+import { useNavigate } from "react-router-dom";
 
 const items=['上衣','下装','外套','鞋子','饰品']
 
@@ -9,6 +10,7 @@ export default function Clothes(props){
     // const [cloth_list,setClothes]=React.useState(defalut_cloth_list);
     const clothes_lists=props.clothes_lists;
     const reqClothes=props.reqClothes;
+    const navigate=useNavigate();
 
     const [item_selected,selectItem]=React.useState(items[0]);
     // if(clothes_lists[item_selected]==null){
@@ -31,7 +33,8 @@ export default function Clothes(props){
             <div className="clothlist">
                 {clothes_lists[item_selected].map((cloth,index)=>{
                     return(
-                        <div className="cloth" title={"pid: "+cloth.pid.toString()} key={index} >
+                        <div className="cloth" title={"pid: "+cloth.pid.toString()}
+                        key={index} onClick={()=>navigate("/cloth/"+`${cloth.pid}`)}>
                             <img src={cloth.img_src} className="img" />
                         </div>
                 )})}

@@ -71,7 +71,7 @@ export default class UserCenterInfoMgr{
         const tmp = {
             uid:        this.Ref.current.user_info.uid,
             username:   this.Ref.current.user_info.username,
-            gender:     data.gender, 
+            gender:     data.gender,
             age:        data.age,
             profession: data.profession
         }

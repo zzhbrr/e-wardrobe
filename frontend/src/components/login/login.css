@@ -1,42 +1,42 @@
 .loginCard {
-  width: 100%;
-  max-width: 400px;
-  height: auto;
-  color: rgb(20, 116, 129);
-  box-sizing: content-box;
-  margin: 0 auto 0 auto;
-  border: 1px solid rgba(250, 243, 243, 0.5);
-  padding: 1rem 1.5rem 2rem 1.5rem;
-  -webkit-backdrop-filter: blur(50px);
-  backdrop-filter: blur(50px);
-  box-shadow: inset 
-    0 -0.1em 0.1em rgba(255, 255, 255, 0.1),
-    0 0 0 1px rgba(255, 255, 255, 0.1), 
-    0.3em 0.2em 1em rgba(0, 0, 0, 0.2);
-  border-radius: 0.5rem;
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    color: rgb(20, 116, 129);
+    box-sizing: content-box;
+    margin: 0 auto 0 auto;
+    border: 1px solid rgba(250, 243, 243, 0.5);
+    padding: 1rem 1.5rem 2rem 1.5rem;
+    -webkit-backdrop-filter: blur(50px);
+    backdrop-filter: blur(50px);
+    box-shadow: inset 
+        0 -0.1em 0.1em rgba(255, 255, 255, 0.1),
+        0 0 0 1px rgba(255, 255, 255, 0.1), 
+        0.3em 0.2em 1em rgba(0, 0, 0, 0.2);
+    border-radius: 0.5rem;
 }
 
 .card-header {
-  padding-bottom: 1rem;
+    padding-bottom: 1rem;
 }
 
 p.title {
-  font-size: 1.25rem;
-  text-align: center;
-  letter-spacing: 0.2rem;
-  color:rgb(20, 116, 129);
+    font-size: 1.25rem;
+    text-align: center;
+    letter-spacing: 0.2rem;
+    color:rgb(20, 116, 129);
 }
 
 .warning {
-  text-align: center;
+    text-align: center;
 }
 
 .card-body {
-  width: 100%;
-  padding-bottom: 1rem;
-  text-align: center;
-  letter-spacing: 0.1rem;
-  font-size: 0.65rem;
+    width: 100%;
+    padding-bottom: 1rem;
+    text-align: center;
+    letter-spacing: 0.1rem;
+    font-size: 0.65rem;
 }
 
 .register_link {

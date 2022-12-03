@@ -23,9 +23,11 @@ export default function GlobalNaviBar(props){
             {items.map((item)=>{
                 return(
                     <div className={item_selected==item?"globalbar_item globalbar_item_selected":"globalbar_item"}
-                    onClick={()=>clickItem(item)}
-                    key={item} >{item}</div>
-            )})}
+                        onClick={()=>clickItem(item)} key={item}>
+                        {item}
+                    </div>
+                )
+            })}
         </div>
     )
 }
