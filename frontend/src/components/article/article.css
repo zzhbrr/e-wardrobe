@@ -1,49 +1,28 @@
 .Article_head{
     height: auto;
-    border-bottom: 2px solid black;
-    margin: 0px 0px 0px 0px;
-}
-.Article_head:hover {
-    background-color: rgba(0,0,0,0.1);
-}
-.Article_title{
-    color: black;
-}
-.Article_username{
-    font: italic bold arial;
-    color: black;
+    width: 90%;
+    margin: 0 auto;
+    border-bottom: 2px solid  rgba(0,0,0,0.1);
 }
 .Article_time{
     color: grey;
 }
-
 .Article_body{
     height: auto;
+    width: 70%;
+    text-align: left;
     border-bottom: 2px solid black;
-    margin: 0px 0px 0px 0px;
+    margin: 0 auto;
+    padding: 0 50px 0 50px;
 }
-
-/* .Comment_like{
-    background-color:dodgerblue;
-    color:white;
-    width: 300px;
-    height: 47px;
-    border:0;
-    font-size: 20px;			
-    border-radius: 1px;
-    margin: 10px 10px 10px 10px;
-} */
+.Comment_block{
+    width: 40%;
+    text-align: left;
+    min-width: fit-content;
+    padding: 0px 10px 2px 10px;
+    border-bottom: 2px solid black;
+    margin: 30px auto;
+}
 .Comment_username{
-    color: rgba(0,0,0,0.4);
-}
-.Comment_like {
-    font-size: 20px;	
-    background-color: white;
-    color: black; 
-    border: 3px solid #008CBA;
-    border-radius: 6px;
-}
-.Comment_like:hover {
-    background-color: #008CBA;
-    color: white;
+    color: rgba(0,0,0,0.5);
 }

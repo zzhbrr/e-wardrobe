@@ -1,18 +1,19 @@
 // cloth
 import React from "react";
 import "./Cloth.css";
+import cloth_pic from "./cloth.png";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function ClothDetail(props){
     const params=useParams();
     const pid=params.pid;
     const [cloth_detail, set_cloth_detail] = React.useState({
-        img_src: "",
-        season: "春",
-        climate: "晴天",
-        situation: "约会",
-        band:  "Nike",
-        texture: "纯棉"
+        img_src: cloth_pic,
+        season: "season-1",
+        climate: "climate-1",
+        situation: "situation-1",
+        band:  "band-1",
+        texture: "texture-1"
     })
     const [comment_list, set_comment_list] = React.useState([{
         time: "2022-12-01",
@@ -41,23 +42,23 @@ export default function ClothDetail(props){
     return(
         <div>
             <div className="Cloth_head">
-                <div className="Cloth_around">
-                    <bottom className="Cloth_season">
-                        季节:&nbsp;{cloth_detail.season}
-                    </bottom>&nbsp;&nbsp;&nbsp;
-                    <bottom className="Cloth_climate">
-                        适宜天气:&nbsp;{cloth_detail.climate}
-                    </bottom>&nbsp;&nbsp;&nbsp;
-                    <bottom className="Cloth_situation">
-                        适宜场景:&nbsp;{cloth_detail.situation}
-                    </bottom>&nbsp;&nbsp;&nbsp;
-                    <bottom className="Cloth_band">
-                        品牌:&nbsp;{cloth_detail.band}
-                    </bottom>&nbsp;&nbsp;&nbsp;
-                    <bottom className="Cloth_texture">
-                        材质:&nbsp;{cloth_detail.texture}
-                    </bottom>
-                </div>
+                <bottom className="Cloth_season">
+                    季节:&nbsp;{cloth_detail.season}
+                </bottom>&nbsp;&nbsp;&nbsp;
+                <bottom className="Cloth_climate">
+                    适宜天气:&nbsp;{cloth_detail.climate}
+                </bottom>&nbsp;&nbsp;&nbsp;
+                <bottom className="Cloth_situation">
+                    适宜场景:&nbsp;{cloth_detail.situation}
+                </bottom>&nbsp;&nbsp;&nbsp;
+                <bottom className="Cloth_band">
+                    品牌:&nbsp;{cloth_detail.band}
+                </bottom>&nbsp;&nbsp;&nbsp;
+                <bottom className="Cloth_texture">
+                    材质:&nbsp;{cloth_detail.texture}
+                </bottom>
+            </div>
+            <div className="Cloth_body">
                 <img src={cloth_detail.img_src} className="cloth_img"/>
             </div>
             <div>
