@@ -14,6 +14,13 @@ const fe_type={
     'shoe':     '鞋子',
     'ornament': '饰品'
 }
+const history_type_img={
+    'top':      '上衣',
+    'bottom':   '下装',
+    'coat':     '外套',
+    'shoe':     '鞋子',
+    'ornament': '饰品'
+}
 const default_outfit={
     oid:0,
     ing_src:cloth_pic
@@ -36,6 +43,8 @@ export default class UserCenterInfoMgr{
         this.socket.on('getOutfitsRetURLSuccess',this.handelOutfitImg)
         this.socket.on('getAllClothesSuccess',this.handleAllClothes)
         this.socket.on('getAllArticlesSuccess',this.handleAllArticles)
+        this.socket.on('getAllHistorySuccess',this.handleAllHistories)
+        this.socket.on('getAllHistoryRetURLSuccess',this.handelHistoriesImg)
     }
 
     onchange=()=>{
@@ -84,40 +93,17 @@ export default class UserCenterInfoMgr{
             oid:-1
         })
         this.Ref.current.init_state['我的穿搭']=true;
-        //test code
-        // console.log("outfits req")
-        // this.handleOutfits({outfits:default_outfits})
     }
-    // reqOutfitImg=(index,type,pid)=>{
-    //     if(this.Ref.current.outfit_list[index][type].img_src==''){
-    //         console.log(`req img: ${pid} ${type}`)
-    //         this.socket.emit('PID2url',{
-    //             pid:pid,
-    //             type_src:be_type[type],
-    //             index:index
-    //         })
-    //     }
-        
-    //     // console.log(this.Ref.current.outfit_list)
-    //     // if(this.Ref.current.outfit_list==false||this.Ref.current.cur_img>=this.Ref.current.outfit_list.length) return;
-    //     // // console.log(this.Ref.current.outfit_list)
-    //     // let cur=this.Ref.current.cur_img;
-    //     // console.log("req img: "+cur)
-    //     // let i;
-    //     // for(i in be_type){
-    //     //     if(this.Ref.current.outfit_list[cur][i].img_src===''){
-    //     //         this.socket.emit('PID2url',{
-    //     //             pid:        this.Ref.current.outfit_list[cur][i].pid,
-    //     //             type_src:   be_type[i],
-    //     //             index:      cur
-    //     //         });
-    //     //         break;
-    //     //     }
-    //     // }
-    //     // if(i==='饰品'){
-    //     //     this.sets.setCurImg(cur+1)
-    //     // } 
-    // }
+    reqHistories=()=>{
+        console.log(this.Ref.current.user_info)
+        if(this.Ref.current.user_info.uid!=-1){
+            this.socket.emit('getAllHistory',{
+                uid:        this.Ref.current.user_info.uid,
+                username:   this.Ref.current.user_info.username
+            });
+            this.Ref.current.init_state['我的历史']=true;
+        }
+    }
 
     handelOutfitImg=(data)=>{
         if(this.Ref.current.outfit_list==false){
@@ -132,6 +118,16 @@ export default class UserCenterInfoMgr{
         this.Ref.current.outfit_list[data.index][fe_type[data.type]].img_src=data.img_src;
         this.onchange()
         this.Ref.current.init_state['我的穿搭']=true;
+    }
+    handelHistoriesImg=(data)=>{
+        if(this.Ref.current.history_list==false){
+            console.log('rcv img: history_list null')
+            return
+        }
+        console.log(`rcv img:${data.index} ${data.type} `)
+        this.Ref.current.history_list[data.index][history_type_img[data.type]]=data.img_src;
+        this.onchange()
+        this.Ref.current.init_state['我的历史']=true;
     }
 
     handleUserInfo=(data)=>{
@@ -157,6 +153,11 @@ export default class UserCenterInfoMgr{
     handleAllArticles=(data)=>{
         this.Ref.current.article_list=data.articles;
         console.log(data.articles)
+        this.onchange()
+    }
+    handleAllHistories=(data)=>{
+        this.Ref.current.history_list=data.history; 
+        console.log(data.history)
         this.onchange()
     }
     handleAllClothes=(data)=>{

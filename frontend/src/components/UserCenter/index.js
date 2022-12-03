@@ -4,6 +4,7 @@ import UserInfo from "./components/UserInfo"
 import Articles from "./components/Articles"
 import Outfits from "./components/Outfits"
 import Clothes from "./components/Clothes"
+import History from "./components/History"
 import UserCenterInfoMgr from "./UserCenterInfoMgr"
 import "./index.css"
 import {useNavigate} from "react-router-dom";
@@ -28,6 +29,7 @@ export default function UserCenter(props){
             '鞋子': [],
             '饰品': []
         },
+        history_list: [],
         init_state: {
             '个人信息': false,
             '我的穿搭': false,
@@ -82,7 +84,7 @@ export default function UserCenter(props){
                     item_selected===navibar_items[1] ? <Outfits outfit_list={InfoRef.current.outfit_list} reqOutfitList={info_mgr.reqOutfitList} init_state={InfoRef.current.init_state[navibar_items[1]]}/>:
                         item_selected===navibar_items[2] ? <Articles article_list={InfoRef.current.article_list} reqArticles={info_mgr.reqArticles} init_state={InfoRef.current.init_state[navibar_items[2]]}/>:
                             item_selected===navibar_items[3] ? <Clothes clothes_lists={InfoRef.current.clothes_lists} reqClothes={info_mgr.reqClothes} init_state={InfoRef.current.init_state[navibar_items[3]]}/>:
-                                // item_selected===navibar_items[4] ? <History  onClick={()=>navigate('/history')}/>:
+                                item_selected===navibar_items[4] ? <History history_list={InfoRef.current.history_list} reqHistories={info_mgr.reqHistories} init_state={InfoRef.current.init_state[navibar_items[4]]}/>:
                                     <div className="user_info">error</div>}
             </div>
         </div>

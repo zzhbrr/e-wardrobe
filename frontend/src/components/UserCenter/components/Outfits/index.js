@@ -47,7 +47,6 @@ export default function Outfits(props){
                         {items.map((item)=>{return(
                             <div className="product_card" key={outfit[item].pid} onClick={view_product(outfit[item].pid)}>
                                 <div className="outfit_content">{item}</div>
-                                {/* <img src={outfit.upwear.src} className="outfit_img"/> */}
                                 <img src={outfit[item].img_src} className="outfit_img"/>
                             </div>
                         )})}

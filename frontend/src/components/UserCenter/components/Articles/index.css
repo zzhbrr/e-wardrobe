@@ -7,10 +7,10 @@
 .article_block {
     height: auto;
     width: 90%;
-    min-width: fit-content;
-    padding: 10px 10px 0 10px;
+    min-width: fit-content;  /* 设置段落的最小宽度 */
+    padding: 10px 10px 0 10px;  /* 填充内边距 */
     border-bottom: 2px solid black;
-    margin: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;  /* 填充外边距 */
 }
 .article_block:hover {
     background-color: rgba(0,0,0,0.1);
