@@ -16,6 +16,15 @@ const socket = require('socket.io-client').io('ws://localhost:8000');
 // });
 // socket.emit('changeClothesInfo', {pid:8, change:{img_src:'\'https://img2.baidu.com/it/u=2412133177,3037428682&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=310\''}});
 //--------------------------------------------------------------------------------------------------------------------------------------------------------
+// socket.on('addClothesSuccess', (data) => {
+//     console.log(data);
+// });
+// socket.emit('addClothes', {uid:0, type:'top', img_src:'https://img1.baidu.com/it/u=3691886660,4074550413&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500'});
+// socket.on('deleteClothesSuccess', (data) => {
+//     console.log(data);
+// });
+// socket.emit('deleteClothes', {uid:0, pid:13});
+//--------------------------------------------------------------------------------------------------------------------------------------------------------
 // socket.on('getOutfitsSuccess', (data) => {
 //    console.log(data);
 // });
@@ -108,6 +117,7 @@ const socket = require('socket.io-client').io('ws://localhost:8000');
 //       console.log(data);
 // });
 // socket.emit('addOutfits', {uid: 1, username: 'asd', top_id: 8, bottom_id: 9, shoe_id: 10, coat_id: 11, ornament_id: 12});
+// socket.emit('addOutfits', {uid: 0, username: 'zz', top_id: 13, bottom_id: 13, shoe_id: 13, coat_id: 13, ornament_id: 13});
 //--------------------------------------------------------------------------------------------------------------------------------------------------------
 // socket.on('changeOutfitSuccess', (data) => {
 //         console.log(data);
@@ -127,17 +137,24 @@ const socket = require('socket.io-client').io('ws://localhost:8000');
 // socket.on('addCommentToArticleSuccess', (data) => {
 //         console.log(data);
 // });
-// socket.emit('addCommentToArticle', {uid: 2, eid: 1, content: 'test'});
+// socket.emit('addCommentToArticle', {uid: 2, eid: 3, content: 'test comment for test'});
+//--------------------------------------------------------------------------------------------------------------------------------------------------------
+// socket.on('deleteArticleSuccess', (data) => {
+//         console.log(data);
+// });
+// socket.emit('deleteArticle', {uid: 2, eid: 3});
 //--------------------------------------------------------------------------------------------------------------------------------------------------------
 // socket.on('createGroupSuccess', (data) => {
 //       console.log(data);
 // });
-// socket.emit('createGroup', {uid:2, group_name:'test', intro: 'just for test'});
+// socket.emit('createGroup', {uid:2, group_name:'test_group', intro: 'just for test'});
 //--------------------------------------------------------------------------------------------------------------------------------------------------------
 // socket.on('joinGroupSuccess', (data) => {
 //       console.log(data);
 // });
-// socket.emit('joinGroup', {uid:2, gid: 1});
+// socket.emit('joinGroup', {uid:1, gid: 1});
+//--------------------------------------------------------------------------------------------------------------------------------------------------------
+// socket.emit('deleteGroup', {uid: 2, gid: 1});
 //--------------------------------------------------------------------------------------------------------------------------------------------------------
 // socket.on('addHistorySuccess', (data) => {
 //       console.log(data);

@@ -7,7 +7,7 @@ function PID2url(socket, pg_client, pid, index, type) {
     pg_client.query(sql_clothes.getProductURLByPID(pid), (err, res) => {
         if (err) throw err;
         if (res.rows.length === 0) {
-            console.log('no product with pid: ' + data.pid);
+            console.log('no product with pid: ' + pid);
         } else {
             socket.emit('getOutfitsRetURLSuccess', {img_src: res.rows[0].img_src, type: type, index: index});
         }
@@ -145,6 +145,28 @@ module.exports = {
         });
     }, 
     updateClothes: function updateClothes(socket, pg_client) {
+        socket.on('addClothes', (data) => {
+            pg_client.query('SELECT MAX(pid) AS max_pid FROM admin.product', function(err, res) {
+                PID_count = res.rows[0].max_pid + 1;
+                // console.log('PID_count is ' + PID_count + " now");
+                console.log(data.color === undefined);
+                sql_addClothes = `INSERT INTO admin.product (pid, img_src, p_type, color, season, climate, situation, texture)
+                                    VALUES (${PID_count}, '${data.img_src}', '${data.type}', '${data.color === undefined ? '' : data.color}', 
+                                    '${data.season === undefined ? '' : data.season}', '${data.climate === undefined ? '' : data.climate}', '${data.situation  === undefined ? '' : data.situation}', 
+                                    '${data.texture  === undefined ? '' : data.texture}') 
+                                    RETURNING *;`;
+                pg_client.query(sql_addClothes, (err, res) => {
+                    if (err) throw err;
+                    console.log(`add clothes ${PID_count} success`);
+                    pg_client.query(`INSERT INTO admin.user_product(uid, pid) VALUES (${data.uid}, ${PID_count})`, (err, res1) => {
+                        if (err) throw err;
+                        socket.emit('addClothesSuccess', {pid: PID_count, img_src: res.rows[0].img_src, type: res.rows[0].p_type, season: res.rows[0].season, climate: res.rows[0].climate, situation: res.rows[0].situation, texture: res.rows[0].texture});
+                    });
+                })
+            });
+        });
+
+
         socket.on('deleteClothes', (data) => {
             pg_client.query(`DELETE FROM admin.product WHERE pid = ${data.pid};`, (err, res) => {
                 if (err) throw err;

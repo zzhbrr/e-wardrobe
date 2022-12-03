@@ -112,16 +112,7 @@ module.exports = {
             console.log('delete article: ' + data.eid);
             pg_client.query(`DELETE FROM admin.essay WHERE eid = '${data.eid}';`, (err, res) => {
                 if (err) throw err;
-                pg_client.query(`DELETE FROM admin.essaycomment WHERE eid = '${data.eid}';`, (err, res) => {
-                    if (err) throw err;
-                    pg_client.query(`DELETE FROM admin.essay_group WHERE eid = '${data.eid};`, (err, res) => {
-                        if (err) throw err;
-                        pg_client.query(`DELETE FROM admin.prod_essay WHERE eid = '${data.eid};`, (err, res) => {
-                            if (err) throw err;
-                            socket.emit('deleteArticleSuccess', {eid: data.eid});
-                        });
-                    });
-                });
+                socket.emit('deleteArticleSuccess', {eid: data.eid});
             });
         });
     }

@@ -50,6 +50,7 @@ module.exports = {
                                         
             pg_client.query(sql_getGroupEssayByReplyTime, (err, res) => {
                 if (err) throw err;
+                console.log(`get ${res.rows.length} essays for group ${data.gid}`);
                 socket.emit('getGroupEssaySuccess', {essays: res.rows});
             })
         });
@@ -102,7 +103,9 @@ module.exports = {
                                 VALUES (${GID_count}, '${data.group_name}', '${data.intro}', ${data.uid});`;
                 pg_client.query(sql_addGroup, (err, res) => {
                     if (err) throw err;
-                    socket.emit('createGroupSuccess', {gid: GID_count, group_name: data.group_name, intro: data.intro, creator_uid: data.uid});
+                    pg_client.query(`INSERT INTO admin.group_user (gid, uid) VALUES (${GID_count}, ${data.uid})`, (err, res) => {
+                        socket.emit('createGroupSuccess', {gid: GID_count, group_name: data.group_name, intro: data.intro, creator_uid: data.uid});
+                    });
                 });
             });
         });
@@ -119,13 +122,7 @@ module.exports = {
                                 WHERE gid = ${data.gid};`;
             pg_client.query(`DELETE FROM admin.interst_group WHERE gid = ${data.gid};`, (err, res) => {
                 if (err) throw err;
-                pg_client.query(`DELETE FROM admin.essay_group WHERE gid = ${data.gid};`, (err, res) => {
-                    if (err) throw err;
-                    pg_client.query(`DELETE FROM admin.group_user WHERE gid = ${data.gid};`, (err, res) => {
-                        if (err) throw err;
-                        socket.emit('deleteGroupSuccess', {gid: data.gid});
-                    });
-                });
+                socket.emit('deleteGroupSuccess', {gid: data.gid});
             });
         });
     },
