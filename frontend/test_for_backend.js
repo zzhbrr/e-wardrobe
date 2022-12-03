@@ -11,6 +11,20 @@ const socket = require('socket.io-client').io('ws://localhost:8000');
 // });
 // socket.emit('getClothesDetail', {pid:12});
 //--------------------------------------------------------------------------------------------------------------------------------------------------------
+// socket.on('changeClothesInfoSuccess', (data) => {
+//     console.log(data);
+// });
+// socket.emit('changeClothesInfo', {pid:8, change:{img_src:'\'https://img2.baidu.com/it/u=2412133177,3037428682&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=310\''}});
+//--------------------------------------------------------------------------------------------------------------------------------------------------------
+// socket.on('addClothesSuccess', (data) => {
+//     console.log(data);
+// });
+// socket.emit('addClothes', {uid:0, type:'top', img_src:'https://img1.baidu.com/it/u=3691886660,4074550413&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500'});
+// socket.on('deleteClothesSuccess', (data) => {
+//     console.log(data);
+// });
+// socket.emit('deleteClothes', {uid:0, pid:13});
+//--------------------------------------------------------------------------------------------------------------------------------------------------------
 // socket.on('getOutfitsSuccess', (data) => {
 //    console.log(data);
 // });
@@ -23,10 +37,10 @@ const socket = require('socket.io-client').io('ws://localhost:8000');
 //    console.log(data);
 // });
 // socket.emit('getClothesEssays', {pid: 11});
-socket.emit('getClothesComments', {pid: 11});
-socket.on('getClothesCommentsSuccess', (data) => {
-    console.log(data);
-});
+// socket.emit('getClothesComments', {pid: 11});
+// socket.on('getClothesCommentsSuccess', (data) => {
+//     console.log(data);
+// });
 //--------------------------------------------------------------------------------------------------------------------------------------------------------
 // socket.on('getAllArticlesSuccess', (data) => {
 //    console.log(data);
@@ -42,6 +56,16 @@ socket.on('getClothesCommentsSuccess', (data) => {
 //    console.log(data);
 // });
 // socket.emit('getArticleComments', {eid: 0});
+//--------------------------------------------------------------------------------------------------------------------------------------------------------
+// socket.on('addClothesCommentsSuccess', (data) => {
+//     console.log(data);  
+// });
+// socket.emit('addClothesComments', {pid: 11, uid: 2, content: 'test'});
+//--------------------------------------------------------------------------------------------------------------------------------------------------------
+// socket.on('deleteClothesCommentsSuccess', (data) => {
+//     console.log(data);
+// });
+// socket.emit('deleteClothesComments', {pid:11, seqid:1});
 //--------------------------------------------------------------------------------------------------------------------------------------------------------
 // socket.on('getGroupDetailSuccess', (data) => {
 //    console.log(data);
@@ -103,26 +127,59 @@ socket.on('getClothesCommentsSuccess', (data) => {
 //       console.log(data);
 // });
 // socket.emit('addOutfits', {uid: 1, username: 'asd', top_id: 8, bottom_id: 9, shoe_id: 10, coat_id: 11, ornament_id: 12});
+// socket.emit('addOutfits', {uid: 0, username: 'zz', top_id: 13, bottom_id: 13, shoe_id: 13, coat_id: 13, ornament_id: 13});
+//--------------------------------------------------------------------------------------------------------------------------------------------------------
+// socket.on('changeOutfitSuccess', (data) => {
+//         console.log(data);
+// });
+// socket.emit('changeOutfit', {oid:10, change:{top_id:9, bottom_id:9}});
 //--------------------------------------------------------------------------------------------------------------------------------------------------------
 // socket.on('addArticleSuccess', (data) => {
 //       console.log(data);
 // });
-// socket.emit('addArticle', {uid:2, title:'test', content_src: 'null'});
+// socket.emit('addArticle', {uid:2, title:'test', content_src: 'null', relatedproducts: [/*{pid: 1}, {pid: 2}, {pid: 3}*/], relatedgroups: [/*{gid: 0}, {gid: 1}*/]});
+//--------------------------------------------------------------------------------------------------------------------------------------------------------
+// socket.on('changeArticleSuccess', (data) => {
+//         console.log(data);
+// });
+// socket.emit('changeArticle', {uid:2, eid:2, change:{content_src: '\'wobiande\'', title:'\'test for changeArticle\''}});
+//--------------------------------------------------------------------------------------------------------------------------------------------------------
+// socket.on('addCommentToArticleSuccess', (data) => {
+//         console.log(data);
+// });
+// socket.emit('addCommentToArticle', {uid: 2, eid: 2, content: 'test comment for test'});
+//--------------------------------------------------------------------------------------------------------------------------------------------------------
+// socket.on('deleteArticleCommentSuccess', (data) => {
+//     console.log(data);
+// });
+// socket.emit('deleteArticleComment', {eid: 2, ecid: 1});
+//--------------------------------------------------------------------------------------------------------------------------------------------------------
+// socket.on('deleteArticleSuccess', (data) => {
+//         console.log(data);
+// });
+// socket.emit('deleteArticle', {uid: 2, eid: 3});
 //--------------------------------------------------------------------------------------------------------------------------------------------------------
 // socket.on('createGroupSuccess', (data) => {
 //       console.log(data);
 // });
-// socket.emit('createGroup', {uid:2, group_name:'test', intro: 'just for test'});
+// socket.emit('createGroup', {uid:2, group_name:'test_group', intro: 'just for test'});
 //--------------------------------------------------------------------------------------------------------------------------------------------------------
 // socket.on('joinGroupSuccess', (data) => {
 //       console.log(data);
 // });
-// socket.emit('joinGroup', {uid:2, gid: 1});
+// socket.emit('joinGroup', {uid:1, gid: 1});
+//--------------------------------------------------------------------------------------------------------------------------------------------------------
+// socket.emit('deleteGroup', {uid: 2, gid: 1});
 //--------------------------------------------------------------------------------------------------------------------------------------------------------
 // socket.on('addHistorySuccess', (data) => {
 //       console.log(data);
 // });
-// socket.emit('addHistory', {uid:2, year:2022, month:12, day:1, climate:'阴', situation:'约会', top_id: 8, bottom_id: 9, shoe_id: 10, coat_id: 11, ornament_id: 12});
+// socket.emit('addHistory', {uid:0, year:2077, month:12, day:1, climate:'阴', situation:'约会', top_id: 12, bottom_id: 11, shoe_id: 9, coat_id: 11, ornament_id: 12});
+//--------------------------------------------------------------------------------------------------------------------------------------------------------
+// socket.emit('changeHistory', {change:{h_year:2019, climate:'\'大雨\''}, uid:3, hid: 1});
+// socket.on('changeHistorySuccess', (data) => {
+//         console.log(data);
+// }); 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------
 // const qiniu = require('qiniu-js')
 // async function upload(req, res) {

@@ -1,6 +1,6 @@
 // article
 import React from "react";
-import "./Article.css";
+import "./article.css";
 import { useNavigate, useParams } from "react-router-dom";
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';             // markdown 对表格/删除线/脚注等的支持
@@ -49,7 +49,10 @@ export default function ArticleDetail(props){
         <div>
             <div className="Article_head">
                 <h1 className="Article_title">{article_detail.title}</h1>
-                <h4 className="Article_time">{article_detail.username}&nbsp;&nbsp;编辑于&nbsp;&nbsp;{article_detail.time}</h4>
+                <h4 className="Article_time">
+                    {article_detail.username}&nbsp;编辑于&nbsp;{article_detail.time}&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href={article_detail.content_src} target="content" className="Article_download">下载文章</a>
+                </h4>
             </div>
             <div className="Article_body">
                 {/* <MarkNav source={article_detail.content_src} ordered={true}/> */}
@@ -58,7 +61,6 @@ export default function ArticleDetail(props){
                 </ReactMarkdown>
                 {/* <ReactMarkdown escapeHtml={false} remarkPlugins={[remarkGfm]}>{article_detail.content_src}</ReactMarkdown> */}
                 {/* <iframe src={article_detail.content_src} width="800" height="400" name="content"></iframe> */}
-                <p><a href={article_detail.content_src} target="content">{article_detail.content_src}</a></p>
             </div>
             <div>
                 <h2>相关评论</h2>

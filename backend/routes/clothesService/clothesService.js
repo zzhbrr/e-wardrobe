@@ -7,7 +7,7 @@ function PID2url(socket, pg_client, pid, index, type) {
     pg_client.query(sql_clothes.getProductURLByPID(pid), (err, res) => {
         if (err) throw err;
         if (res.rows.length === 0) {
-            console.log('no product with pid: ' + data.pid);
+            console.log('no product with pid: ' + pid);
         } else {
             socket.emit('getOutfitsRetURLSuccess', {img_src: res.rows[0].img_src, type: type, index: index});
         }
@@ -107,9 +107,9 @@ module.exports = {
     }, 
     updateOutfits: function updateOutfits(socket, pg_client) {
         socket.on('addOutfits', (data) => {
-            pg_client.query('SELECT COUNT(oid) FROM admin.outfit', function(err, res) {
-                OID_count = res.rows[0].count;
-                console.log('OID_count is ' + OID_count + " now");
+            pg_client.query('SELECT MAX(oid) AS max_oid FROM admin.outfit', function(err, res) {
+                OID_count = res.rows[0].max_oid + 1;
+                // console.log('OID_count is ' + OID_count + " now");
                 sql_addOutfits = `INSERT INTO admin.outfit (oid, top_id, bottom_id, coat_id, shoe_id, ornament_id, uid, username) 
                                     VALUES (${OID_count}, ${data.top_id}, ${data.bottom_id}, ${data.coat_id}, ${data.shoe_id}, ${data.ornament_id}, ${data.uid}, '${data.username}');`;
                 pg_client.query(sql_addOutfits, (err, res) => {
@@ -118,8 +118,95 @@ module.exports = {
                     socket.emit('addOutfitsSuccess', {oid: OID_count, top_id: data.top_id, bottom_id: data.bottom_id, coat_id: data.coat_id, shoe_id: data.shoe_id, ornament_id: data.ornament_id, uid: data.uid, username: data.username});
                 })
             });
-        })
-        
-        
+        });
+        socket.on('deleteOutfits', (data) => {
+            sql_deleteOutfits = `DELETE FROM admin.outfit WHERE oid = ${data.oid};`;
+            pg_client.query(sql_deleteOutfits, (err, res) => {
+                if (err) throw err;
+                socket.emit('deleteOutfitsSuccess', {oid: data.oid});
+            });
+        });
+        socket.on('changeOutfit', (data) => {
+            let s = "";
+            let isFirst = true;
+            for (let key in data.change) {
+                if (!isFirst) {s += `,`;}
+                else isFirst=false;
+                s += `${key} = ${data.change[key]} `;
+                console.log(key, data.change[key]);
+            }
+            sql_changeOutfits = `UPDATE admin.outfit SET ` + s + `WHERE oid = ${data.oid} RETURNING *`;
+            pg_client.query(sql_changeOutfits, (err, res) => {
+                if (err) throw err;
+                console.log('change outfit success');
+                socket.emit('changeOutfitSuccess', {oid: data.oid, top_id: res.rows[0].top_id, bottom_id: res.rows[0].bottom_id, 
+                    coat_id: res.rows[0].coat_id, shoe_id: res.rows[0].shoe_id, ornament_id: res.rows[0].ornament_id});
+            })
+        });
+    }, 
+    updateClothes: function updateClothes(socket, pg_client) {
+        socket.on('addClothes', (data) => {
+            pg_client.query('SELECT MAX(pid) AS max_pid FROM admin.product', function(err, res) {
+                PID_count = res.rows[0].max_pid + 1;
+                // console.log('PID_count is ' + PID_count + " now");
+                sql_addClothes = `INSERT INTO admin.product (pid, img_src, p_type, color, season, climate, situation, texture)
+                                    VALUES (${PID_count}, '${data.img_src}', '${data.type}', '${data.color === undefined ? '' : data.color}', 
+                                    '${data.season === undefined ? '' : data.season}', '${data.climate === undefined ? '' : data.climate}', '${data.situation  === undefined ? '' : data.situation}', 
+                                    '${data.texture  === undefined ? '' : data.texture}') 
+                                    RETURNING *;`;
+                pg_client.query(sql_addClothes, (err, res) => {
+                    if (err) throw err;
+                    console.log(`add clothes ${PID_count} success`);
+                    pg_client.query(`INSERT INTO admin.user_product(uid, pid) VALUES (${data.uid}, ${PID_count})`, (err, res1) => {
+                        if (err) throw err;
+                        socket.emit('addClothesSuccess', {pid: PID_count, img_src: res.rows[0].img_src, type: res.rows[0].p_type, season: res.rows[0].season, climate: res.rows[0].climate, situation: res.rows[0].situation, texture: res.rows[0].texture});
+                    });
+                })
+            });
+        });
+        socket.on('deleteClothes', (data) => {
+            pg_client.query(`DELETE FROM admin.product WHERE pid = ${data.pid};`, (err, res) => {
+                if (err) throw err;
+                socket.emit('deleteClothesSuccess', {message: '删除成功'});
+            });
+        });
+        socket.on('changeClothesInfo', (data) => {
+            let s = "";
+            let isFirst = true;
+            for (let key in data.change) {
+                if (!isFirst) {s += `,`;}
+                else isFirst=false;
+                s += `${key} = ${data.change[key]} `;
+                console.log(key, data.change[key]);
+            }
+            sql_changeClothesInfo = `UPDATE admin.product SET ` + s + `WHERE pid = ${data.pid} RETURNING *`;
+            pg_client.query(sql_changeClothesInfo, (err, res) => {
+                if (err) throw err;
+                console.log('change clothes success');
+                socket.emit('changeClothesInfoSuccess', {pid: data.pid, img_src: res.rows[0].img_src, season: res.rows[0].season, climate: res.rows[0].climate, situation: res.rows[0].situation, texture: res.rows[0].texture});
+            })
+        });
+        socket.on('addClothesComments', (data) => {
+            pg_client.query(`SELECT MAX(seq_id) AS max_seqid FROM admin.p_comment WHERE pid = ${data.pid}`, function(err, res) {
+                SeqID_count = res.rows[0].max_seqid + 1;
+                console.log('SeqID_count is ' + SeqID_count + " now");
+                sql_addClothesComments = `INSERT INTO admin.p_comment (pid, seq_id, uid, content, c_time) 
+                                            VALUES (${data.pid}, ${SeqID_count}, ${data.uid}, '${data.content}', current_timestamp(0))
+                                            RETURNING *;`;
+                pg_client.query(sql_addClothesComments, (err, res) => {
+                    if (err) throw err;
+                    console.log('add clothes comments success');
+                    socket.emit('addClothesCommentsSuccess', {pid: res.rows[0].pid, seqid: res.rows[0].seq_id, uid: res.rows[0].uid, content: res.rows[0].content, c_time: res.rows[0].c_time});
+                })
+            });
+        });
+        socket.on('deleteClothesComments', (data) => {
+            console.log('in deleteClothesComments');
+            pg_client.query(`DELETE FROM admin.p_comment WHERE pid = ${data.pid} AND seq_id = ${data.seqid};`, (err, res) => {
+                if (err) throw err;
+                socket.emit('deleteClothesCommentsSuccess', {message: '删除成功'});
+            });
+        });
+
     }
 }

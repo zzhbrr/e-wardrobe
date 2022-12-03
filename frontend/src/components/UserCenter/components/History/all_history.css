@@ -1,0 +1,47 @@
+.histories {
+    width: 90%;
+    min-width: fit-content;
+    text-align: left;
+    padding: 30px 50px 0px 50px;
+}
+.history_list{
+    /* padding: -10px; */
+    border-bottom: 2px solid red;
+    /* margin: 0 auto; */
+}
+.history_list:hover {
+    background-color: rgba(0,0,0,0.1);
+}
+.history_block {
+    min-width: fit-content;  /* 设置段落的最小宽度 */
+    padding: 10px 10px 0 10px;
+    margin: 10px 10px 10px 10px;
+    border-bottom: 2px solid black;
+}
+.history_block:hover{
+    background-color: green;
+}
+.history_time{
+    margin: 10px 0 3px 0;
+}
+
+.history_product_card {
+    width: 120px;
+    height: 140px;
+    margin: 0 10px;
+    float: left;
+    text-align: center;
+}
+
+.history_content {
+    line-height: 30px;
+    padding: 0;
+    margin: 0 auto;
+    font-size: small;
+}
+
+.history_img {
+    height: 100px;
+    width: 100px;
+    border: 1px solid black;
+}
