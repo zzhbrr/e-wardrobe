@@ -37,14 +37,24 @@ export default class UserCenterInfoMgr{
         this.socket=props.socket;
         this.Ref=props.InfoRef;
         this.onChange=props.onChange;
-        this.socket.on('userInfoAskSuccess',this.handleUserInfo)
-        this.socket.on('userInfoChangeSuccess',this.handleUserInfoChange)
-        this.socket.on('getOutfitsSuccess',this.handleOutfits)
-        this.socket.on('getOutfitsRetURLSuccess',this.handelOutfitImg)
-        this.socket.on('getAllClothesSuccess',this.handleAllClothes)
-        this.socket.on('getAllArticlesSuccess',this.handleAllArticles)
-        this.socket.on('getAllHistorySuccess',this.handleAllHistories)
-        this.socket.on('getAllHistoryRetURLSuccess',this.handelHistoriesImg)
+        this.socket.off('userInfoAskSuccess');
+        this.socket.on('userInfoAskSuccess',this.handleUserInfo);
+        this.socket.off('userInfoChangeSuccess');
+        this.socket.on('userInfoChangeSuccess',this.handleUserInfoChange);
+        this.socket.off('getOutfitsSuccess');
+        this.socket.on('getOutfitsSuccess',this.handleOutfits);
+        this.socket.off('getOutfitsRetURLSuccess');
+        this.socket.on('getOutfitsRetURLSuccess',this.handelOutfitImg);
+        this.socket.off('getAllClothesSuccess');
+        this.socket.on('getAllClothesSuccess',this.handleAllClothes);
+        this.socket.off('getAllArticlesSuccess');
+        this.socket.on('getAllArticlesSuccess',this.handleAllArticles);
+        this.socket.off('getAllHistorySuccess');
+        this.socket.on('getAllHistorySuccess',this.handleAllHistories);
+        this.socket.off('getAllHistoryRetURLSuccess');
+        this.socket.on('getAllHistoryRetURLSuccess',this.handelHistoriesImg);
+        this.socket.off('addClothesSuccess');
+        this.socket.on('addClothesSuccess', this.handleAddClothes)
     }
 
     onchange=()=>{
@@ -103,6 +113,26 @@ export default class UserCenterInfoMgr{
             });
             this.Ref.current.init_state['我的历史']=true;
         }
+    }
+    reqAddClothes=(data)=>{
+        console.log('add clothes')
+        this.socket.emit('addClothes',{
+            uid:        this.Ref.current.user_info.uid,
+            username:   this.Ref.current.user_info.username,
+            type:       be_type[data.type],
+            img_src:    data.img_src, 
+            color:      data.color,
+            season:     data.season,
+            texture:    data.texture
+        })
+    }
+
+    handleAddClothes=(data)=>{
+        console.log('add Cloth : ');
+        console.log(data);
+        console.log(fe_type[data.type]);
+        this.Ref.current.clothes_lists[fe_type[data.type]].push({pid:data.pid, img_src:data.img_src, type:data.type});
+        this.onchange();
     }
 
     handelOutfitImg=(data)=>{
