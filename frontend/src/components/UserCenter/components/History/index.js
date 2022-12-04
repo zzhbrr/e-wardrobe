@@ -17,17 +17,17 @@ export default function History(props){
     return(
         <div className="histories">
             <h1>我的穿搭历史</h1>
-            <div className="history_list">
+            <div>
                 {history_list.map((history)=>{return (
                     <div className="history_block">
-                        <h3 className="history_time">{history.h_year}-{history.h_month}-{history.h_day}&nbsp;&nbsp;{history.climate}</h3>
-                        <div className="history_time">今天去的场景：{history.situation}</div>
+                        <div className="history_time">{history.h_year}-{history.h_month}-{history.h_day}&nbsp;&nbsp;{history.climate}</div>
                         {items.map((item)=>{return(
                             <div className="history_product_card">
                                 <div className="history_content">{item}</div>
                                 <img src={history[item]} className="history_img"/>
                             </div>
                         )})}
+                        <div className="history_situation">穿搭场景：{history.situation}</div>
                     </div>
                 )})}
             </div>
