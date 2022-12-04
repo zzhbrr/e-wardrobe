@@ -1,6 +1,6 @@
 // article
 import React from "react";
-import "./article.css";
+import "./Article.css";
 import { useNavigate, useParams } from "react-router-dom";
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';             // markdown 对表格/删除线/脚注等的支持
