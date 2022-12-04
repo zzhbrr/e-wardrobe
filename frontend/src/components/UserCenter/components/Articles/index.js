@@ -1,6 +1,10 @@
 import React from "react";
 import "./index.css"
 import { useNavigate } from "react-router-dom";
+import AddArticle from "./AddArticle";
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+
+
 
 export default function Articles(props){    
     const article_list=props.article_list;
@@ -13,11 +17,20 @@ export default function Articles(props){
             reqArticles();
         }
     });
-    
+    console.log('uid : '+props.uid)
     // const [article_list,setArticles]=React.useState(defalut_article_list);
+
+    function handleAddArticle(data) {
+        props.reqAddArticle(data);
+    }
+
     return(
         <div className="articles">
             <h1>我发布的文章</h1>
+            <AddArticle className="button" socket={props.socket} uid={props.uid} handleAddArticle={handleAddArticle}>
+                新建文章
+                <AddCircleIcon style={{float:"left",marginRight:"5px"}} />
+            </AddArticle>
             <div className="list">
                 {article_list.map((article)=>{return (
                     <div className="article_block" key={article.eid} onClick={()=>navigate("/article/"+`${article.eid}`)}>

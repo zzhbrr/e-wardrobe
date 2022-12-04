@@ -1,0 +1,16 @@
+.group_list {
+    margin-top: 15px;
+    padding-right: 50px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.group_block {
+    height: auto;
+    width: 40%;
+    min-width: fit-content;
+    min-width: fit-content;
+    padding: 10px 10px 5px 10px;
+    border: 2px solid grey;
+    margin: 0px 0px 0px 0px;
+    float: left;
+}
