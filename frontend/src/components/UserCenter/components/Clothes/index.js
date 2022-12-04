@@ -3,6 +3,7 @@ import ClothBar from "../../../NaviBar2";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import "./index.css"
 import { useNavigate } from "react-router-dom";
+import AddClothes from "./AddClothes";
 
 const items=['上衣','下装','外套','鞋子','饰品']
 
@@ -22,13 +23,17 @@ export default function Clothes(props){
         }
     })
 
+    function handleAddClothes(data) {
+        props.reqAddClothes(data);
+    }
+
     return(
         <div className="clothes">
             <h1>我的衣服</h1>
-            <button className="button">
+            <AddClothes className="button" socket={props.socket} handleAddClothes={handleAddClothes}>
                 添加衣服
                 <AddCircleIcon style={{float:"left",marginRight:"5px"}} />
-            </button>
+            </AddClothes>
             <ClothBar item_selected={item_selected} selectItem={selectItem} items={items} />
             <div className="clothlist">
                 {clothes_lists[item_selected].map((cloth,index)=>{
