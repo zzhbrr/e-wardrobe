@@ -3,7 +3,7 @@ import UserCenter from './components/UserCenter/index';
 import Login from './components/login/login';
 import Register from './components/register/register';
 import OutfitDetail from './components/Outfit/Outfit';
-import ArticleDetail from './components/article/article';
+import ArticleDetail from './components/Article/Article';
 import ClothDetail from './components/Cloth/Cloth';
 import io from 'socket.io-client'
 import {
@@ -75,9 +75,9 @@ function App() {
                 <ArticleDetail eid={0} uid={0} socket={socket}/>
             </div>
         }/>
-        <Route exact path="/cloth/:pid" element={
+        <Route exact path="/cloth/:pid/:uid" element={
             <div className="App">
-                <ClothDetail pid={0} socket={socket} userName={userName}/>
+                <ClothDetail pid={0} uid={0} socket={socket} userName={userName}/>
             </div>
         }/>
         <Route exact path="/" element={<Navigate to="/usercenter"></Navigate>} />

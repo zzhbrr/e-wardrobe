@@ -82,7 +82,8 @@ export default function AddArticle({handleAddArticle, socket, uid}) {
                 <Space>
                     <Button onClick={()=>setOpen(false)}>Cancel</Button>
                     <Button type="primary" onClick={handleSubmit}> Submit </Button>
-                </Space> }>
+                </Space>
+            }>
                 <div>Related Clothes</div>
                 <div>
                     <ChooseRelatedGroups socket={socket} uid={uid} handleChooseGroup={handleChooseGroup}>

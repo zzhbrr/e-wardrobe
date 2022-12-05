@@ -17,22 +17,22 @@ const qiniuserver = require('../../../../../qiniuserver/uploadToQiniu');
 const beforeUpload = (file) => {
     const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
     if (!isJpgOrPng) {
-      message.error('You can only upload JPG/PNG file!');
+        message.error('You can only upload JPG/PNG file!');
     }
     const isLt2M = file.size / 1024 / 1024 < 2;
     if (!isLt2M) {
-      message.error('Image must smaller than 2MB!');
+        message.error('Image must smaller than 2MB!');
     }
     return isJpgOrPng && isLt2M;
 };
 const onPreview = async (file) => {
     let src = file.url;
     if (!src) {
-      src = await new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file.originFileObj);
-        reader.onload = () => resolve(reader.result);
-      });
+        src = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file.originFileObj);
+            reader.onload = () => resolve(reader.result);
+        });
     }
     const image = new Image();
     image.src = src;
@@ -52,7 +52,7 @@ export default function AddClothes({handleAddClothes, socket}) {
         //   status: 'done',
         //   url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
         // },
-      ]);
+    ]);
     
 
     const [open, setOpen] = React.useState(false);
@@ -107,10 +107,10 @@ export default function AddClothes({handleAddClothes, socket}) {
 
     const uploadButton = (
         <div>
-          {loading ? <LoadingOutlined /> : <PlusOutlined />}
-          <div style={{ marginTop: 8 }}>
-            Upload
-          </div>
+            {loading ? <LoadingOutlined /> : <PlusOutlined />}
+            <div style={{ marginTop: 8 }}>
+                Upload
+            </div>
         </div>
     );
     const onChange = ({ fileList: newFileList }) => {
@@ -169,7 +169,7 @@ export default function AddClothes({handleAddClothes, socket}) {
                     </Button>
                     <Button onClick={() => handleSubmit()} color="primary">
                         添加
-                    </Button>                
+                    </Button>
                 </DialogActions>
             </Dialog>
         </div>
