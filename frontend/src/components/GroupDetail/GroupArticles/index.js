@@ -20,7 +20,7 @@ export default function GroupArticles(props){
             <h1>全部文章</h1>
             <div className="list">
                 {article_list.map((article)=>{return (
-                    <div className="article_block" key={article.eid} onClick={()=>window.open("/article/"+`${article.eid}`)}>
+                    <div className="article_block" key={article.eid} onClick={()=>window.open("/article/"+`${article.eid}/${props.uid}`)}>
                         <h3 className="title">{article.title}</h3>
                         <div className="author">{`${article.username} - ${article.time.substr(0,10)}`}</div>
                     </div>

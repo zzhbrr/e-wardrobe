@@ -13,6 +13,7 @@ const ariaLabel = { 'aria-label': 'description' };
 
 export default function ArticleDetail(props){
     const params=useParams();
+    const navigate=useNavigate();
     const eid=params.eid;
     const uid=params.uid;
     const [article_detail, set_article_detail] = React.useState({
@@ -30,10 +31,11 @@ export default function ArticleDetail(props){
         uid:      0,
         username: "Tom",
     }])
-
     React.useEffect(() => {
+        props.socket.off('getArticleDetailSuccess');
         props.socket.on('getArticleDetailSuccess', (res) => {
             set_article_detail(res);
+            console.log('props:');
             console.log(props);
             fetch(res.content_src)
                 .then((resp) => resp.text())
@@ -42,6 +44,7 @@ export default function ArticleDetail(props){
         props.socket.emit('getArticleDetail', {eid: eid});
     }, [])
     React.useEffect(() => {
+        props.socket.off('getArticleCommentsSuccess');
         props.socket.on('getArticleCommentsSuccess', (res) => {
             set_comment_list(res.comments);
             console.log(res);
@@ -61,6 +64,18 @@ export default function ArticleDetail(props){
         })
     }, [])
 
+    const handleDeleteArticle = () => {
+        console.log('删除文章');
+        props.socket.emit('deleteArticle', {eid: eid});
+        props.socket.off('deleteArticleSuccess');
+        props.socket.on('deleteArticleSuccess', (res) => {
+            console.log(res);
+            navigate('/usercenter');
+        })
+    }
+
+    console.log('params.uid: ', params.uid);
+    console.log('article_detail.uid: ', article_detail.uid);
     
     return(
         <div>
@@ -68,7 +83,8 @@ export default function ArticleDetail(props){
                 <h1 className="Article_title">{article_detail.title}</h1>
                 <h4 className="Article_time">
                     {article_detail.username}&nbsp;编辑于&nbsp;{article_detail.time}&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href={article_detail.content_src} target="content" className="Article_download">下载文章</a>
+                    <a href={article_detail.content_src} target="content" className="Article_download">下载文章</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    {Number(params.uid) === article_detail.uid && <a onClick={handleDeleteArticle}>删除文章</a>}
                 </h4>
             </div>
             <div className="Article_body">

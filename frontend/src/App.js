@@ -70,9 +70,9 @@ function App() {
                 <OutfitDetail oid={0} uid={0} userName={userName} socket={socket}/>
             </div>
         }/>
-        <Route exact path="/article/:eid" element={
+        <Route exact path="/article/:eid/:uid" element={
             <div className="App">
-                <ArticleDetail eid={0} socket={socket} userName={userName}/>
+                <ArticleDetail eid={0} uid={0} socket={socket}/>
             </div>
         }/>
         <Route exact path="/cloth/:pid" element={
