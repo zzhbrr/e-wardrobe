@@ -5,11 +5,16 @@ import { useNavigate, useParams } from "react-router-dom";
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';             // markdown 对表格/删除线/脚注等的支持
 import remarkMath from 'remark-math'
-import MarkNav from 'markdown-navbar';          // markdown 目录
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import Input from '@mui/material/Input';
+const ariaLabel = { 'aria-label': 'description' };
 
 export default function ArticleDetail(props){
     const params=useParams();
     const eid=params.eid;
+    const uid=params.uid;
     const [article_detail, set_article_detail] = React.useState({
         eid: eid, 
         title: "Title",
@@ -43,6 +48,18 @@ export default function ArticleDetail(props){
         })
         props.socket.emit('getArticleComments', {eid: eid});
     }, [])
+    React.useEffect((data) => {
+        console.log('add comment')
+        props.socket.emit('addCommentToArticle', {
+            uid: 0,
+            eid: eid,
+            content: data
+        });
+        props.socket.on('addCommentToArticleSuccess', (res) => {
+            set_comment_list(res.comments);
+            console.log(res);
+        })
+    }, [])
 
     
     return(
@@ -64,6 +81,11 @@ export default function ArticleDetail(props){
             </div>
             <div>
                 <h2>相关评论</h2>
+                {/* <Box sx={{ display: 'flex', alignItems: 'flex-end' }} className="addComment_block"> */}
+                <Box sx={{ display: 'flex', alignItems: 'flex-end' }} className="addComment_block">
+                    <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
+                    <TextField id="input-with-sx" placeholder="添加评论" inputProps={ariaLabel} className="addComment_TextField"/>
+                </Box>
                 {comment_list.map((comment)=>{return (
                     <div className="Comment_block" key={comment.eid}>
                         <p className="Comment_username">{comment.username}&nbsp;编辑于&nbsp;{comment.time}</p>
