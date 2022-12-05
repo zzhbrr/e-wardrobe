@@ -23,8 +23,9 @@
     color: grey;
 }
 
-.list {
-    height: 65vh;
+.article_list {
+    height: 55vh;
+    margin-top: 5px;
     padding-right: 50px;
     overflow-x: hidden;
     overflow-y: auto;

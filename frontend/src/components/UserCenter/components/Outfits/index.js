@@ -42,11 +42,11 @@ export default function Outfits(props){
         <div className="outfits">
             <h1>全部穿搭</h1>
             <div className="list">
-                {outfit_list.map((outfit)=>
-                    <div className="outfit_card" key={outfit.oid} onClick={()=>navigate("/outfit/"+`${outfit.oid}`)} >
-                        {items.map((item)=>{return(
-                            <div className="product_card" key={outfit[item].pid} onClick={view_product(outfit[item].pid)}>
-                                <div className="outfit_content">{item}</div>
+                {outfit_list.map((outfit,index)=>
+                    <div className="outfit_card" key={index} onClick={()=>window.open(`/outfit/${outfit.oid}`)} >
+                        {items.map((item,index)=>{return(
+                            <div className="product_card" key={index} onClick={view_product(outfit[item].pid)}>
+                                <div className="outfit_content">{item}</div> 
                                 <img src={outfit[item].img_src} className="outfit_img"/>
                             </div>
                         )})}
