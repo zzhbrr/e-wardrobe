@@ -72,7 +72,7 @@ function App() {
         }/>
         <Route exact path="/article/:eid" element={
             <div className="App">
-                <ArticleDetail eid={0} socket={socket} userName={userName}/>
+                <ArticleDetail eid={0} socket={socket} userName={userName} uid={UserID}/>
             </div>
         }/>
         <Route exact path="/cloth/:pid" element={
