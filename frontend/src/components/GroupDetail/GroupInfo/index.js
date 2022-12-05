@@ -22,8 +22,9 @@ export default function GroupInfo(props){
         props.socket.emit('deleteGroup', {gid: group_info.gid});
         props.socket.off('deleteGroupSuccess');
         props.socket.on('deleteGroupSuccess', (data)=>{
-            // navigate('/group');
-            window.close();
+            alert('delete group success');
+            navigate('/group');
+            // window.close();
         });
     }
 

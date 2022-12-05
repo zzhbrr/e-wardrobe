@@ -3,7 +3,7 @@ import UserCenter from './components/UserCenter/index';
 import Login from './components/login/login';
 import Register from './components/register/register';
 import OutfitDetail from './components/Outfit/Outfit';
-import ArticleDetail from './components/Article/Article';
+import ArticleDetail from './components/article/article';
 import ClothDetail from './components/Cloth/Cloth';
 import io from 'socket.io-client'
 import {

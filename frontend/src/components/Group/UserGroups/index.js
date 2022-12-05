@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import './index.css'
 import AddGroup from "./AddGroup";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-
+import SearchGroup from "./SearchGroup";
 
 const items=['我加入的组','我创建的组']
 export default function UserGroups(props){
@@ -24,6 +24,7 @@ export default function UserGroups(props){
                 新建组
                 <AddCircleIcon style={{float:"left",marginRight:"5px"}} />
             </AddGroup>
+            <SearchGroup className="button" socket={props.socket} uid={props.uid} handleAddGroup={handleAddGroup}></SearchGroup>
             <NaviBar2 item_selected={item_selected} selectItem={selectItem} items={items} />
             <div className="group_list">
                 {user_lists[item_selected].map((group)=>{return (

@@ -26,6 +26,7 @@ export default function UserInfo(props){
             <div className="user_content left">职业：{userInfo.profession}</div>
             {/* <button className="change_btn">修改信息</button> */}
             <ChangeInfo className="change_btn left" handleChangeInfo={reqUserInfoChange}/>
+            <button className="change_btn left">修改密码</button>
         </div>
     )
 }
