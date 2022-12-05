@@ -54,7 +54,9 @@ export default class UserCenterInfoMgr{
         this.socket.off('getAllHistoryRetURLSuccess');
         this.socket.on('getAllHistoryRetURLSuccess',this.handelHistoriesImg);
         this.socket.off('addClothesSuccess');
-        this.socket.on('addClothesSuccess', this.handleAddClothes)
+        this.socket.on('addClothesSuccess', this.handleAddClothes);
+        this.socket.off('addArticleSuccess');
+        this.socket.on('addArticleSuccess', this.handleAddArticle);
     }
 
     onchange=()=>{
@@ -125,6 +127,22 @@ export default class UserCenterInfoMgr{
             season:     data.season,
             texture:    data.texture
         })
+    }
+    reqAddArticle=(data)=>{
+        console.log('add article')
+        this.socket.emit('addArticle',{
+            uid:        this.Ref.current.user_info.uid,
+            title:      data.title,
+            content_src:    data.content_src,
+            relatedgroups: data.relatedGroups, 
+            relatedproducts: []
+        })
+    }
+
+    handleAddArticle=(data)=>{
+        console.log('add article: '); console.log(data);
+        this.Ref.current.article_list.push(data);
+        this.onchange();
     }
 
     handleAddClothes=(data)=>{
