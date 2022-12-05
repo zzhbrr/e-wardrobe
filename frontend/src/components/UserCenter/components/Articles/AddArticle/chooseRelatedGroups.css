@@ -3,10 +3,15 @@
     padding-right: 50px;
     overflow-x: hidden;
     overflow-y: auto;
+    /* float: left; */
+    /* height: auto;
+    width: 100%;
+    margin: 10px 30px;
+    border: 2px solid grey; */
 }
 .group_block {
     height: auto;
-    width: 40%;
+    width: auto;
     min-width: fit-content;
     min-width: fit-content;
     padding: 10px 10px 5px 10px;

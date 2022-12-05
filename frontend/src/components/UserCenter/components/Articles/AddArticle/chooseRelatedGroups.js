@@ -46,29 +46,30 @@ export default function ChooseRelatedGroups({socket, uid, handleChooseGroup}) {
                 <Dialog open={open} onClose={()=>setOpen(false)}>
                     <DialogTitle>选择相关组</DialogTitle>
                     <div className="group_list">
-                    <Checkbox.Group style={{ width: '100%'}} onChange={chosenGroup} >
-                        {groups.map((group)=>{return (
-                            <Row>
-                                <Col>
-                                    <Checkbox value={group.gid}>
-                                        <div className="group_block" key={group.gid} >
-                                            <h3 className="group_name">{group.group_name}</h3>
-                                            <div className="intro">{`${group.intro.substr(0,8)}......`}</div>
-                                        </div>
-                                    </Checkbox>
-                                </Col>
-                            </Row>
-                        )})}
-                    </Checkbox.Group>
-                    <DialogActions>
-                        <Button onClick={()=>setOpen(false)} color="primary">
-                            取消
-                        </Button>
-                        <Button onClick={handleClickComfirm} color="primary">
-                            确定
-                        </Button>                
-                    </DialogActions>
+                        <Checkbox.Group style={{ width: '100%'}} onChange={chosenGroup} >
+                            {groups.map((group)=>{return (
+                                <Row>
+                                    <Col>
+                                        <Checkbox value={group.gid}>
+                                            <div className="group_block" key={group.gid} >
+                                                <h3 className="group_name">{group.group_name}</h3>
+                                                <div className="intro">{group.intro}</div>
+                                            </div>
+                                        </Checkbox>
+                                    </Col>
+                                </Row>
+                            )})}
+                        </Checkbox.Group>
                     </div>
+                        <DialogActions>
+                            <Button onClick={()=>setOpen(false)} color="primary">
+                                取消
+                            </Button>
+                            <Button onClick={handleClickComfirm} color="primary">
+                                确定
+                            </Button>
+                        </DialogActions>
+                    
                 </Dialog>
             </div>
         </div>
