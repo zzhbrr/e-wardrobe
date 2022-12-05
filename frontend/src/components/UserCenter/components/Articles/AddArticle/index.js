@@ -77,7 +77,7 @@ export default function AddArticle({handleAddArticle, socket, uid}) {
                     新建文章
                 </button>
             </div>
-            <Drawer title="新建文章" placement={'bottom'} height={'80%'} onClose={()=>setOpen(false)} open={open} 
+            <Drawer title="新建文章" placement={'bottom'} height={'90%'} onClose={()=>setOpen(false)} open={open} 
                 extra={
                 <Space>
                     <Button onClick={()=>setOpen(false)}>Cancel</Button>
@@ -92,7 +92,7 @@ export default function AddArticle({handleAddArticle, socket, uid}) {
                 <h2> Title </h2>
                 <Input placeholder="title" onChange={onChangeTitle}/>
                 <br></br><br></br>
-                <MdEditor style={{ height: '500px' }} renderHTML={text => mdParser.render(text)} onChange={handleEditorChange} />
+                <MdEditor style={{ height: '85%' }} renderHTML={text => mdParser.render(text)} onChange={handleEditorChange} />
                 
             </Drawer>
 
