@@ -23,6 +23,7 @@ export default function ClothDetail(props){
     }])
 
     React.useEffect(() => {
+        props.socket.off('getClothesDetailSuccess');
         props.socket.on('getClothesDetailSuccess', (res) => {
             set_cloth_detail(res);
             console.log(res);
@@ -31,6 +32,7 @@ export default function ClothDetail(props){
     }, [])
     React.useEffect(() => {
         console.log("adfsfs");
+        props.socket.off('getClothesCommentsSuccess');
         props.socket.on('getClothesCommentsSuccess', (res) => {
             set_comment_list(res.comments);
             console.log(res);

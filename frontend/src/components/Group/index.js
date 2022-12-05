@@ -90,7 +90,7 @@ export default function Group(props){
             <h1 className="underline">组</h1>
             <div className="group-row">
                 <NaviBar item_selected={item_selected} selectItem={selectItem} items={navibar_items} />
-                {item_selected===navibar_items[0]?<GroupArticles article_list={InfoRef.current.article_list}/>:
+                {item_selected===navibar_items[0]?<GroupArticles article_list={InfoRef.current.article_list} uid={uid}/>:
                     item_selected===navibar_items[1]?<UserGroups user_lists={InfoRef.current.user_lists}/>:
                         <div>error</div>}
             </div>

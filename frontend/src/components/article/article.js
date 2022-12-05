@@ -26,11 +26,11 @@ export default function ArticleDetail(props){
         uid:      0,
         username: "Tom",
     }])
-
     React.useEffect(() => {
         props.socket.off('getArticleDetailSuccess');
         props.socket.on('getArticleDetailSuccess', (res) => {
             set_article_detail(res);
+            console.log('props:');
             console.log(props);
             fetch(res.content_src)
                 .then((resp) => resp.text())
@@ -57,6 +57,8 @@ export default function ArticleDetail(props){
         })
     }
 
+    console.log('params.uid: ', params.uid);
+    console.log('article_detail.uid: ', article_detail.uid);
     
     return(
         <div>
@@ -65,7 +67,7 @@ export default function ArticleDetail(props){
                 <h4 className="Article_time">
                     {article_detail.username}&nbsp;编辑于&nbsp;{article_detail.time}&nbsp;&nbsp;&nbsp;&nbsp;
                     <a href={article_detail.content_src} target="content" className="Article_download">下载文章</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                    {props.uid === article_detail.uid && <a onClick={handleDeleteArticle}>删除文章</a>}
+                    {Number(params.uid) === article_detail.uid && <a onClick={handleDeleteArticle}>删除文章</a>}
                 </h4>
             </div>
             <div className="Article_body">
