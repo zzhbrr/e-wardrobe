@@ -53,7 +53,8 @@ export default function ArticleDetail(props){
         props.socket.off('deleteArticleSuccess');
         props.socket.on('deleteArticleSuccess', (res) => {
             console.log(res);
-            navigate('/usercenter');
+            // navigate('/usercenter');
+            window.close();
         })
     }
 

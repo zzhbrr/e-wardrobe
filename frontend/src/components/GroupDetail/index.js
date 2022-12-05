@@ -59,6 +59,7 @@ export default function GroupDetail(props){
     })
 
     React.useEffect(()=>{
+        socket.off('getGroupDetailSuccess');
         socket.on('getGroupDetailSuccess',(data)=>{
             InfoRef.current.group_info={
                 gid:gid,
@@ -69,11 +70,13 @@ export default function GroupDetail(props){
             InfoRef.current.init_state.详细信息=true;
             onchange()
         })
+        socket.off('getGroupMembersSuccess');
         socket.on('getGroupMembersSuccess',(data)=>{
             InfoRef.current.member_list=data.members;
             InfoRef.current.init_state.全部成员=true;
             onchange()
         })
+        socket.off('getGroupEssaySuccess');
         socket.on('getGroupEssaySuccess',(data)=>{
             console.log(data)
             InfoRef.current.article_list=data.essays;
@@ -82,6 +85,10 @@ export default function GroupDetail(props){
         })
     })
 
+    const handleJoinGroup=(data)=>{
+        reqGroupMembers();
+    }
+
     return(
         <div className='group_detail'>
             <GlobalNaviBar cur_item='组' />
@@ -89,7 +96,7 @@ export default function GroupDetail(props){
             <div className="group-row">
                 <NaviBar item_selected={item_selected} selectItem={selectItem} items={navibar_items} />
                 {item_selected===navibar_items[0]?<GroupInfo group_info={InfoRef.current.group_info} socket={socket} uid={params.uid}/>:
-                    item_selected===navibar_items[1]?<Members member_list={InfoRef.current.member_list} />:
+                    item_selected===navibar_items[1]?<Members member_list={InfoRef.current.member_list} uid={params.uid} gid={InfoRef.current.group_info.gid} socket={socket}/>:
                         item_selected===navibar_items[2]?<Articles article_list={InfoRef.current.article_list} />:
                             <div>error</div>}
             </div>

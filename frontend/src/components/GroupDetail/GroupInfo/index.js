@@ -22,7 +22,8 @@ export default function GroupInfo(props){
         props.socket.emit('deleteGroup', {gid: group_info.gid});
         props.socket.off('deleteGroupSuccess');
         props.socket.on('deleteGroupSuccess', (data)=>{
-            navigate('/group');
+            // navigate('/group');
+            window.close();
         });
     }
 
@@ -33,7 +34,6 @@ export default function GroupInfo(props){
             <div className="group_content left">简介：{group_info.intro}</div>
             {/* <button className="change_btn">修改信息</button> */}
             {/* <ChangeInfo className="change_btn left" handleChangeInfo={reqGroupInfoChange}/> */}
-            
             {Number(props.uid) === Number(group_info.creatorid) && 
                 <button className="change_btn left" onClick={handleDeleteGroup}>
                     <DeleteIcon style={{float:"left",marginRight:"5px"}}/>
