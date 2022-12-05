@@ -75,9 +75,9 @@ function App() {
                 <ArticleDetail eid={0} uid={0} socket={socket}/>
             </div>
         }/>
-        <Route exact path="/cloth/:pid" element={
+        <Route exact path="/cloth/:pid/:uid" element={
             <div className="App">
-                <ClothDetail pid={0} socket={socket} userName={userName}/>
+                <ClothDetail pid={0} uid={0} socket={socket} userName={userName}/>
             </div>
         }/>
         <Route exact path="/" element={<Navigate to="/usercenter"></Navigate>} />
