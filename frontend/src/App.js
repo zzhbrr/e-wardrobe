@@ -60,9 +60,9 @@ function App() {
             </div>
         }>
         </Route>
-        <Route exact path="/group/:gid" element={
+        <Route exact path="/group/:gid/:uid" element={
             <div className="App">
-            <GroupDetail gid={0} socket={socket} isLogin={isLogin}/>
+            <GroupDetail gid={0} uid={0} socket={socket} isLogin={isLogin}/>
             </div>
         }/>
         <Route exact path="/outfit/:oid" element={

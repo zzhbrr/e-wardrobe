@@ -27,7 +27,7 @@ export default function UserGroups(props){
             <NaviBar2 item_selected={item_selected} selectItem={selectItem} items={items} />
             <div className="group_list">
                 {user_lists[item_selected].map((group)=>{return (
-                    <div className="group_block" key={group.gid} onClick={()=>{navigate(`${group.gid}`)}}>
+                    <div className="group_block" key={group.gid} onClick={()=>{navigate(`${group.gid}/${props.uid}`)}}>
                         <h3 className="group_name">{group.group_name}</h3>
                         <div className="intro">{`${group.intro.substr(0,8)}......`}</div>
                     </div>

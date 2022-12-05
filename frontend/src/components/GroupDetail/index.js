@@ -63,7 +63,8 @@ export default function GroupDetail(props){
             InfoRef.current.group_info={
                 gid:gid,
                 groupname:data.groupName,
-                intro:data.intro
+                intro:data.intro, 
+                creatorid: data.creatorid
             }
             InfoRef.current.init_state.详细信息=true;
             onchange()
@@ -87,7 +88,7 @@ export default function GroupDetail(props){
             <h1 className="underline">组：{InfoRef.current.group_info.groupname}</h1>
             <div className="group-row">
                 <NaviBar item_selected={item_selected} selectItem={selectItem} items={navibar_items} />
-                {item_selected===navibar_items[0]?<GroupInfo group_info={InfoRef.current.group_info} />:
+                {item_selected===navibar_items[0]?<GroupInfo group_info={InfoRef.current.group_info} socket={socket} uid={params.uid}/>:
                     item_selected===navibar_items[1]?<Members member_list={InfoRef.current.member_list} />:
                         item_selected===navibar_items[2]?<Articles article_list={InfoRef.current.article_list} />:
                             <div>error</div>}
