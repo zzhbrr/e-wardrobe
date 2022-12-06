@@ -36,10 +36,13 @@ function App() {
         // isLogin = true;
         setUserID(uid);
     }
+    function handleLogout() {
+        setIsLogIn(false);
+    }
     return (
         <Routes>
         <Route exact path="/login" element={
-            userName === null ? 
+            !isLogin ? 
             <div className="App">
             <Login socket={socket} handleLogin={handleLogin}/>
             </div> : <Navigate to="/usercenter" />
@@ -51,7 +54,7 @@ function App() {
             } />
         <Route exact path="/usercenter" element={
             <div className="App">
-            <UserCenter socket={socket} isLogin={isLogin} userName={userName} />
+            <UserCenter socket={socket} isLogin={isLogin} userName={userName} handleLogout={handleLogout} />
             </div>
         }/>
         <Route exact path='/group' element={

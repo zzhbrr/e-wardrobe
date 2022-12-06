@@ -56,10 +56,12 @@ export default function UserCenter(props){
     })
 
     React.useEffect(()=>{
+        socket.off("autoLoginFailed");
         socket.on("autoLoginFailed", ()=>{
             // console.log('usercenter: autologinFailed');init_state
             navigate('/login');
         });
+        socket.off('autoLoginSuccess');
         socket.on('autoLoginSuccess', ()=>{
         });
     }, [])
@@ -72,7 +74,7 @@ export default function UserCenter(props){
             console.log('usercenter: isLogin:', isLogin);
             socket.emit('autoLogin', {username:userName})
         }
-    }, [])
+    })
 
     return(
         <div className="main_page">
@@ -80,7 +82,7 @@ export default function UserCenter(props){
             <h1 className="underline">个人中心</h1>
             <div className="flex-row">
                 <NaviBar item_selected={item_selected} selectItem={selectItem} items={navibar_items} />
-                {item_selected===navibar_items[0] ? <UserInfo user_info={InfoRef.current.user_info} reqUserInfo={info_mgr.reqUserInfo} handleChangeInfo={info_mgr.reqUserInfoChange} init_state={InfoRef.current.init_state[navibar_items[0]]} />:
+                {item_selected===navibar_items[0] ? <UserInfo user_info={InfoRef.current.user_info} reqUserInfo={info_mgr.reqUserInfo} handleChangeInfo={info_mgr.reqUserInfoChange} init_state={InfoRef.current.init_state[navibar_items[0]]} socket={socket} handleLogout={props.handleLogout}/>:
                     item_selected===navibar_items[1] ? <Outfits outfit_list={InfoRef.current.outfit_list} reqOutfitList={info_mgr.reqOutfitList} init_state={InfoRef.current.init_state[navibar_items[1]]}/>:
                         item_selected===navibar_items[2] ? <Articles article_list={InfoRef.current.article_list} reqArticles={info_mgr.reqArticles} init_state={InfoRef.current.init_state[navibar_items[2]]} uid={InfoRef.current.user_info.uid} socket={socket} reqAddArticle={info_mgr.reqAddArticle}/>:
                             item_selected===navibar_items[3] ? <Clothes clothes_lists={InfoRef.current.clothes_lists} reqClothes={info_mgr.reqClothes} init_state={InfoRef.current.init_state[navibar_items[3]]} uid={InfoRef.current.user_info.uid} socket={socket} reqAddClothes={info_mgr.reqAddClothes}/>:
