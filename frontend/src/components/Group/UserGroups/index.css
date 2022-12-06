@@ -11,12 +11,8 @@
 .group_block {
     height: auto;
     width: 40%;
-    min-width: fit-content;
-    min-width: fit-content;
-    padding: 10px 10px 5px 10px;
+    margin: 10px 30px;
     border: 2px solid grey;
-    margin: 0px 0px 0px 0px;
-    float: left;
 }
 .group_block:hover {
     background-color: rgba(0,0,0,0.1);

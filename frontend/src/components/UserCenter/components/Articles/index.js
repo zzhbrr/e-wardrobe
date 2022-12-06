@@ -31,9 +31,9 @@ export default function Articles(props){
                 新建文章
                 <AddCircleIcon style={{float:"left",marginRight:"5px"}} />
             </AddArticle>
-            <div className="list">
+            <div className="article_list">
                 {article_list.map((article)=>{return (
-                    <div className="article_block" key={article.eid} onClick={()=>navigate("/article/"+`${article.eid}`)}>
+                    <div className="article_block" key={article.eid} onClick={()=>window.open(`/article/${article.eid}/${props.uid}`)}>
                         <h3 className="title">{article.title}</h3>
                         <div className="author">{article.time}</div>
                     </div>

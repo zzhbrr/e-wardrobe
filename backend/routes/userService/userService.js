@@ -3,7 +3,14 @@ sql = require('./sql_userService');
 module.exports = {
     userLogin: function(socket, pg_client, onlineUsers) {
         function checkIfUserIsLoggedIn(username) {
+            // return false;
+            for (let i = 0; i < onlineUsers.length; i++) {
+                if (onlineUsers[i].username.replace(/\s+/g, "") === username.replace(/\s+/g, "")) {
+                    return true;
+                }
+            }
             return false;
+            username = username.replace(/\s+/g, "");
             if (onlineUsers.indexOf(username) === -1) {
                 return false;
             } else {
@@ -34,8 +41,8 @@ module.exports = {
         });
 
         socket.on('autoLogin', (data) => {
-            // console.log('in autoLogin');
-            // console.log(username);
+            console.log('in autoLogin');
+            console.log(data.username);
             if (checkIfUserIsLoggedIn(data.username)) {
                 socket.emit('autoLoginSuccess');
                 onlineUsers.push(data.username);
@@ -77,11 +84,11 @@ module.exports = {
             pg_client.query(sql.checkoutUsername(data.userName), (err, res) => {
                 if (err) throw err;
                 if (res.rows.length === 0) {
-                    console.log("userinAsk failed")
+                    console.log("userinfoAsk failed")
                     socket.emit('userInfoAskFailed', {message: '用户不存在'});
                 } else {
                     res.rows[0].userName = data.userName;
-                    console.log("userinAsk success")
+                    console.log("userinfoAsk success")
                     socket.emit('userInfoAskSuccess', {message: '查询成功', userInfo: res.rows[0]});
                 }
             })
@@ -102,10 +109,16 @@ module.exports = {
     }, 
     userLogout: function(socket, pg_client, onlineUsers) {
         socket.on('logout', (data) => {
+            console.log('in logout');
             let index = onlineUsers.indexOf(data.username);
+            // console.log(index);
+            // console.log(data.username+'1');
+            // console.log(onlineUsers[0]+'1');
+            // console.log(data.username === onlineUsers[0])
             if (index === -1) {
                 socket.emit('logoutFailed', {message: '用户未登录'});
             } else {
+                console.log('logout success');
                 onlineUsers.splice(index, 1);
                 console.log(`log: ${data.username} 成功登出`);
                 socket.emit('logoutSuccess', {message: '登出成功', uid: data.uid, username: data.username});

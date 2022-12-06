@@ -15,6 +15,17 @@
     margin: 0 auto;
     padding: 0 50px 0 50px;
 }
+
+.addComment_block{
+    width: 30%;
+    margin: 0 auto;
+}
+/* .addComment_block:hover{
+    background-color: grey;
+} */
+.addComment_enter{
+    margin: 0 0 2px 20px;
+}
 .Comment_block{
     width: 40%;
     text-align: left;

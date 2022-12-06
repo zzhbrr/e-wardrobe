@@ -34,7 +34,7 @@ export default function ChangeInfo({handleChangeInfo}) {
     return (
         <div>
             <div>
-                <button className='change_btn' onClick={handleClickChangeInfo}>
+                <button className='change_btn left' onClick={handleClickChangeInfo}>
                     <EditIcon style={{float:"left",marginRight:"5px"}}/>
                     修改信息
                 </button>

@@ -3,7 +3,7 @@ import UserCenter from './components/UserCenter/index';
 import Login from './components/login/login';
 import Register from './components/register/register';
 import OutfitDetail from './components/Outfit/Outfit';
-import ArticleDetail from './components/article/article';
+import ArticleDetail from './components/Article/Article';
 import ClothDetail from './components/Cloth/Cloth';
 import io from 'socket.io-client'
 import {
@@ -36,10 +36,13 @@ function App() {
         // isLogin = true;
         setUserID(uid);
     }
+    function handleLogout() {
+        setIsLogIn(false);
+    }
     return (
         <Routes>
         <Route exact path="/login" element={
-            userName === null ? 
+            !isLogin ? 
             <div className="App">
             <Login socket={socket} handleLogin={handleLogin}/>
             </div> : <Navigate to="/usercenter" />
@@ -51,7 +54,7 @@ function App() {
             } />
         <Route exact path="/usercenter" element={
             <div className="App">
-            <UserCenter socket={socket} isLogin={isLogin} userName={userName} />
+            <UserCenter socket={socket} isLogin={isLogin} userName={userName} handleLogout={handleLogout} />
             </div>
         }/>
         <Route exact path='/group' element={
@@ -60,9 +63,9 @@ function App() {
             </div>
         }>
         </Route>
-        <Route exact path="/group/:gid" element={
+        <Route exact path="/group/:gid/:uid" element={
             <div className="App">
-            <GroupDetail gid={0} socket={socket} isLogin={isLogin}/>
+            <GroupDetail gid={0} uid={0} socket={socket} isLogin={isLogin}/>
             </div>
         }/>
         <Route exact path="/outfit/:oid" element={
@@ -70,14 +73,14 @@ function App() {
                 <OutfitDetail oid={0} uid={0} userName={userName} socket={socket}/>
             </div>
         }/>
-        <Route exact path="/article/:eid" element={
+        <Route exact path="/article/:eid/:uid" element={
             <div className="App">
-                <ArticleDetail eid={0} socket={socket} userName={userName}/>
+                <ArticleDetail eid={0} uid={0} socket={socket}/>
             </div>
         }/>
-        <Route exact path="/cloth/:pid" element={
+        <Route exact path="/cloth/:pid/:uid" element={
             <div className="App">
-                <ClothDetail pid={0} socket={socket} userName={userName}/>
+                <ClothDetail pid={0} uid={0} socket={socket} userName={userName}/>
             </div>
         }/>
         <Route exact path="/" element={<Navigate to="/usercenter"></Navigate>} />

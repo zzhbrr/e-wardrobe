@@ -39,7 +39,7 @@ export default function Clothes(props){
                 {clothes_lists[item_selected].map((cloth,index)=>{
                     return(
                         <div className="cloth" title={"pid: "+cloth.pid.toString()}
-                        key={index} onClick={()=>navigate("/cloth/"+`${cloth.pid}`)}>
+                        key={index} onClick={()=>window.open(`/cloth/${cloth.pid}/${props.uid}`)}>
                             <img src={cloth.img_src} className="img" />
                         </div>
                 )})}

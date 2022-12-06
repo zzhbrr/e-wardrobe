@@ -14,13 +14,6 @@ const fe_type={
     'shoe':     '鞋子',
     'ornament': '饰品'
 }
-const history_type_img={
-    'top':      '上衣',
-    'bottom':   '下装',
-    'coat':     '外套',
-    'shoe':     '鞋子',
-    'ornament': '饰品'
-}
 const default_outfit={
     oid:0,
     ing_src:cloth_pic
@@ -138,6 +131,11 @@ export default class UserCenterInfoMgr{
             relatedproducts: []
         })
     }
+    reqAddOutfit=(data)=>{
+        data.uid=this.Ref.current.user_info.uid;
+        data.username=this.Ref.current.user_info.username;
+        this.socket.emit('addOutfits',data)
+    }
 
     handleAddArticle=(data)=>{
         console.log('add article: '); console.log(data);
@@ -173,7 +171,7 @@ export default class UserCenterInfoMgr{
             return
         }
         console.log(`rcv img:${data.index} ${data.type} `)
-        this.Ref.current.history_list[data.index][history_type_img[data.type]]=data.img_src;
+        this.Ref.current.history_list[data.index][fe_type[data.type]]=data.img_src;
         this.onchange()
         this.Ref.current.init_state['我的历史']=true;
     }
