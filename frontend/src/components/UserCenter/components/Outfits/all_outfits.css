@@ -33,8 +33,9 @@
     width: 40px;
     border: 1px solid black;
 }
-.list {
-    height: 65vh;
+.outfit_list {
+    height: 55vh;
+    margin-top: 5px;
     padding-right: 50px;
     overflow-x: hidden;
     overflow-y: auto;
