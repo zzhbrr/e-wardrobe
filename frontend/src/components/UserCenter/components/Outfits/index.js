@@ -1,4 +1,5 @@
 import React from "react";
+import AddOutfit from "./AddOutfit";
 import "./all_outfits.css"
 import { useNavigate } from "react-router-dom";
 
@@ -41,7 +42,8 @@ export default function Outfits(props){
     return(
         <div className="outfits">
             <h1>全部穿搭</h1>
-            <div className="list">
+            <AddOutfit reqAddOutfit={props.reqAddOutfit} reqClothes={props.reqClothes} clothes={props.clothes}/>
+            <div className="outfit_list">
                 {outfit_list.map((outfit,index)=>
                     <div className="outfit_card" key={index} onClick={()=>window.open(`/outfit/${outfit.oid}`)} >
                         {items.map((item,index)=>{return(

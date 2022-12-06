@@ -138,6 +138,11 @@ export default class UserCenterInfoMgr{
             relatedproducts: []
         })
     }
+    reqAddOutfit=(data)=>{
+        data.uid=this.Ref.current.user_info.uid;
+        data.username=this.Ref.current.user_info.username;
+        this.socket.emit('addOutfits',data)
+    }
 
     handleAddArticle=(data)=>{
         console.log('add article: '); console.log(data);
