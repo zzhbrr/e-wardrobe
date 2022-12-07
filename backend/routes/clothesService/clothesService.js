@@ -165,9 +165,9 @@ module.exports = {
             });
         });
         socket.on('deleteClothes', (data) => {
-            pg_client.query(`DELETE FROM admin.product WHERE pid = ${data.pid};`, (err, res) => {
+            pg_client.query(`DELETE FROM admin.product WHERE pid = ${data.pid} RETURNING *;`, (err, res) => {
                 if (err) throw err;
-                socket.emit('deleteClothesSuccess', {message: '删除成功'});
+                socket.emit('deleteClothesSuccess', {message: '删除成功', type:res.rows[0].p_type.replace(/\s+/g, "")});
             });
         });
         socket.on('changeClothesInfo', (data) => {
