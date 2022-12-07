@@ -34,6 +34,7 @@ export default function AddHistory(props) {
         month:-1,
         day: -1
     })
+    const [time_value, set_time_value] = React.useState();
     const chosens=[top,down,coat,shoe,ornament]
     const sets={
         '上衣': set_top,
@@ -56,6 +57,7 @@ export default function AddHistory(props) {
             month:date.$M+1, 
             day: date.$D
         });
+        set_time_value(date);
     }
     // 提交接口
     function handleSubmit() {
@@ -73,6 +75,11 @@ export default function AddHistory(props) {
         };
         console.log(data);
         handleClose();
+        set_top(-1);
+        set_down(-1);
+        set_shoe(-1);
+        set_coat(-1);
+        set_ornament(-1);
         handleChangeInfo(data);
     }
     React.useEffect(()=>{
@@ -104,7 +111,7 @@ export default function AddHistory(props) {
                             <DateTimePicker
                                 renderInput={(props) => <TextField {...props} />}
                                 // label="sss"
-                                value={Time}
+                                value={time_value}
                                 onChange={changeDate}
                             />
                         </LocalizationProvider>

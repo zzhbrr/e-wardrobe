@@ -45,6 +45,11 @@ export default function AddOutfit(props) {
         };
         console.log(data);
         handleClose();
+        set_top(-1);
+        set_down(-1);
+        set_shoe(-1);
+        set_coat(-1);
+        set_ornament(-1);
         handleChangeInfo(data);
     }
     React.useEffect(()=>{

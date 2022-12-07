@@ -19,7 +19,7 @@ export default function History(props){
         <div className="histories">
             <h1>我的穿搭历史</h1>
             <AddHistory reqAddHistory={props.reqAddHistory} reqClothes={props.reqClothes} clothes={props.clothes}/>
-            <div className="outfit_list">
+            <div className="history_list">
                 {history_list.map((history)=>
                     <div className="history_block">
                         <div className="history_time">{history.h_year}-{history.h_month}-{history.h_day}&nbsp;&nbsp;{history.climate}</div>
