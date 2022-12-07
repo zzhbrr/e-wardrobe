@@ -33,10 +33,10 @@
     border: 1px solid black;
 }
 .outfit_list {
-    width: 100%;
+    width: 150%;
     height: 60vh;
     margin-top: 5px;
-    /* padding-right: 470px; */
+    padding-right: 3.2rem;
     overflow-x: hidden;
     overflow-y: auto;
 }
