@@ -3,6 +3,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import "./index.css"
 import Icon from '@mui/material/Icon';
 import Alert from '@mui/material/Alert';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 export default function Members(props){
     const [alertInfo, setAlertInfo] = React.useState("");
@@ -33,6 +34,23 @@ export default function Members(props){
         props.socket.emit('joinGroup', {uid: props.uid, gid: props.gid});
     }
 
+    const handleClickQuitGroup = ()=> {
+        console.log('in handleQuirGroup');
+        for (let i = 0; i < member_list.length; i++) {
+            if (Number(member_list[i].uid) === Number(props.uid)) {
+                props.socket.off('quitGroupSuccess');
+                props.socket.on('quitGroupSuccess', (data) => {
+                    props.handleQuitGroup(data);
+                });
+                props.socket.emit('quitGroup', {uid: props.uid, gid: props.gid});
+                return;
+            }
+        }
+        setAlertInfo("您还未加入该组");
+        console.log('您还未加入该组');
+        return;
+    }
+
     
     return(
         <div className="members">
@@ -44,6 +62,10 @@ export default function Members(props){
                 />
                 <Icon style={{float:"left",marginRight:"5px"}}>add_circle</Icon>
                     加入本组
+            </button>
+            <button className="change_btn left" onClick={handleClickQuitGroup}>
+                <LogoutIcon style={{float:"left",marginRight:"5px"}}></LogoutIcon>
+                    退出本组
             </button>
             {alertInfo==="" ? "" : 
                     <Alert severity="error"> {alertInfo} </Alert> }

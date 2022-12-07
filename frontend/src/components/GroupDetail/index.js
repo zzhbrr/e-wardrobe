@@ -87,7 +87,11 @@ export default function GroupDetail(props){
 
     const handleJoinGroup=(data)=>{
         reqGroupMembers();
-    }
+    };
+
+    const handleQuitGroup=(data)=>{
+        reqGroupMembers();
+    };
 
     return(
         <div className='group_detail'>
@@ -96,7 +100,7 @@ export default function GroupDetail(props){
             <div className="group-row">
                 <NaviBar item_selected={item_selected} selectItem={selectItem} items={navibar_items} />
                 {item_selected===navibar_items[0]?<GroupInfo group_info={InfoRef.current.group_info} socket={socket} uid={params.uid}/>:
-                    item_selected===navibar_items[1]?<Members member_list={InfoRef.current.member_list} uid={params.uid} gid={InfoRef.current.group_info.gid} socket={socket}/>:
+                    item_selected===navibar_items[1]?<Members member_list={InfoRef.current.member_list} uid={params.uid} gid={InfoRef.current.group_info.gid} socket={socket} handleJoinGroup={handleJoinGroup} handleQuitGroup={handleQuitGroup}/>:
                         item_selected===navibar_items[2]?<Articles article_list={InfoRef.current.article_list} uid={params.uid}/>:
                             <div>error</div>}
             </div>

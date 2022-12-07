@@ -126,5 +126,13 @@ module.exports = {
                 socket.emit('deleteGroupSuccess', {gid: data.gid});
             });
         });
+        socket.on('quitGroup', (data) => {
+            sql_quitGroup = `DELETE FROM admin.group_user
+                                WHERE gid = ${data.gid} AND uid = ${data.uid};`;
+            pg_client.query(sql_quitGroup, (err, res) => {
+                if (err) throw err;
+                socket.emit('quitGroupSuccess', {gid: data.gid, uid: data.uid});
+            })
+        });
     },
 }
