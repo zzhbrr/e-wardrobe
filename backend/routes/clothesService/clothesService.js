@@ -126,11 +126,11 @@ module.exports = {
                 })
             });
         });
-        socket.on('deleteOutfits', (data) => {
+        socket.on('deleteOutfit', (data) => {
             sql_deleteOutfits = `DELETE FROM admin.outfit WHERE oid = ${data.oid};`;
             pg_client.query(sql_deleteOutfits, (err, res) => {
                 if (err) throw err;
-                socket.emit('deleteOutfitsSuccess', {oid: data.oid});
+                socket.emit('deleteOutfitSuccess', {oid: data.oid});
             });
         });
         socket.on('changeOutfit', (data) => {
