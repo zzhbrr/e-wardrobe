@@ -42,13 +42,13 @@ export default function ChangeInfo({handleChangeInfo}) {
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>修改信息</DialogTitle>
                 <DialogContent>
-                    <FormLabel component="legend">性别</FormLabel>
+                    <FormLabel>性别</FormLabel>
                     <RadioGroup value={gender} onChange={(e) => setGender(e.target.value)}>
                         <FormControlLabel value="男" control={<Radio />} label="男" />
                         <FormControlLabel value="女" control={<Radio />} label="女" />
                     </RadioGroup>
                     <FormControl fullWidth>
-                        <InputLabel>年龄</InputLabel>
+                        <FormLabel>年龄</FormLabel>
                         <Select value={age} onChange={(e) => setAge(e.target.value)}>
                             {ages.map((age) => <MenuItem value={age} key={age}>{age}</MenuItem>)}
                         </Select>

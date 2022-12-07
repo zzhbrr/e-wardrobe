@@ -41,7 +41,7 @@ export default function Outfits(props){
 
     return(
         <div className="outfits">
-            <h1>全部穿搭</h1>
+            <h1>我收藏的穿搭</h1>
             <AddOutfit reqAddOutfit={props.reqAddOutfit} reqClothes={props.reqClothes} clothes={props.clothes}/>
             <div className="outfit_list">
                 {outfit_list.map((outfit,index)=>

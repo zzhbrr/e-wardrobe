@@ -46,8 +46,8 @@ export default function UserInfo(props){
             <div className="user_content left">年龄：{userInfo.age}</div>
             <div className="user_content left">职业：{userInfo.profession}</div>
             {/* <button className="change_btn">修改信息</button> */}
-            <ChangeInfo className="change_btn left" handleChangeInfo={reqUserInfoChange}/>
-            <button className="change_btn left" onClick={handleLogout}>
+            <ChangeInfo className="change_btn right" handleChangeInfo={reqUserInfoChange}/>
+            <button className="change_btn right" onClick={handleLogout}>
                 <LogoutIcon style={{float:"left",marginRight:"5px"}}/>Logout
             </button>
         </div>

@@ -1,7 +1,6 @@
 import React from 'react';
 import { 
-    Dialog, DialogTitle, DialogContent, 
-    DialogContentText, RadioGroup, FormControlLabel, 
+    Dialog, DialogTitle, DialogContent,
     FormControl, InputLabel, DialogActions, 
     FormLabel, Radio, Button, Select, MenuItem
 } from '@mui/material';
@@ -70,13 +69,17 @@ export default function AddOutfit(props) {
                     <FormControl fullWidth>
                         <FormLabel component="legend">{items[0]}</FormLabel> 
                         <Select value={chosens[0]} onChange={(e) => sets[items[0]](e.target.value)}>
-                            {clothes[items[0]].map((cloth)=><MenuItem value={cloth.pid} key={cloth.pid}><img src={cloth.img_src} style={{height:'40px',width:'40px'}}/></MenuItem>)}
+                            {clothes[items[0]].map((cloth)=><MenuItem value={cloth.pid} key={cloth.pid}>
+                                <img src={cloth.img_src} style={{height:'40px',width:'40px'}}/>
+                            </MenuItem>)}
                         </Select>
                     </FormControl>
                     <FormControl fullWidth>
                         <FormLabel component="legend">{items[1]}</FormLabel> 
                         <Select value={chosens[1]} onChange={(e) => sets[items[1]](e.target.value)}>
-                            {clothes[items[1]].map((cloth)=><MenuItem value={cloth.pid} key={cloth.pid}><img src={cloth.img_src} style={{height:'40px',width:'40px'}}/></MenuItem>)}
+                            {clothes[items[1]].map((cloth)=><MenuItem value={cloth.pid} key={cloth.pid}>
+                                <img src={cloth.img_src} style={{height:'40px',width:'40px'}}/>
+                            </MenuItem>)}
                         </Select>
                     </FormControl>
                     <FormControl fullWidth>
@@ -95,7 +98,7 @@ export default function AddOutfit(props) {
                         <FormLabel component="legend">{items[4]}</FormLabel> 
                         <Select value={chosens[4]} onChange={(e) => sets[items[4]](e.target.value)}>
                             {clothes[items[4]].map((cloth)=><MenuItem value={cloth.pid} key={cloth.pid}><img src={cloth.img_src} style={{height:'40px',width:'40px'}}/></MenuItem>)}
-                        </Select> 
+                        </Select>
                     </FormControl>
                 </DialogContent>
                 <DialogActions>
