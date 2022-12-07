@@ -1,5 +1,6 @@
 // cloth
 import React from "react";
+import DeleteIcon from '@mui/icons-material/Delete';
 import "./Cloth.css";
 import cloth_pic from "./cloth.png";
 import { useNavigate, useParams } from "react-router-dom";
@@ -10,8 +11,11 @@ import { Button } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 const ariaLabel = { 'aria-label': 'description' };
 
+const items = {'top':'上装', 'bottom':'下装', 'coat':'外套', 'shoe':'鞋子', 'ornament':'饰品'};
+
 export default function ClothDetail(props){
     const params=useParams();
+    const navigate = useNavigate()
     const pid=params.pid;
     const uid=params.uid;
     const [new_comment, set_new_comment] = React.useState("");
@@ -66,6 +70,18 @@ export default function ClothDetail(props){
         })
     }
 
+    function handleDeleteClothes() {
+        console.log('click delete clothes');
+        props.socket.emit('deleteClothes', {uid: uid, pid:pid});
+        props.socket.off('deleteClothesSuccess');
+        props.socket.on('deleteClothesSuccess', (data)=>{
+            // params.handleDeleteClothes(items[data.type]);
+            alert('delete clothes success');
+            // navigate('/usercenter');
+            window.close();
+        });
+    }
+
 
     return(
         <div>
@@ -88,6 +104,12 @@ export default function ClothDetail(props){
             </div>
             <div className="Cloth_body">
                 <img src={cloth_detail.img_src} className="cloth_img"/>
+                <div>
+                    <button className="change_btn left" onClick={handleDeleteClothes}>
+                        <DeleteIcon style={{float:"left",marginRight:"5px"}}/>
+                        删除
+                    </button>
+                </div>
             </div>
             <div>
                 <h2>相关评论</h2>

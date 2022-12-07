@@ -50,6 +50,8 @@ export default class UserCenterInfoMgr{
         this.socket.on('addClothesSuccess', this.handleAddClothes);
         this.socket.off('addArticleSuccess');
         this.socket.on('addArticleSuccess', this.handleAddArticle);
+        this.socket.off('addOutfitsSuccess');
+        this.socket.on('addOutfitsSuccess', this.handleAddOutfits);
     }
 
     onchange=()=>{
@@ -140,6 +142,11 @@ export default class UserCenterInfoMgr{
         data.uid=this.Ref.current.user_info.uid;
         data.username=this.Ref.current.user_info.username;
         this.socket.emit('addHistory',data)
+    }
+
+    handleAddOutfits=(data)=>{
+        console.log('add outfit: '); console.log(data);
+        this.reqOutfitList();
     }
 
     handleAddArticle=(data)=>{

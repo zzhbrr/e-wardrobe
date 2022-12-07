@@ -27,3 +27,7 @@
     overflow-x: hidden;
     overflow-y: auto;
 }
+
+.change_btn {
+    margin: 0 2rem 0.5rem 0
+}

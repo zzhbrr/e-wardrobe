@@ -27,6 +27,10 @@ export default function Clothes(props){
         props.reqAddClothes(data);
     }
 
+    function handleDeleteClothes(data) {
+        props.reqClothes(data.item);
+    }
+
     return(
         <div className="clothes">
             <h1>我拥有的衣服</h1>

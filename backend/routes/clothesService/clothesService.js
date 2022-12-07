@@ -110,20 +110,27 @@ module.exports = {
             pg_client.query('SELECT MAX(oid) AS max_oid FROM admin.outfit', function(err, res) {
                 OID_count = res.rows[0].max_oid + 1;
                 // console.log('OID_count is ' + OID_count + " now");
+                if (data.top_id === undefined || data.top_id === -1) data.top_id = 0;
+                if (data.bottom_id === undefined || data.bottom_id === -1) data.bottom_id = 0;
+                if (data.coat_id === undefined || data.coat_id === -1) data.coat_id = 0;
+                if (data.shoe_id === undefined || data.shoe_id === -1) data.shoe_id = 0;
+                if (data.ornament_id === undefined || data.ornament_id === -1) data.ornament_id = 0;
+                
+                console.log('top_id='+data.top_id + ' bottom_id='+data.bottom_id + ' coat_id='+data.coat_id + ' shoe_id='+data.shoe_id + ' ornament_id='+data.ornament_id + ' uid='+data.uid + ' username='+data.username);
                 sql_addOutfits = `INSERT INTO admin.outfit (oid, top_id, bottom_id, coat_id, shoe_id, ornament_id, uid, username) 
                                     VALUES (${OID_count}, ${data.top_id}, ${data.bottom_id}, ${data.coat_id}, ${data.shoe_id}, ${data.ornament_id}, ${data.uid}, '${data.username}');`;
                 pg_client.query(sql_addOutfits, (err, res) => {
                     if (err) throw err;
-                    console.log('add outfit success');
+                    console.log('add outfit success: ' + 'top_id='+data.top_id + ' bottom_id='+data.bottom_id + ' coat_id='+data.coat_id + ' shoe_id='+data.shoe_id + ' ornament_id='+data.ornament_id + ' uid='+data.uid + ' username='+data.username);
                     socket.emit('addOutfitsSuccess', {oid: OID_count, top_id: data.top_id, bottom_id: data.bottom_id, coat_id: data.coat_id, shoe_id: data.shoe_id, ornament_id: data.ornament_id, uid: data.uid, username: data.username});
                 })
             });
         });
-        socket.on('deleteOutfits', (data) => {
+        socket.on('deleteOutfit', (data) => {
             sql_deleteOutfits = `DELETE FROM admin.outfit WHERE oid = ${data.oid};`;
             pg_client.query(sql_deleteOutfits, (err, res) => {
                 if (err) throw err;
-                socket.emit('deleteOutfitsSuccess', {oid: data.oid});
+                socket.emit('deleteOutfitSuccess', {oid: data.oid});
             });
         });
         socket.on('changeOutfit', (data) => {
@@ -165,9 +172,9 @@ module.exports = {
             });
         });
         socket.on('deleteClothes', (data) => {
-            pg_client.query(`DELETE FROM admin.product WHERE pid = ${data.pid};`, (err, res) => {
+            pg_client.query(`DELETE FROM admin.product WHERE pid = ${data.pid} RETURNING *;`, (err, res) => {
                 if (err) throw err;
-                socket.emit('deleteClothesSuccess', {message: '删除成功'});
+                socket.emit('deleteClothesSuccess', {message: '删除成功', type:res.rows[0].p_type.replace(/\s+/g, "")});
             });
         });
         socket.on('changeClothesInfo', (data) => {

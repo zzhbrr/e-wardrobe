@@ -2,10 +2,14 @@ import React from "react";
 import "./Outfit.css"
 import { useNavigate, useParams } from "react-router-dom";
 import cloth_pic from "./cloth.png"
+import LogoutIcon from '@mui/icons-material/Logout';
+
 const items=['上衣','下装','外套','鞋子','饰品']
+
 
 export default function OutfitDetail(props){
     const params=useParams();
+    const navigate = useNavigate();
     const oid=params.oid;
     const username=params.username;
     const uid=params.uid;
@@ -58,6 +62,18 @@ export default function OutfitDetail(props){
         props.socket.emit('getOutfits', {askType:"alone", uid: uid, oid: oid});
     },[])
     // set_onchange(!onchange)
+
+    const handleClickDeleteOutfit=()=>{
+        console.log('in delete outfit');
+        props.socket.off('deleteOutfitSuccess');
+        props.socket.on('deleteOutfitSuccess', (res) => {
+            console.log(res);
+            alert('删除成功');
+            window.close();
+        });
+        props.socket.emit('deleteOutfit', {uid: uid, oid: oid});
+    }
+
     return(
         <div className="outfit_page">
             <div className="header">
@@ -83,6 +99,10 @@ export default function OutfitDetail(props){
             <button className="decoration_pos">
                 <div className="outfit_content">饰品</div>
                 <img src={outfit_ref.current.ornament_src} className="outfits_img"/>
+            </button>
+            <button className="change_btn left" onClick={handleClickDeleteOutfit}>
+                <LogoutIcon style={{float:"left",marginRight:"5px"}}></LogoutIcon>
+                    删除穿搭
             </button>
         </div>
     )
