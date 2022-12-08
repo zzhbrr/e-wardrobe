@@ -137,12 +137,14 @@ export default function AddClothes({handleAddClothes, socket}) {
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>添加衣服</DialogTitle>      
                 {/* <ImgCrop rotate beforeCrop={beforeCrop}>           */}
-                    <Upload name="clothes" listType="picture-card" className="pic-uploader" 
+                <div className="pic-uploader">
+                    <Upload name="clothes" listType="picture-card"
                         fileList={fileList}
                         action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                         beforeUpload={beforeUpload} onChange={onChange} onPreview={onPreview} >
                         {fileList.length === 0 ? '+ Upload' : null}
                     </Upload>
+                </div>
                 {/* </ImgCrop> */}
                 
                 <DialogContent>
