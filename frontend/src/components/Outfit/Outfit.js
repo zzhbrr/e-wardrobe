@@ -100,7 +100,7 @@ export default function OutfitDetail(props){
                 <div className="outfit_content">饰品</div>
                 <img src={outfit_ref.current.ornament_src} className="outfits_img"/>
             </button>
-            <button className="change_btn left" onClick={handleClickDeleteOutfit}>
+            <button className="change_btn delete_button_pos" onClick={handleClickDeleteOutfit}>
                 <LogoutIcon style={{float:"left",marginRight:"5px"}}></LogoutIcon>
                     删除穿搭
             </button>

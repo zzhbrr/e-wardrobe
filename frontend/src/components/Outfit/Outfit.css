@@ -27,6 +27,13 @@
     border-bottom: 1px solid black;
 }
 
+.delete_button_pos{
+    position: absolute;
+    left: 54px;
+    top: 100px;
+    text-align: center;
+}
+
 .upwear_pos{
     position: absolute;
     left: 540px;
