@@ -19,10 +19,12 @@ export default function History(props){
     });
     // 删除对应历史记录
     function handleDeleteHistory(HID) {
-        console.log('删除历史');
+        console.log('删除历史 hid:' + HID);
+        // console.log('hid: ' + HID);
         props.socket.off('deleteHistorySuccess');
         props.socket.on('deleteHistorySuccess', (res) => {
             console.log(res);
+            reqHistories();
             // alert('删除成功');
         })
         props.socket.emit('deleteHistory', {uid: uid, hid: HID});
@@ -31,13 +33,13 @@ export default function History(props){
     return(
         <div className="histories">
             <h1>我的穿搭历史</h1>
-            <AddHistory reqAddHistory={props.reqAddHistory} reqClothes={props.reqClothes} clothes={props.clothes}/>
+            <AddHistory reqAddHistory={props.reqAddHistory} reqClothes={props.reqClothes} clothes={props.clothes} reqHistories={reqHistories} socket={props.socket}/>
             <div className="history_list">
                 {history_list.map((history)=>
                     <div className="history_block">
                         <div className="history_time">
                             {history.h_year}-{history.h_month}-{history.h_day}&nbsp;&nbsp;{history.climate}&nbsp;&nbsp;&nbsp;&nbsp;
-                            <a onClick={handleDeleteHistory(history.hid)}>删除历史</a>
+                            <div onClick={()=>handleDeleteHistory(history.hid)}>删除历史</div>
                             {/* <a onClick={handleDeleteHistory}>删除历史</a> */}
                             {/* {Number(params.uid) === history.uid && <a onClick={handleDeleteHistory}>删除历史</a>} */}
                         </div>

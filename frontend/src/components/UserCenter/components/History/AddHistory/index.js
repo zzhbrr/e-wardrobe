@@ -81,6 +81,10 @@ export default function AddHistory(props) {
         set_coat(-1);
         set_ornament(-1);
         handleChangeInfo(data);
+        props.socket.off('addHistorySuccess');
+        props.socket.on('addHistorySuccess',()=>{
+            props.reqHistories();
+        });
     }
     React.useEffect(()=>{
         for(let i in items){

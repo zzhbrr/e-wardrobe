@@ -117,7 +117,8 @@ export default function UserCenter(props){
                                              uid={InfoRef.current.user_info.uid}
                                              reqClothes={info_mgr.reqClothes}
                                              clothes={InfoRef.current.clothes_lists}
-                                             reqAddHistory={info_mgr.reqAddHistory}/>:
+                                             reqAddHistory={info_mgr.reqAddHistory}
+                                             socket={socket}/>:
                                     <div className="user_info">error</div>}
             </div>
         </div>
