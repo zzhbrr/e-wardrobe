@@ -27,12 +27,7 @@ export default function ArticleDetail(props){
         time: "2022-12-01"
     })
     const [md, handleMD] = React.useState('loading... ...');
-    const [comment_list, set_comment_list] = React.useState([{
-        time: "2022-12-01",
-        content: "Loading...",
-        uid:      uid,
-        username: "Init",
-    }])
+    const [comment_list, set_comment_list] = React.useState([])
     // 请求文章内容
     React.useEffect(() => {
         props.socket.off('getArticleDetailSuccess');
