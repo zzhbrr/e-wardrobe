@@ -11,7 +11,6 @@ export default function History(props){
     const history_list=props.history_list;
     const reqHistories=props.reqHistories;
     const uid=props.uid;
-    const hid=1;
 
     React.useEffect(()=>{
         if(history_list==false&&!props.init_state){
@@ -19,14 +18,14 @@ export default function History(props){
         }
     });
     // 删除对应历史记录
-    function handleDeleteHistory() {
+    function handleDeleteHistory(HID) {
         console.log('删除历史');
         props.socket.off('deleteHistorySuccess');
         props.socket.on('deleteHistorySuccess', (res) => {
             console.log(res);
             // alert('删除成功');
         })
-        props.socket.emit('deleteHistory', {uid: uid, hid: hid});
+        props.socket.emit('deleteHistory', {uid: uid, hid: HID});
     }
 
     return(
@@ -38,7 +37,8 @@ export default function History(props){
                     <div className="history_block">
                         <div className="history_time">
                             {history.h_year}-{history.h_month}-{history.h_day}&nbsp;&nbsp;{history.climate}&nbsp;&nbsp;&nbsp;&nbsp;
-                            <a onClick={handleDeleteHistory}>删除历史</a>
+                            <a onClick={handleDeleteHistory(history.hid)}>删除历史</a>
+                            {/* <a onClick={handleDeleteHistory}>删除历史</a> */}
                             {/* {Number(params.uid) === history.uid && <a onClick={handleDeleteHistory}>删除历史</a>} */}
                         </div>
                         {items.map((item)=>{return(
