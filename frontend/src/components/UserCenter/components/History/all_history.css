@@ -7,9 +7,6 @@
     margin: 30px 0;
     border-bottom: 2px solid black;
 }
-.history_block:hover{
-    background-color: rgba(0,0,0,0.2);
-}
 .history_time{
     font-size: 20px;
     font-weight: bold;
@@ -28,4 +25,12 @@
     height: 100px;
     width: 100px;
     border: 1px solid black;
+}
+.history_list {
+    /* width: 150%; */
+    height: 60vh;
+    margin-top: 5px;
+    padding-right: 3.4rem;
+    overflow-x: hidden;
+    overflow-y: auto;
 }

@@ -138,6 +138,11 @@ export default class UserCenterInfoMgr{
         data.username=this.Ref.current.user_info.username;
         this.socket.emit('addOutfits',data)
     }
+    reqAddHistory=(data)=>{
+        data.uid=this.Ref.current.user_info.uid;
+        data.username=this.Ref.current.user_info.username;
+        this.socket.emit('addHistory',data)
+    }
 
     handleAddOutfits=(data)=>{
         console.log('add outfit: '); console.log(data);

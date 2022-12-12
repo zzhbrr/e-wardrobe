@@ -76,11 +76,37 @@ export default function OutfitDetail(props){
 
     return(
         <div className="outfit_page">
-            <div className="header">
-                <h1 className="outfit_head">{outfit_ref.current.username}的搭配详情 </h1>
-                <div className="oid">oid：{outfit_ref.current.oid}&nbsp;&nbsp;uid：{outfit_ref.current.uid}</div>
+            <div >
+                <h1 className="center">{outfit_ref.current.username}的搭配详情 </h1>
+                <button className="change_btn left inline" onClick={handleClickDeleteOutfit}>
+                    <LogoutIcon style={{float:"left",marginRight:"5px"}}></LogoutIcon>
+                        删除穿搭
+                </button>
             </div>
-            <button className="upwear_pos">
+            <div className="oid">oid：{outfit_ref.current.oid}&nbsp;&nbsp;uid：{outfit_ref.current.uid}</div>
+            <div className="float_left">
+                <button className="cloth_pos">
+                    <div className="outfit_content">上衣</div>
+                    <img src={outfit_ref.current.top_src} className="outfits_img"/>
+                </button>
+                <button className="cloth_pos">
+                    <div className="outfit_content">下装</div>
+                    <img src={outfit_ref.current.bottom_src} className="outfits_img"/>
+                </button>
+                <button className="cloth_pos">
+                    <div className="outfit_content">外套</div>
+                    <img src={outfit_ref.current.coat_src} className="outfits_img"/>
+                </button>
+                <button className="cloth_pos">
+                    <div className="outfit_content">鞋子</div>
+                    <img src={outfit_ref.current.shoe_src} className="outfits_img"/>
+                </button>
+                <button className="cloth_pos">
+                    <div className="outfit_content">饰品</div>
+                    <img src={outfit_ref.current.ornament_src} className="outfits_img"/>
+                </button>
+            </div>
+            {/* <button className="upwear_pos">
                 <div className="outfit_content">上衣</div>
                 <img src={outfit_ref.current.top_src} className="outfits_img"/>
             </button>
@@ -99,11 +125,8 @@ export default function OutfitDetail(props){
             <button className="decoration_pos">
                 <div className="outfit_content">饰品</div>
                 <img src={outfit_ref.current.ornament_src} className="outfits_img"/>
-            </button>
-            <button className="change_btn delete_button_pos" onClick={handleClickDeleteOutfit}>
-                <LogoutIcon style={{float:"left",marginRight:"5px"}}></LogoutIcon>
-                    删除穿搭
-            </button>
+            </button> */}
+            
         </div>
     )
 }

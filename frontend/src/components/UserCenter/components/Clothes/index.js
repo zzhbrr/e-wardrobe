@@ -33,7 +33,7 @@ export default function Clothes(props){
 
     return(
         <div className="clothes">
-            <h1>我的衣服</h1>
+            <h1>我拥有的衣服</h1>
             <AddClothes className="button" socket={props.socket} handleAddClothes={handleAddClothes}>
                 添加衣服
                 <AddCircleIcon style={{float:"left",marginRight:"5px"}} />

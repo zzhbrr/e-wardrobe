@@ -1,22 +1,21 @@
 .outfits {
     text-align: left;
-    padding: 30px 50px 0px 50px;
+    padding: 30px 0px 0px 50px;
 }
 .outfit_card {
-    height: 80px;
-    width: 350px;
+    height: 140px;
+    width: 650px;
     padding: 10px;
     padding-bottom: 10px;
     border-bottom: 2px solid black;
-    margin: 0px 0px 0px 0px;
 }
 .outfit_card:hover {
     background-color: rgba(0,0,0,0.1);
     transition-duration: 0.2s;
 }
 .product_card {
-    width: 60px;
-    height: 80px;
+    width: 120px;
+    height: 140px;
     /* border: 1px solid gray; */
     /* border-radius: 4pt; */
     margin: 5px;
@@ -29,14 +28,15 @@
     margin: 0;
     font-size: small;}
 .outfit_img {
-    height: 40px;
-    width: 40px;
+    height: 100px;
+    width: 100px;
     border: 1px solid black;
 }
 .outfit_list {
-    height: 55vh;
+    width: 150%;
+    height: 60vh;
     margin-top: 5px;
-    padding-right: 50px;
+    padding-right: 3.4rem;
     overflow-x: hidden;
     overflow-y: auto;
 }
