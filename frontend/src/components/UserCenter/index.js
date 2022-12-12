@@ -114,6 +114,7 @@ export default function UserCenter(props){
                                     <History history_list={InfoRef.current.history_list} 
                                              reqHistories={info_mgr.reqHistories} 
                                              init_state={InfoRef.current.init_state[navibar_items[4]]}
+                                             uid={InfoRef.current.user_info.uid}
                                              reqClothes={info_mgr.reqClothes}
                                              clothes={InfoRef.current.clothes_lists}
                                              reqAddHistory={info_mgr.reqAddHistory}/>:

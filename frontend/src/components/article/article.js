@@ -67,14 +67,13 @@ export default function ArticleDetail(props){
             props.socket.emit('getArticleComments', {eid: eid});
         })
     }
-
+    // 删除整篇文章
     const handleDeleteArticle = () => {
         console.log('删除文章');
         props.socket.emit('deleteArticle', {eid: eid});
         props.socket.off('deleteArticleSuccess');
         props.socket.on('deleteArticleSuccess', (res) => {
             console.log(res);
-            // navigate('/usercenter');
             window.close();
         })
     }

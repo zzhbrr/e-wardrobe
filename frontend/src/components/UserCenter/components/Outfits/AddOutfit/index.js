@@ -102,7 +102,7 @@ export default function AddOutfit(props) {
                         <FormLabel component="legend">{items[3]}</FormLabel> 
                         <Select value={chosens[3]} onChange={(e) => sets[items[3]](e.target.value)}>
                             {clothes[items[3]].map((cloth)=><MenuItem value={cloth.pid} key={cloth.pid}><img src={cloth.img_src} style={{height:'40px',width:'40px'}}/></MenuItem>)}
-                        </Select>   
+                        </Select>
                     </FormControl>
                     <FormControl fullWidth>
                         <FormLabel component="legend">{items[4]}</FormLabel> 

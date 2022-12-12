@@ -55,7 +55,6 @@ export default function ClothDetail(props){
     const handleSubmit = () => {
         props.socket.emit('addClothesComments', {uid: uid, pid: pid, content: new_comment});
         console.log({uid: uid, pid: pid, add_new_content: new_comment});
-        // addClothesCommentsSuccess:{uid:int,pid:int,seqid:int,content:string,c_time:string}
         props.socket.off('addClothesCommentsSuccess');
         props.socket.on('addClothesCommentsSuccess', (data) =>{
             console.log(data);
@@ -69,13 +68,12 @@ export default function ClothDetail(props){
             props.socket.emit('getClothesComments', {pid: pid});
         })
     }
-
+    // 删除整篇文章
     function handleDeleteClothes() {
         console.log('click delete clothes');
         props.socket.emit('deleteClothes', {uid: uid, pid:pid});
         props.socket.off('deleteClothesSuccess');
         props.socket.on('deleteClothesSuccess', (data)=>{
-            // params.handleDeleteClothes(items[data.type]);
             alert('delete clothes success');
             // navigate('/usercenter');
             window.close();
