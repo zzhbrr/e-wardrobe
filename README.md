@@ -177,6 +177,6 @@
 数据库使用华为OpenGauss，云存储服务使用七牛云。
 前后端接口定义（42个）：
 
-![image-20221213114057161](README.assets/image-20221213114057161.png)
+![image-20221213114057161](readme.assets/image-20221213114057161.png)
 
-![image-20221213114113745](README.assets/image-20221213114113745.png)
+![image-20221213114113745](readme.assets/image-20221213114113745.png)
