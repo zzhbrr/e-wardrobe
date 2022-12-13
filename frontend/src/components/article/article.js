@@ -1,6 +1,6 @@
 // article
 import React from "react";
-import "./Article.css";
+import "./article.css";
 import { useNavigate, useParams } from "react-router-dom";
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';             // markdown 对表格/删除线/脚注等的支持
@@ -27,12 +27,7 @@ export default function ArticleDetail(props){
         time: "2022-12-01"
     })
     const [md, handleMD] = React.useState('loading... ...');
-    const [comment_list, set_comment_list] = React.useState([{
-        time: "2022-12-01",
-        content: "Loading...",
-        uid:      uid,
-        username: "Init",
-    }])
+    const [comment_list, set_comment_list] = React.useState([])
     // 请求文章内容
     React.useEffect(() => {
         props.socket.off('getArticleDetailSuccess');
@@ -72,14 +67,13 @@ export default function ArticleDetail(props){
             props.socket.emit('getArticleComments', {eid: eid});
         })
     }
-
+    // 删除整篇文章
     const handleDeleteArticle = () => {
         console.log('删除文章');
         props.socket.emit('deleteArticle', {eid: eid});
         props.socket.off('deleteArticleSuccess');
         props.socket.on('deleteArticleSuccess', (res) => {
             console.log(res);
-            // navigate('/usercenter');
             window.close();
         })
     }

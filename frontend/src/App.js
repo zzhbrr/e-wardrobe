@@ -3,7 +3,7 @@ import UserCenter from './components/UserCenter/index';
 import Login from './components/login/login';
 import Register from './components/register/register';
 import OutfitDetail from './components/Outfit/Outfit';
-import ArticleDetail from './components/Article/Article';
+import ArticleDetail from './components/article/article';
 import ClothDetail from './components/Cloth/Cloth';
 import io from 'socket.io-client'
 import {
@@ -22,7 +22,7 @@ const socket = io('ws://localhost:8000')
 // var userName = "", isLogin = false;
 
 function App() {
-    localStorage.clear();
+    // localStorage.clear();
     const [isLogin, setIsLogIn] = React.useState(false);
     const [userName, setUserName] = React.useState(localStorage.getItem('userName'));
     const [UserID, setUserID] = React.useState(localStorage.getItem('UserID'));
@@ -80,7 +80,7 @@ function App() {
         }/>
         <Route exact path="/cloth/:pid/:uid" element={
             <div className="App">
-                <ClothDetail pid={0} uid={0} socket={socket} userName={userName}/>
+                <ClothDetail pid={0} uid={0} handleDeleteClothes={0} socket={socket} userName={userName}/>
             </div>
         }/>
         <Route exact path="/" element={<Navigate to="/usercenter"></Navigate>} />

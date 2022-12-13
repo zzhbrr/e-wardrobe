@@ -6,7 +6,8 @@ module.exports = {
                                     WHERE gid = ${data.gid} AND admin.interst_group.creator_uid = admin.users_tmp.uid;`;
             pg_client.query(sql_getGroupDetail, (err, res) => {
                 if (err) throw err;
-                socket.emit('getGroupDetailSuccess', {groupName: res.rows[0].group_name, intro: res.rows[0].intro, creatorname: res.rows[0].username, creatorid: res.rows[0].creator_uid});
+                if (res.rows.length === 0) socket.emit('getGroupDetailSuccess', {groupName: "", intro: "", creatorname: "", creatorid: 0});
+                else socket.emit('getGroupDetailSuccess', {groupName: res.rows[0].group_name, intro: res.rows[0].intro, creatorname: res.rows[0].username, creatorid: res.rows[0].creator_uid});
             })
         });
 
@@ -124,6 +125,14 @@ module.exports = {
                 if (err) throw err;
                 socket.emit('deleteGroupSuccess', {gid: data.gid});
             });
+        });
+        socket.on('quitGroup', (data) => {
+            sql_quitGroup = `DELETE FROM admin.group_user
+                                WHERE gid = ${data.gid} AND uid = ${data.uid};`;
+            pg_client.query(sql_quitGroup, (err, res) => {
+                if (err) throw err;
+                socket.emit('quitGroupSuccess', {gid: data.gid, uid: data.uid});
+            })
         });
     },
 }

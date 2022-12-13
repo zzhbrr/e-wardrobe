@@ -5,7 +5,7 @@ module.exports = {
         function checkIfUserIsLoggedIn(username) {
             // return false;
             for (let i = 0; i < onlineUsers.length; i++) {
-                if (onlineUsers[i].username.replace(/\s+/g, "") === username.replace(/\s+/g, "")) {
+                if (onlineUsers[i].username === username.replace(/\s+/g, "")) {
                     return true;
                 }
             }

@@ -19,6 +19,9 @@
 .left {
     text-align: left;
 }
+.right {
+    text-align: right;
+}
 .change_btn {
     max-width: 200px;
     margin-top: 10px;
